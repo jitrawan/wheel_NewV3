@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 03, 2019 at 04:48 PM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 5.6.38
+-- Generation Time: May 09, 2019 at 07:10 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -36,14 +36,14 @@ CREATE TABLE `autonumber` (
   `year` int(4) UNSIGNED ZEROFILL NOT NULL,
   `month` int(2) UNSIGNED ZEROFILL NOT NULL,
   `day` int(2) UNSIGNED ZEROFILL NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `autonumber`
 --
 
 INSERT INTO `autonumber` (`item_number`, `finance_number`, `quotation_number`, `invoice_number`, `year`, `month`, `day`) VALUES
-(0005, 0001, 0001, 0001, 2019, 01, 27);
+(0004, 0001, 0001, 0001, 2019, 05, 09);
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,7 @@ CREATE TABLE `backup_logs` (
   `backup_file` varchar(256) NOT NULL,
   `backup_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_key` char(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `backup_logs`
@@ -97,6 +97,54 @@ INSERT INTO `brand` (`BrandID`, `BrandName`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `brandrubble`
+--
+
+CREATE TABLE `brandrubble` (
+  `id` int(11) NOT NULL,
+  `code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `Description` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `brandrubble`
+--
+
+INSERT INTO `brandrubble` (`id`, `code`, `Description`, `status`) VALUES
+(1, 'RB0001', 'Apollo', 1),
+(2, 'RB0002', 'BF Goodrich', 1),
+(3, 'RB0003', 'Brigestone', 1),
+(4, 'RB0004', 'Continental', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brandwhee`
+--
+
+CREATE TABLE `brandwhee` (
+  `id` int(11) NOT NULL,
+  `code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `Description` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `brandwhee`
+--
+
+INSERT INTO `brandwhee` (`id`, `code`, `Description`, `status`) VALUES
+(1, 'WB0001', 'RAY Engineering', 1),
+(2, 'WB0002', 'Advan Yokohama', 1),
+(3, 'WB0003', 'Mugen GP', 1),
+(4, 'WB0004', 'Lenso', 1),
+(5, 'WB0005', 'Volk TE37', 1),
+(6, 'WB0006', 'ENKEI RACING RPF1', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `cancelesd_reserve`
 --
 
@@ -105,18 +153,7 @@ CREATE TABLE `cancelesd_reserve` (
   `reserve_code` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
   `user_create` char(32) COLLATE utf8_unicode_ci NOT NULL,
   `date_create` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `cancelesd_reserve`
---
-
-INSERT INTO `cancelesd_reserve` (`canceles_key`, `reserve_code`, `user_create`, `date_create`) VALUES
-('4e68858a40b7f4fd4d22fff557aec55b', 'CX46XQTV', 'd97530f6437e7ffa3a74afe46a953a15', '2019-01-20 00:34:08'),
-('5538dac6790e07e08e64883858d980cb', 'CX46XQTV', 'd97530f6437e7ffa3a74afe46a953a15', '2019-01-22 09:55:59'),
-('d7c7db26792e40156c303f1a23a0aadb', 'C3G9MBB', 'd97530f6437e7ffa3a74afe46a953a15', '2019-01-22 10:00:09'),
-('eaed2fb4ad1177ca16852cd38b773337', 'C91F2NNO', 'd97530f6437e7ffa3a74afe46a953a15', '2019-01-22 09:59:49'),
-('eea899fb00523ffb176c78d01f68ebf7', 'C91F2NNO', 'd97530f6437e7ffa3a74afe46a953a15', '2019-01-22 10:02:50');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -137,47 +174,15 @@ CREATE TABLE `card_info` (
   `user_key` varchar(32) NOT NULL,
   `card_status` varchar(32) NOT NULL,
   `card_insert` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `card_info`
 --
 
 INSERT INTO `card_info` (`card_key`, `card_code`, `card_customer_name`, `card_customer_lastname`, `card_customer_address`, `card_customer_phone`, `card_customer_email`, `card_note`, `card_done_aprox`, `user_key`, `card_status`, `card_insert`) VALUES
-('269ed8e1ae6280700cb24d09ef4bc5b9', 'C5TECHMG', 'จิตวรรณ', 'ชุมไพร', '1231546', '02315885', '', '', '0000-00-00', '', '', '2018-12-23'),
-('36c5245c6b1baa481b571937a1178962', 'C3G9M', 'จิตรวรรณ', 'ชุมไพร', '111', '0917099645', 'jitrawan.ch@gmail.com', '', '2018-12-27', 'd97530f6437e7ffa3a74afe46a953a15', '89da7d193f3c67e4310f50cbb5b36b90', '2018-12-23'),
-('4d99d49c8e64ec2ae28b1d172b80dd21', 'C5TECHMG', 'จิตวรรณ', 'ชุมไพร', '1231546', '02315885', '', '', '0000-00-00', '', '', '2018-12-23'),
-('70c0795afc119fff4bcd0324a4a5d0cd', 'CX6JCS9S', 'ddd', 'hhh', 'rrrr', '03125456468', 'jitrawan.ch@mail.com', '', '2018-12-05', 'd97530f6437e7ffa3a74afe46a953a15', '89da7d193f3c67e4310f50cbb5b36b90', '2018-12-23'),
-('c3e8f1271e436ba52cff0be2caba0542', 'C7YAGW6N', 'จิตรวรรณ', 'ชุมไพร', '', '0917099645', '', '', '0000-00-00', '', '', '2018-12-28'),
-('1761aed90bab1a1e0febc58fc3ed33ea', 'CJH8LPKR', 'จิตรวรรณ', 'ชุมไพร', '', '0917099645', '', '', '0000-00-00', '', '', '2018-12-28'),
-('d898f2a7ccd1cf417a137f3bb26ff51b', 'CPXCLSHU', 'จิตรวรรณ', 'ชุมไพร', '', '0917099645', '', '', '0000-00-00', '', '', '2018-12-28'),
-('13f8f003c4d584e1afb5f976a013b58c', 'CJZBZFCS', 'จิตรวรรณ', 'ุชุมไพร', '', '0917099645', '', '', '0000-00-00', '', '', '2018-12-28'),
-('9a49e28639ddbfa759f006b5ef9d5deb', 'C1JZ2BB', 'จิตรวรรณ', 'ชุมไพร', '', '0917099645', '', '', '0000-00-00', '', '', '2018-12-28'),
-('c86a98f1a6f1111fccaf8510f5708676', 'C724YJCO', 'จิตรวรรณ', 'ชุมไพร', '', '0917099645', '', '', '0000-00-00', '', '', '2018-12-28'),
-('cb44fd899d224bcf50272424790f06c2', 'CCLY3FXM', 'จิตรวรรณ', 'ชุมไพร', '', '0917099645', '', '', '0000-00-00', '', '', '2018-12-28'),
-('7466c48df5ef9e6003cc938c03a08416', 'C123WYNX', 'จิตรวรรณ', 'ชุมไพร', '', '0917099645', '', '', '0000-00-00', '', '', '2018-12-28'),
-('425acf9089286ec8812106e251927a27', 'C0ZIWOBB', 'จิตรวรรณ', 'ชุมไพร', '', '0917099645', '', '', '0000-00-00', '', '', '2018-12-28'),
-('249a34f21493d43fd938516bedd9c167', 'CWB8RNLZ', 'จิตรวรรณ', 'ชุมไพร', '', '0917099645', '', '', '0000-00-00', '', '', '2018-12-28'),
-('b28b89eacf1cff46a0ba701234eb5b9d', 'CIBJMMF4', 'จิตรวรรณ', 'ชุมไพร', '', '0917099645', '', '', '0000-00-00', '', '', '2018-12-28'),
-('e473fe32ec89aa8e39de920ba83ff566', 'CHIQC5AA', 'จิตรวรรณ', 'ชุมไพร', '', '0917099645', '', '', '0000-00-00', '', '', '2018-12-28'),
-('afdd32eea8456e0afea67fd1035d54a1', 'C9GIRN4S', 'จิตรวรรณ', 'ชุมไพร', '', '0917099645', '', '', '0000-00-00', '', '', '2018-12-28'),
-('44ed20702d3c530b6126d785220bb5b0', 'C75SMTBK', 'จิตรวรรณ', 'ชุมไพร', '', '0917099645', '', '', '0000-00-00', '', '', '2018-12-28'),
-('1620abd31b11a5dcde4bef2340f9bd9c', 'CDIJIJ7G', 'จิตรวรรณ', 'ชุมไพร', '', '0917099645', '', '', '0000-00-00', '', '', '2018-12-28'),
-('3a43bff1576af6f025491a81c5f0ff58', 'CB8JRS', 'จิตรวรรณ', 'ชุมไพร', '', '0917099645', '', '', '2019-01-01', 'd97530f6437e7ffa3a74afe46a953a15', '89da7d193f3c67e4310f50cbb5b36b90', '2018-12-28'),
-('80309f383f4df29fa78d7a6d8d2132e0', 'CGIIRGI4', 'dd', 'ddd', '', '0917099645', '', '', '0000-00-00', '', '', '2019-01-16'),
-('1e50bcb43fa726862e5ff16de18d7d88', 'CXF6CT5L', 'ddd', 'jjjj', '', '0907099645', '', '', '0000-00-00', '', '', '2019-01-16'),
-('f35b2cd0122c206c29300c80099ad27e', 'COVCQOVR', 'dddd', 'tttt', '', '0917099645', '', '', '2019-01-31', 'd97530f6437e7ffa3a74afe46a953a15', 'c382e352e2e620a3c60a2cc7c6a7fa35', '2019-01-16'),
-('c7b2efcbba69334e850168bb2d240cce', 'C6PV4430', 'tttt', 'nnnn', '', '0917099645', '', '', '0000-00-00', '', '', '2019-01-17'),
-('e74d9a7ceadd0345ca279e8586a34c18', 'CGK3BIW9', 'ddd', 'tttt', '', '0917099645', '', '', '0000-00-00', '', '', '2019-01-17'),
-('6b75ab4f163a160bf706dd59351a3e39', 'C95UV1SK', 'กก', 'รรรร', '', '0917099645', '', '', '0000-00-00', '', '', '2019-01-17'),
-('0b1f9c18eca478b7d8b5248dd134034a', 'CVVCZT1X', 'กก', 'ัััรรรร', '', '0917099645', '', '', '2019-01-25', 'd97530f6437e7ffa3a74afe46a953a15', 'c382e352e2e620a3c60a2cc7c6a7fa35', '2019-01-18'),
-('4c95fc26ea495e95c30b6cd26b611c5a', 'CQ7E11O7', 'fddd', 'hhhh', '', '0915556685', '', '', '0000-00-00', '', '', '2019-01-22'),
-('f3904411c127a366c04c1b1b6dc2b818', 'CGRCRB0S', 'กกก', 'สสสสสส', '', '855855224', '', '', '0000-00-00', '', '', '2019-01-22'),
-('e5b284a99fd206f05edff77d1fcf620c', 'C8PL35A4', 'ดกดกหดกหด', 'ยยยย', '', '52505554426', '', '', '0000-00-00', '', '', '2019-01-22'),
-('81635c4752139e96ae81489411691587', 'CNENRU2S', 'กดหดหกด', 'ดเดกเกดเ', '', '02250252552', '', '', '0000-00-00', '', '', '2019-01-22'),
-('f3877dde3d9b0ea28310f8b867c615e0', 'CVIZYYLQ', 'ddd', 'eee', '', '0917099645', '', '', '0000-00-00', '', '', '2019-01-27'),
-('e196e2f0abb1edc7c0a9cded4b306604', 'COCXQUWM', 'ggg', 'iiii', '', '09090909009', '', '', '0000-00-00', '', '', '2019-01-27'),
-('8d858f553a01c0766a1a41c1d73a6857', 'CA7ZIFI4', 'ddd', 'ggg', '', '09188945', '', '', '0000-00-00', '', '', '2019-01-27');
+('77fa8e1770e8244e27866e95f674058c', 'CQDO6UW', 'tae', 'tae', 'tae', '6543236543', '435345', 'sdfsf', '2019-05-14', 'd97530f6437e7ffa3a74afe46a953a15', 'c382e352e2e620a3c60a2cc7c6a7fa35', '2019-05-05'),
+('cc005e33e32405dd755f4ea01ea9ab19', 'C07153JE', 'test', 'test', '', '0917099645', 'jitrawan.ch@gmail.com', '', '2019-05-31', '6a7c6fe063021a761c8498b4f11aad85', 'c382e352e2e620a3c60a2cc7c6a7fa35', '2019-05-09');
 
 -- --------------------------------------------------------
 
@@ -196,39 +201,16 @@ CREATE TABLE `card_item` (
   `reserve_key` char(32) NOT NULL,
   `reseve_item_key` char(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `item_amt` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `card_item`
 --
 
 INSERT INTO `card_item` (`item_key`, `card_key`, `item_number`, `item_name`, `item_note`, `item_price_aprox`, `item_insert`, `reserve_key`, `reseve_item_key`, `item_amt`) VALUES
-('024d75e03b15f0efccd9a5b9a8eac11f', '70c0795afc119fff4bcd0324a4a5d0cd', 18120002, 'คีบรอ์ด', 'กดไม่ติด', 500, '2018-12-23', '', '', 0),
-('070ebc49288ab33d53bf9ee635e581cc', '36c5245c6b1baa481b571937a1178962', 18120004, 'คอม', 'เปิดไม่ติด', 20000, '2018-12-23', '', '', 0),
-('2dac17f9272938c71754347abc36920d', '36c5245c6b1baa481b571937a1178962', 18120003, 'คอม', 'เปิดไม่ติด', 20000, '2018-12-23', '', '', 0),
-('b283fcf33c02f02f53abcf9b58534054', '70c0795afc119fff4bcd0324a4a5d0cd', 18120001, 'คอม', 'เปิดไม่ติด', 20000, '2018-12-23', '', '', 0),
-('d3ec3e0947a6078c08a8af978e6873bd', '36c5245c6b1baa481b571937a1178962', 18120005, 'คีบรอ์ด', 'เปิดไม่ติด', 20000, '2018-12-23', '', '', 0),
-('2070c17e157f4b10b7ef6d54fc87745b', '9a49e28639ddbfa759f006b5ef9d5deb', 18120001, 'ยาง Continental มือ2 ขอบ19', 'แตก', 500, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0002', 0),
-('5d867656425c7445f20eb4c4ad584c09', '9a49e28639ddbfa759f006b5ef9d5deb', 18120002, 'ยาง Continental มือ2 ขอบ19', 'แตก', 500, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0002', 0),
-('e38271d7c8498d74b18fe31be08caa59', '9a49e28639ddbfa759f006b5ef9d5deb', 18120003, 'ยาง Continental มือ2 ขอบ19', 'แตก', 500, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0002', 0),
-('d52702f6c01fcf7fbfa0c706a9f5892c', 'c86a98f1a6f1111fccaf8510f5708676', 18120004, 'ยาง Apollo มือ1 ขอบ14', 'แตก', 500, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0004', 0),
-('adf7150a00c25ee2b11a52b21cdb3fe7', 'cb44fd899d224bcf50272424790f06c2', 18120005, 'ยาง Apollo มือ1 ขอบ14', 'แตก', 500, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0004', 0),
-('afeabfd99a26502c249c4bb8826e8727', '7466c48df5ef9e6003cc938c03a08416', 18120006, 'ยาง Apollo มือ1 ขอบ14', 'แตก', 500, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0004', 0),
-('23bcbbdcc25f563ac5c8379c3db429c3', '425acf9089286ec8812106e251927a27', 18120007, 'ล้อแม๊ก มือ2 ขอบ15', 'มีรอย', 500, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0001', 0),
-('be1cc2cef925c700ee848e34a1e7f72d', '249a34f21493d43fd938516bedd9c167', 18120008, 'ล้อแม๊ก มือ2 ขอบ15', 'มีรอย', 500, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0001', 0),
-('dbcbb6fc9c628c9ea2c63d80851135b0', 'b28b89eacf1cff46a0ba701234eb5b9d', 18120009, 'ล้อแม๊ก มือ2 ขอบ15', 'มีรอย', 0, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0001', 0),
-('c0a92762cf1c4ac817b46d8b4c9790a6', 'b28b89eacf1cff46a0ba701234eb5b9d', 18120010, 'ล้อแม๊ก มือ2 ขอบ15', 'มีรอย', 0, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0001', 0),
-('7c93593dfadd695f9019f973d777ac36', 'b28b89eacf1cff46a0ba701234eb5b9d', 18120011, 'ล้อแม๊ก มือ2 ขอบ15', 'มีรอย', 0, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0001', 0),
-('c2633d4931740f6b8587dce16cb360fc', 'e473fe32ec89aa8e39de920ba83ff566', 18120012, 'ยาง Apollo มือ1 ขอบ14', 'แตก', 500, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0004', 0),
-('60c2c2d3d8fdba1f4403f687297490a8', 'afdd32eea8456e0afea67fd1035d54a1', 18120013, 'ล้อแม๊ก มือ2 ขอบ15', 'แตก', 0, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0001', 0),
-('ce9193771f9be7a890935b805f1f9fce', '44ed20702d3c530b6126d785220bb5b0', 18120014, 'ยาง Apollo มือ1 ขอบ14', 'มีรอย', 0, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0004', 0),
-('fe2e04e6555cb98b4cfbdb8b53fedf4e', '1620abd31b11a5dcde4bef2340f9bd9c', 18120015, 'ยาง Apollo มือ1 ขอบ14', 'แตก', 0, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0004', 0),
-('27e4583f41dcc77dece5be7212d830a8', '1620abd31b11a5dcde4bef2340f9bd9c', 18120016, 'ยาง Apollo มือ1 ขอบ14', 'แตก', 0, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0004', 0),
-('f4e235eb07deaa86df6fae5d9ad69dd6', '3a43bff1576af6f025491a81c5f0ff58', 18120017, 'ยาง Apollo มือ1 ขอบ14', 'แตก', 0, '2018-12-28', '5eef8cccd98683ba0fcbed56882bc750', 'P0004', 0),
-('ce8e05defe4ced41a98c57428dd6d4e9', '1e50bcb43fa726862e5ff16de18d7d88', 19010001, 'ยาง Continental มือ2 ขอบ19', 'test', 0, '2019-01-16', '5eef8cccd98683ba0fcbed56882bc750', 'P0002', 0),
-('760eda25fa643643809cc097b4813d24', 'f35b2cd0122c206c29300c80099ad27e', 19010002, 'ยาง Continental มือ2 ขอบ19', 'test', 0, '2019-01-16', '5eef8cccd98683ba0fcbed56882bc750', 'P0002', 2),
-('3daa6e4328e65f2e2f5648e008bac882', '0b1f9c18eca478b7d8b5248dd134034a', 19010003, 'ล้อแม๊ก มือ2 ขอบ15', 'แตก', 500, '2019-01-18', 'cff400f26e166cea0a1220fbdd26e9cb', 'P0001', 1),
-('c5d92661e2017fca27450f0458b3d5a7', '4c95fc26ea495e95c30b6cd26b611c5a', 19010004, 'ยาง Continental มือ2 ขอบ19', 'เปิดไม่ติด', 200, '2019-01-22', '16c53ed54b87ae4709488fa65e9699d2', 'P0002', 1);
+('b81a743c16eebd098e009177b2c20afe', '77fa8e1770e8244e27866e95f674058c', 19050001, 'ล้อแม๊ก RAY Engineering ขนาด: ขอบ:13 รู:4 ประเภท:ล้อแม็กกะทะ', 'แตก', 0, '2019-05-05', '9633399692e492b5a09b4bd0863b9d1b', 'P0001', 1),
+('1436ffab337d817495af6c29238cfa96', 'cc005e33e32405dd755f4ea01ea9ab19', 19050002, 'ยาง Apollo ขนาด: ซี่รี่:60 ความกว้าง:165', 'test', 0, '2019-05-09', 'cdc9ebd7e304d5b6a49bb682e62f50bd', 'P0004', 4),
+('09fa5c6b29b3a7fa8a965e23e3284f1c', 'cc005e33e32405dd755f4ea01ea9ab19', 19050003, 'ล้อแม๊ก Advan Yokohama ขนาด: ขอบ:13 รู:4H100 ประเภท:ล้อแม็กกะทะ', 'test', 0, '2019-05-09', '', 'W0003', 4);
 
 -- --------------------------------------------------------
 
@@ -243,18 +225,15 @@ CREATE TABLE `card_status` (
   `card_status_note` text NOT NULL,
   `user_key` varchar(32) NOT NULL,
   `cstatus_insert` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `card_status`
 --
 
 INSERT INTO `card_status` (`cstatus_key`, `card_key`, `card_status`, `card_status_note`, `user_key`, `cstatus_insert`) VALUES
-('1aa258162771611265fc205b2543a8a8', '70c0795afc119fff4bcd0324a4a5d0cd', '89da7d193f3c67e4310f50cbb5b36b90', '', 'd97530f6437e7ffa3a74afe46a953a15', '2018-12-23 01:26:11'),
-('e652db533ed13a0a11a26bb20d6e81b3', '36c5245c6b1baa481b571937a1178962', '89da7d193f3c67e4310f50cbb5b36b90', '', 'd97530f6437e7ffa3a74afe46a953a15', '2018-12-23 09:41:41'),
-('6e572d1bdc67414df71cd831365e7ce7', '3a43bff1576af6f025491a81c5f0ff58', '89da7d193f3c67e4310f50cbb5b36b90', '', 'd97530f6437e7ffa3a74afe46a953a15', '2018-12-30 08:15:28'),
-('b440dfb345e9b3107dd3b9247b91fbdd', 'f35b2cd0122c206c29300c80099ad27e', 'c382e352e2e620a3c60a2cc7c6a7fa35', '', 'd97530f6437e7ffa3a74afe46a953a15', '2019-01-17 03:24:22'),
-('c539a5c818622e6dc9de42e01eed2d11', '0b1f9c18eca478b7d8b5248dd134034a', 'c382e352e2e620a3c60a2cc7c6a7fa35', '', 'd97530f6437e7ffa3a74afe46a953a15', '2019-01-18 03:20:32');
+('a95c4537f56b5c02730a23938f002d48', '77fa8e1770e8244e27866e95f674058c', 'c382e352e2e620a3c60a2cc7c6a7fa35', 'dsf', 'd97530f6437e7ffa3a74afe46a953a15', '2019-05-04 17:45:04'),
+('13fdceb26693dbe7a2fd15d0590cdac3', 'cc005e33e32405dd755f4ea01ea9ab19', 'c382e352e2e620a3c60a2cc7c6a7fa35', '', '6a7c6fe063021a761c8498b4f11aad85', '2019-05-09 10:25:05');
 
 -- --------------------------------------------------------
 
@@ -268,7 +247,7 @@ CREATE TABLE `card_type` (
   `ctype_color` varchar(16) NOT NULL,
   `ctype_status` tinyint(1) NOT NULL,
   `ctype_insert` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `card_type`
@@ -278,7 +257,7 @@ INSERT INTO `card_type` (`ctype_key`, `ctype_name`, `ctype_color`, `ctype_status
 ('2fdf411856947d19708cf4da19aa3af3', 'เปลี่ยนสินค้าชิ้นใหม่', '#ff6969', 0, '2016-04-25 06:50:59'),
 ('31c1891444b8e5734bee09165953bca1', 'ไม่สามารถซ่อมได้', '#9e9806', 0, '2016-04-25 06:49:41'),
 ('4973069504e1be2a5bdcf7162ade8a16', 'ซ่อม/เคลม เสร็จ', '#06d628', 1, '2016-04-25 06:49:21'),
-('58dc6633d9c14d0189efd328fc119591', 'ส่งมอบสินค้าคืนลูกค้าเรียบร้อย', '#2958ff', 0, '2016-04-25 06:52:56'),
+('58dc6633d9c14d0189efd328fc119591', 'ส่งมอบสินค้าคืนลูกค้าเรียบร้อย', '#2958ff', 1, '2016-04-25 06:52:56'),
 ('89da7d193f3c67e4310f50cbb5b36b90', 'นำรายการซ่อม/เคลม เข้าระบบ', '#29ccff', 0, '2016-04-25 06:23:50'),
 ('a5eb0dd1c5065bb9fe0cb05d61f03f4a', 'ยกเลิกการซ่อม/เคลม', '#753709', 0, '2016-04-25 06:51:39'),
 ('b090c4112da52d40a08349b9000dab88', 'ตรวจสอบรายการซ่อม/เคลม', '#c9c9c9', 0, '2016-04-25 06:11:34'),
@@ -301,14 +280,7 @@ CREATE TABLE `changeproduct` (
   `remark` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `createDate` date NOT NULL,
   `createBy` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `changeproduct`
---
-
-INSERT INTO `changeproduct` (`change_key`, `ProductID`, `reserve_key`, `change_Amt`, `remark`, `createDate`, `createBy`) VALUES
-('d9e1889bbc6bba0f18f32b9a9e714f7f', 'P0004', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 1, 'test change', '2019-01-30', 'pat');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -332,13 +304,149 @@ CREATE TABLE `dealer` (
 --
 
 INSERT INTO `dealer` (`dealer_id`, `dealer_code`, `dealer_name`, `mobile`, `address`, `idline`, `email`, `status`) VALUES
-(1, 'D0001', 'intel thailand', '026546000', '87 อาคารเอ็มไทยทาวเวอร์ ชั้น 9 ออลซีซันส์เพลส, ถนนวิทยุ', '', 'applee@gmail.com', 1),
-(2, 'D0002', 'บริษัท เอเอ็มดี ฟาร์อีส', '024655234', '467', 'noina56', 'noina56@gmail.com', 1),
-(3, 'D0003', 'Samsung', ' 026959000', '3 Empire Tower 1 South Sathorn rd.', 'aotaotrm33', 'aotaot33@gmail.com', 1),
-(4, 'D0004', 'บริษัท ซิลิคอนดาต้า จำกัด', '022192010', '18/1-2 พระราม6 ตัดใหม่ ซอย 4', 'nickyyo', 'nickyyo@gmail.com', 1),
-(5, 'D0005', 'GIGABYTE Technology Co.,Ltd.', '029708485', '505/8 ซอย พหลโยธิน 48,', 'nonniiaa', 'teweesak@gmail.com', 1),
-(6, 'D0006', 'Scanner Co.,Ltd. (Service)', '022506072', '555 เดอะพาลาเดียมเวิลด์ ชั้น 5 ห้อง IT25\r\nถนนราชปรารถ', 'jamemee654', 'jamemee@gmail.com', 1),
-(32, 'D0007', 'Gosoft', '0941319671', 'สาทรซอย 5', 'filmmmm', 'jitrawan.ch@gmail.com', 1);
+(2, 'D0002', 'ใจดียาง จำกัด', '0812345677', '234 ม.7 ตำบล สำโรงกลาง อำเภอ พระประแดง จังหวัด สมุทรปราการ 10130', '', '', 1),
+(3, 'D0003', 'แม็ก มั่นคง', '029194858', '123 กทม', '', '', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `diameterrubble`
+--
+
+CREATE TABLE `diameterrubble` (
+  `id` int(11) NOT NULL,
+  `code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `Description` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL,
+  `SeriesRubble` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `WidthRubble` varchar(10) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `diameterrubble`
+--
+
+INSERT INTO `diameterrubble` (`id`, `code`, `Description`, `status`, `SeriesRubble`, `WidthRubble`) VALUES
+(1, 'RD0001', '10', 1, '', ''),
+(2, 'RD0002', '12', 1, '', ''),
+(3, 'RD0003', '13', 1, '', ''),
+(4, 'RD0004', '14', 1, '', ''),
+(5, 'RD0005', '15', 1, '', ''),
+(6, 'RD0006', '16', 1, '', ''),
+(7, 'RD0007', '17', 1, '', ''),
+(8, 'RD0008', '18', 1, '', ''),
+(9, 'RD0009', '19', 1, '', ''),
+(10, 'RD0010', '20', 1, '', ''),
+(11, 'RD0011', '21', 1, '', ''),
+(12, 'RD0012', '22', 1, '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `diameterwhee`
+--
+
+CREATE TABLE `diameterwhee` (
+  `id` int(11) NOT NULL,
+  `code` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
+  `Description` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL,
+  `relationRim` int(11) NOT NULL,
+  `relationHoleSize` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `diameterwhee`
+--
+
+INSERT INTO `diameterwhee` (`id`, `code`, `Description`, `status`, `relationRim`, `relationHoleSize`) VALUES
+(1, 'WD0001', '13', 1, 0, 0),
+(2, 'WD0002', '14', 1, 0, 0),
+(4, 'WD0003', '15', 1, 0, 0),
+(5, 'WD0004', '16', 1, 0, 0),
+(6, 'WD0005', '17', 1, 0, 0),
+(7, 'WD0006', '18', 1, 0, 0),
+(8, 'WD0007', '19', 1, 0, 0),
+(9, 'WD0008', '20', 1, 0, 0),
+(10, 'WD0009', '22', 1, 0, 0),
+(11, 'WD0010', '24', 1, 0, 0),
+(12, 'WD0011', '26', 1, 0, 0),
+(13, 'WD0012', '28', 1, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_info`
+--
+
+CREATE TABLE `event_info` (
+  `id` int(11) NOT NULL,
+  `Event_Code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `Event_Name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `Event_Status` int(11) NOT NULL,
+  `eff_date` date NOT NULL,
+  `exp_date` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `event_info`
+--
+
+INSERT INTO `event_info` (`id`, `Event_Code`, `Event_Name`, `Event_Status`, `eff_date`, `exp_date`) VALUES
+(1, 'E0001', 'สงกราน', 1, '2019-04-28', '2019-05-31'),
+(2, 'E0002', 'test evetn 2', 1, '2019-05-09', '2019-05-31'),
+(3, 'E0003', 'test evetn 3', 1, '2019-05-09', '2019-05-31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Event_Item`
+--
+
+CREATE TABLE `Event_Item` (
+  `id` int(11) NOT NULL,
+  `Event_Code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `ProductID` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `PriceSale` int(11) NOT NULL,
+  `item_amt` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `Event_Item`
+--
+
+INSERT INTO `Event_Item` (`id`, `Event_Code`, `ProductID`, `code`, `PriceSale`, `item_amt`) VALUES
+(1, 'E0002', 'P0001', '', 47000, 4),
+(2, 'E0002', 'P0003', '', 18000, 4),
+(5, 'E0003', 'P0004', 'T0002', 1900, 4),
+(4, 'E0003', 'P0002', 'W0002', 14000, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `holesizewhee`
+--
+
+CREATE TABLE `holesizewhee` (
+  `id` int(11) NOT NULL,
+  `code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `Description` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `holesizewhee`
+--
+
+INSERT INTO `holesizewhee` (`id`, `code`, `Description`, `status`) VALUES
+(1, 'WS0001', '4H100', 1),
+(2, 'WS0002', '4H114.3', 1),
+(3, 'WS0003', '5H100', 1),
+(4, 'WS0004', '5H114.3 ', 1),
+(5, 'WS0005', '5H120', 1),
+(6, 'WS0006', '6H114.3 ', 1),
+(7, 'WS0007', '6H139.7 ', 1);
 
 -- --------------------------------------------------------
 
@@ -350,7 +458,7 @@ CREATE TABLE `language` (
   `language_code` varchar(16) NOT NULL,
   `language_name` varchar(32) NOT NULL,
   `language_status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `language`
@@ -437,7 +545,22 @@ INSERT INTO `list` (`cases`, `menu`, `pages`, `case_status`) VALUES
 ('reportProduct', '', 'report/reportProduct.php', 1),
 ('reportPR', '', 'report/reportPR.php', 1),
 ('reportSale', '', 'report/reportSale.php', 1),
-('reportClaim', '', 'report/reportClaim.php', 1);
+('reportClaim', '', 'report/reportClaim.php', 1),
+('MainSettingWheel', 'settings', 'settings/MainSettingWheel.php', 1),
+('MainSettingRubble', 'settings', 'settings/MainSettingRubble.php', 1),
+('settingDiameterWheelList', 'settings', 'settings/settingDiameterWheelList.php', 1),
+('settingBrandWheelList', 'settings', 'settings/settingBrandWheelList.php', 1),
+('settingHoleSizeWheelList', 'settings', 'settings/settingHoleSizeWheelList.php', 1),
+('settingRimWheelList', 'setting', 'settings/settingRimWheelList.php', 1),
+('settingTypeFormatWheelList', 'settings', 'settings/settingTypeFormatWheelList.php', 1),
+('settingDiameterRubbleList', 'settings', 'settings/settingDiameterRubbleList.php', 1),
+('settingSeriesRubbleList', 'settings', 'settings/settingSeriesRubbleList.php', 1),
+('settingWidthRubbleList', 'settings', 'settings/settingWidthRubbleList.php', 1),
+('settingbrandRubbleList', 'settings', 'settings/settingbrandRubbleList.php', 1),
+('addEvent', 'settings', 'settings/addEvent.php', 1),
+('addEvent_Info', 'settings', 'settings/addEvent_Info.php', 1),
+('reportPopSale', 'settings', 'report/reportPopSale.php', 1),
+('settingOffsetList', 'settings', 'settings/settingOffsetList.php', 1);
 
 -- --------------------------------------------------------
 
@@ -640,7 +763,59 @@ INSERT INTO `logs` (`log_key`, `log_date`, `log_ipaddress`, `log_text`, `log_use
 ('8e23af9ea69917ac', '2019-01-26 11:32:49', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
 ('de88fbfc8b483fff', '2019-01-30 08:14:00', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
 ('da3c56214d53cde2', '2019-01-31 03:49:36', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
-('23cae20dde8695cd', '2019-02-03 08:04:44', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15');
+('23cae20dde8695cd', '2019-02-03 08:04:44', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('4f6aaa53d808528f', '2019-02-16 14:07:17', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('7533821fc24dc301', '2019-02-19 03:34:17', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('dd6b1ef475d489a9', '2019-02-19 04:20:09', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('bad2e5575948cecc', '2019-02-19 04:45:57', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('22dbd101c9b76921', '2019-03-01 16:15:28', '::1', 'pat ออกจากระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('4a0181e3e8ebd58c', '2019-03-01 16:15:32', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('2c85050b487417bb', '2019-03-01 16:17:23', '::1', 'pat ออกจากระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('22e9edae46df429d', '2019-03-01 16:17:25', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('613a87c28a41c2e0', '2019-03-01 16:17:43', '::1', 'pat ออกจากระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('9441edebca9c6c0b', '2019-03-01 16:19:24', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('1543bfaaf9238e5a', '2019-03-02 01:13:40', '::1', 'pat ออกจากระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('f79fe4cb57ea3757', '2019-03-02 01:14:01', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('76703cec661ec940', '2019-03-02 01:14:37', '::1', 'pat ออกจากระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('c8764daf87231146', '2019-03-02 01:14:51', '::1', 'jitrawan.ch@gmail.com เข้าสู่ระบบ.', '1'),
+('b45f2d2b310641f3', '2019-03-02 01:15:00', '::1', 'jitrawan.ch@gmail.com เข้าสู่ระบบ.', '1'),
+('2ca8795ef7c4ba3a', '2019-03-02 01:15:04', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('803f2b9d87a7fa58', '2019-03-02 01:15:30', '::1', 'pat ออกจากระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('02f9c1387d0d5eff', '2019-03-02 01:15:38', '::1', 'jitrawan.ch@gmail.com เข้าสู่ระบบ.', '1'),
+('2c204b3e6379e26e', '2019-03-02 01:20:18', '::1', 'jitrawan.ch@gmail.com ออกจากระบบ.', '1'),
+('ac09c7860b2adf4d', '2019-03-02 01:20:27', '::1', 'jitrawan.ch@gmail.com เข้าสู่ระบบ.', '1'),
+('337981b090d52f7b', '2019-03-02 01:20:40', '::1', 'jitrawan.ch@gmail.com ออกจากระบบ.', '1'),
+('abf43ed82721ff10', '2019-03-02 01:20:45', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('35af994a9cc68466', '2019-03-02 01:22:30', '::1', 'pat ออกจากระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('d61124c02e5008f6', '2019-03-02 01:22:36', '::1', 'jitrawan.ch@gmail.com เข้าสู่ระบบ.', '1'),
+('3c7c73f4a508981a', '2019-03-02 01:23:06', '::1', 'jitrawan.ch@gmail.com เข้าสู่ระบบ.', '1'),
+('8e7a1c8d32a24fcf', '2019-03-02 01:33:03', '::1', 'jitrawan.ch@gmail.com เข้าสู่ระบบ.', '1'),
+('286e05aea23ed3dc', '2019-03-02 01:33:14', '::1', 'jitrawan.ch@gmail.com ออกจากระบบ.', '1'),
+('9d000e6a3321355c', '2019-03-02 01:33:19', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('f8b529b26ae556f4', '2019-03-02 01:33:37', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('766248b6533e043f', '2019-04-14 06:02:03', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('1c9809098ad17f7a', '2019-04-14 06:08:30', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('557dc50168539299', '2019-04-15 10:29:05', '::1', 'pat ออกจากระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('3664c396337d61a6', '2019-04-15 10:29:07', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('c2b8d7a6a13b673b', '2019-04-27 10:18:41', '::1', 'Tacha ออกจากระบบ.', 'c08bbb353c5501400e931363ba032b55'),
+('ed750bf80c14704f', '2019-04-27 10:20:49', '::1', 'jitrawan.ch@gmail.com เข้าสู่ระบบ.', '1'),
+('a191ae46f4086da5', '2019-04-27 10:24:25', '::1', 'jitrawan.ch@gmail.com ออกจากระบบ.', '1'),
+('a501e0893639d416', '2019-04-27 10:26:34', '::1', 'jitrawan.ch@gmail.com เข้าสู่ระบบ.', '1'),
+('3613b416754b10d0', '2019-04-28 08:20:08', '::1', 'jitrawan.ch@gmail.com เข้าสู่ระบบ.', '1'),
+('d30d3b2ca4a15158', '2019-05-03 16:38:59', '::1', 'jitrawan.ch@gmail.com เข้าสู่ระบบ.', '1'),
+('d77f4fe06cc7ea34', '2019-05-03 16:58:54', '::1', 'jitrawan.ch@gmail.com เข้าสู่ระบบ.', '1'),
+('1b0c42b7e15cce07', '2019-05-03 16:59:33', '::1', 'jitrawan.ch@gmail.com ออกจากระบบ.', '1'),
+('03ac3617491f9306', '2019-05-03 16:59:37', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('c4c9520199b21142', '2019-05-03 17:08:05', '::1', 'pat ออกจากระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('3e31812d6709f4aa', '2019-05-03 17:08:09', '::1', 'user1 เข้าสู่ระบบ.', '5e16c811e91f8a4bed61801e7bf1ce20'),
+('1e4910502f0490ba', '2019-05-03 17:10:21', '::1', 'user1 ออกจากระบบ.', '5e16c811e91f8a4bed61801e7bf1ce20'),
+('77f1b6952953959d', '2019-05-03 17:10:27', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('1eca31fac1ffd64b', '2019-05-03 17:13:46', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('a8ed7bda1c3a794c', '2019-05-04 17:12:24', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('65ebe75aa43d15ad', '2019-05-06 16:20:40', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('be16e6538dd4b9bf', '2019-05-09 07:17:33', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('054c3ee5a2872388', '2019-05-09 07:19:31', '::1', 'pat ออกจากระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('0a98acacf3a57fc4', '2019-05-09 07:19:37', '::1', 'film เข้าสู่ระบบ.', '6a7c6fe063021a761c8498b4f11aad85');
 
 -- --------------------------------------------------------
 
@@ -657,7 +832,7 @@ CREATE TABLE `menus` (
   `menu_link` varchar(256) NOT NULL,
   `menu_status` tinyint(1) NOT NULL,
   `menu_sorting` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `menus`
@@ -699,6 +874,26 @@ INSERT INTO `model` (`ModelID`, `BrandID`, `ModelName`, `ModelStatus`) VALUES
 ('M0002', 'B0002', 'dunlop XX2', '1'),
 ('M0003', 'B0009', 'test', '1'),
 ('M0004', 'B0002', 'รุ่นtest', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `offset`
+--
+
+CREATE TABLE `offset` (
+  `id` int(11) NOT NULL,
+  `Description` varchar(10) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `offset`
+--
+
+INSERT INTO `offset` (`id`, `Description`) VALUES
+(2, '-'),
+(3, '-10'),
+(4, '-25');
 
 -- --------------------------------------------------------
 
@@ -749,22 +944,27 @@ INSERT INTO `product` (`ProductID`, `ProductName`, `shelf_id`, `BrandID`, `Model
 
 CREATE TABLE `productdetailrubber` (
   `id` int(11) NOT NULL,
+  `code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `ProductID` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `width` int(11) NOT NULL,
   `series` int(11) NOT NULL,
   `diameter` int(11) NOT NULL,
-  `brand` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `brand` int(11) NOT NULL,
+  `groudRubber` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `productionWeek` int(11) NOT NULL,
+  `productionYear` int(11) NOT NULL,
+  `genRubber` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `speedIndex` int(11) NOT NULL,
+  `weightIndex` int(11) NOT NULL,
+  `persentrubber` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `productdetailrubber`
 --
 
-INSERT INTO `productdetailrubber` (`id`, `ProductID`, `width`, `series`, `diameter`, `brand`) VALUES
-(4, 'P0002', 185, 45, 19, 4),
-(28, 'P0003', 215, 40, 15, 5),
-(29, 'P0004', 195, 50, 14, 1),
-(30, 'P0006', 205, 40, 15, 5);
+INSERT INTO `productdetailrubber` (`id`, `code`, `ProductID`, `width`, `series`, `diameter`, `brand`, `groudRubber`, `productionWeek`, `productionYear`, `genRubber`, `speedIndex`, `weightIndex`, `persentrubber`) VALUES
+(3, 'T0002', 'P0004', 165, 60, 10, 1, '2', 20, 2562, '112', 30, 400, 0);
 
 -- --------------------------------------------------------
 
@@ -774,21 +974,25 @@ INSERT INTO `productdetailrubber` (`id`, `ProductID`, `width`, `series`, `diamet
 
 CREATE TABLE `productdetailwheel` (
   `id` int(11) NOT NULL,
+  `code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `ProductID` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `diameter` int(11) NOT NULL,
   `rim` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `holeSize` int(11) NOT NULL,
-  `typeFormat` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `holeSize` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  `typeFormat` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `brand` int(11) NOT NULL,
+  `color` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `offset` varchar(5) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `productdetailwheel`
 --
 
-INSERT INTO `productdetailwheel` (`id`, `ProductID`, `diameter`, `rim`, `holeSize`, `typeFormat`) VALUES
-(6, 'P0001', 15, '7.5', 5, 'ก้านใหญ่'),
-(14, 'P0005', 19, '9', 6, 'ก้านใหญ่'),
-(17, 'P0007', 18, '8.5', 4, 'จาน');
+INSERT INTO `productdetailwheel` (`id`, `code`, `ProductID`, `diameter`, `rim`, `holeSize`, `typeFormat`, `brand`, `color`, `offset`) VALUES
+(1, 'W0001', 'P0001', 13, '5.5', '4', 'ล้อแม็กกะทะ', 1, 'black', '-'),
+(2, 'W0002', 'P0002', 13, '5.5', '4', 'ล้อแม็กนีเซียมอัลลอย', 2, 'black', '-10'),
+(3, 'W0003', 'P0003', 13, '5.5', '4H100', 'ล้อแม็กกะทะ', 2, 'black', '-11');
 
 -- --------------------------------------------------------
 
@@ -815,13 +1019,270 @@ CREATE TABLE `product_n` (
 --
 
 INSERT INTO `product_n` (`ProductID`, `shelf_id`, `dealer_code`, `Quantity`, `PriceSale`, `PriceBuy`, `ProductStatus`, `Warranty`, `hand`, `TypeID`, `discount`) VALUES
-('P0001', 1, 'D0007', 26, 35000, 20000, '1', '30', 2, 1, 5),
-('P0002', 1, 'D0001', 19, 12000, 10000, '1', '30', 2, 2, 10),
-('P0003', 2, 'D0001', 152, 10000, 10000, '1', '30', 2, 2, 5),
-('P0004', 2, 'D0002', 18, 20000, 15000, '1', '30', 1, 2, 2),
-('P0005', 1, 'D0003', 57, 5000, 5600, '1', '', 1, 1, 0),
-('P0006', 1, 'D0005', 31, 2500, 2000, '1', '', 1, 2, 2),
-('P0007', 1, 'D0006', 62, 6500, 5000, '1', '', 1, 1, 5);
+('P0001', 11, 'D0002', 21, 5000, 4500, '1', '', 1, 1, 0),
+('P0002', 11, 'D0002', 46, 15000, 10000, '1', '', 1, 1, 0),
+('P0003', 14, 'D0002', 40, 20000, 15000, '1', '', 1, 1, 0),
+('P0004', 11, 'D0002', 36, 2000, 2500, '1', '', 1, 2, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `relationdiameter`
+--
+
+CREATE TABLE `relationdiameter` (
+  `id` int(11) NOT NULL,
+  `DiameterId` int(11) NOT NULL,
+  `DiameterRubble` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `relationdiameter`
+--
+
+INSERT INTO `relationdiameter` (`id`, `DiameterId`, `DiameterRubble`) VALUES
+(1, 1, 2),
+(2, 2, 1),
+(3, 2, 2),
+(4, 2, 4),
+(5, 2, 5),
+(6, 3, 3),
+(7, 3, 4),
+(8, 3, 5),
+(9, 3, 6),
+(10, 4, 3),
+(11, 4, 4),
+(12, 4, 5),
+(13, 4, 6),
+(14, 5, 4),
+(15, 5, 5),
+(16, 5, 6),
+(17, 6, 4),
+(18, 6, 5),
+(19, 6, 6),
+(20, 6, 7),
+(21, 6, 8),
+(22, 7, 4),
+(23, 7, 5),
+(24, 7, 6),
+(25, 7, 7),
+(26, 7, 8),
+(27, 7, 9),
+(28, 7, 10),
+(29, 8, 4),
+(30, 8, 5),
+(31, 8, 6),
+(32, 8, 7),
+(33, 8, 8),
+(34, 8, 9),
+(35, 9, 5),
+(36, 9, 6),
+(37, 9, 7),
+(38, 9, 8),
+(39, 9, 9),
+(40, 9, 10),
+(41, 10, 5),
+(42, 10, 6),
+(43, 10, 7),
+(44, 10, 8),
+(45, 10, 9),
+(46, 10, 10),
+(47, 10, 11),
+(48, 10, 12);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `relationholesize`
+--
+
+CREATE TABLE `relationholesize` (
+  `id` int(11) NOT NULL,
+  `HoleSizeId` int(11) NOT NULL,
+  `HoleSizeWhee` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `relationholesize`
+--
+
+INSERT INTO `relationholesize` (`id`, `HoleSizeId`, `HoleSizeWhee`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 4, 1),
+(4, 4, 2),
+(5, 4, 7),
+(6, 5, 1),
+(7, 5, 2),
+(8, 5, 5),
+(9, 5, 7),
+(10, 6, 1),
+(11, 6, 3),
+(12, 6, 4),
+(14, 6, 7),
+(15, 7, 3),
+(16, 7, 4),
+(17, 7, 5),
+(18, 7, 7),
+(19, 8, 4),
+(20, 9, 5),
+(21, 9, 4),
+(22, 9, 7),
+(23, 10, 7),
+(24, 11, 7),
+(25, 12, 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `relationrim`
+--
+
+CREATE TABLE `relationrim` (
+  `id` int(11) NOT NULL,
+  `RimId` int(11) NOT NULL,
+  `RimWheel` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `relationrim`
+--
+
+INSERT INTO `relationrim` (`id`, `RimId`, `RimWheel`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 2, 2),
+(4, 4, 3),
+(5, 4, 4),
+(6, 4, 5),
+(7, 4, 6),
+(8, 4, 7),
+(9, 6, 4),
+(10, 5, 4),
+(11, 5, 5),
+(12, 5, 6),
+(13, 5, 7),
+(14, 6, 5),
+(15, 6, 6),
+(16, 6, 7),
+(17, 6, 8),
+(18, 7, 5),
+(19, 7, 6),
+(20, 7, 7),
+(21, 7, 8),
+(22, 7, 9),
+(23, 8, 6),
+(24, 8, 7),
+(25, 8, 8),
+(26, 8, 9),
+(27, 9, 7),
+(28, 9, 8),
+(29, 9, 9),
+(30, 10, 9),
+(31, 10, 10),
+(32, 11, 10),
+(33, 12, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `relationseries`
+--
+
+CREATE TABLE `relationseries` (
+  `id` int(11) NOT NULL,
+  `SeriesId` int(11) NOT NULL,
+  `SeriesRubble` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `relationseries`
+--
+
+INSERT INTO `relationseries` (`id`, `SeriesId`, `SeriesRubble`) VALUES
+(1, 1, 10),
+(2, 1, 12),
+(3, 2, 7),
+(4, 2, 8),
+(5, 2, 9),
+(6, 2, 10),
+(7, 2, 11),
+(8, 2, 12),
+(9, 3, 6),
+(10, 3, 7),
+(11, 3, 8),
+(12, 3, 9),
+(13, 3, 10),
+(14, 4, 7),
+(15, 4, 8),
+(16, 4, 9),
+(17, 4, 10),
+(18, 5, 5),
+(19, 5, 6),
+(20, 5, 7),
+(21, 5, 8),
+(22, 5, 9),
+(23, 5, 10),
+(24, 5, 11),
+(25, 6, 4),
+(26, 6, 5),
+(27, 6, 6),
+(28, 6, 7),
+(29, 6, 8),
+(30, 6, 9),
+(31, 6, 10),
+(32, 6, 11),
+(33, 7, 3),
+(34, 7, 4),
+(35, 7, 5),
+(36, 7, 6),
+(37, 7, 7),
+(38, 7, 8),
+(39, 7, 9),
+(40, 7, 10),
+(41, 7, 11),
+(42, 8, 3),
+(43, 8, 4),
+(44, 8, 5),
+(45, 8, 6),
+(46, 8, 7),
+(47, 8, 8),
+(48, 8, 9),
+(49, 8, 10),
+(50, 8, 11),
+(51, 9, 2),
+(52, 9, 3),
+(53, 9, 4),
+(54, 9, 5),
+(55, 9, 6),
+(56, 9, 7),
+(57, 9, 8),
+(58, 9, 9),
+(59, 9, 10),
+(60, 9, 11),
+(61, 9, 12),
+(62, 10, 2),
+(63, 10, 3),
+(64, 10, 4),
+(65, 10, 5),
+(66, 10, 6),
+(67, 10, 7),
+(68, 10, 8),
+(69, 10, 9),
+(70, 10, 10),
+(71, 10, 11);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `relationwidth`
+--
+
+CREATE TABLE `relationwidth` (
+  `id` int(11) NOT NULL,
+  `WidthId` int(11) NOT NULL,
+  `WidthRubble` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -835,7 +1296,7 @@ CREATE TABLE `reprint_reserve` (
   `remark` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `createDate` datetime NOT NULL,
   `createBy` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `reprint_reserve`
@@ -843,6 +1304,7 @@ CREATE TABLE `reprint_reserve` (
 
 INSERT INTO `reprint_reserve` (`reprintReserveKey`, `reserve_key`, `remark`, `createDate`, `createBy`) VALUES
 ('', '0', '', '2019-01-22 16:52:54', ''),
+('2a91a0a4c895ab0bfbf505c53d6c401a', '5081ce85fd81dae438ba85efe885e50b', '', '2019-02-19 22:15:55', 'd97530f6437e7ffa3a74afe46a953a15'),
 ('382967531fcddb2256631ebb0f7cc9ad', '23a6d54e9e7cffa8256f85a630bcae68', '', '2019-01-22 17:02:22', 'd97530f6437e7ffa3a74afe46a953a15'),
 ('635977cc0487db193087a6397dd027bc', '16', '', '2019-01-22 17:01:14', 'd97530f6437e7ffa3a74afe46a953a15'),
 ('9a4c2d8152b4d448368a02264b36e8b1', '23a6d54e9e7cffa8256f85a630bcae68', '', '2019-01-22 17:02:04', 'd97530f6437e7ffa3a74afe46a953a15');
@@ -859,7 +1321,7 @@ CREATE TABLE `reserve` (
   `create_by` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `discount` int(11) NOT NULL,
   `tax_total` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `reserve`
@@ -881,7 +1343,7 @@ CREATE TABLE `reserve_detail` (
   `price` int(11) NOT NULL,
   `detail_discount` int(11) NOT NULL,
   `detail_amt` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -892,30 +1354,29 @@ CREATE TABLE `reserve_detail` (
 CREATE TABLE `reserve_info` (
   `reserve_key` char(32) COLLATE utf8_unicode_ci NOT NULL,
   `reserve_code` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `reserve_no` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `empolyee` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `reserve_tax` int(11) NOT NULL,
   `reserve_total` int(11) NOT NULL,
   `reserve_status` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
   `create_date` datetime NOT NULL,
   `remark` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `reserve_info`
 --
 
-INSERT INTO `reserve_info` (`reserve_key`, `reserve_code`, `empolyee`, `reserve_tax`, `reserve_total`, `reserve_status`, `create_date`, `remark`) VALUES
-('16c53ed54b87ae4709488fa65e9699d2', 'CX46XQTV', 'd97530f6437e7ffa3a74afe46a953a15', 4172, 59600, 'S', '2019-01-18 16:52:10', ''),
-('23a6d54e9e7cffa8256f85a630bcae68', 'CIUYTQW', 'd97530f6437e7ffa3a74afe46a953a15', 756, 10800, 'S', '2019-01-22 16:33:58', ''),
-('2ff6276734edaa8a9cc03ae5fa36189d', 'C91F2NNO', 'd97530f6437e7ffa3a74afe46a953a15', 8435, 120500, 'C', '2019-01-22 09:57:17', ''),
-('356106a76ab2d5dd0fcf7c46c330517d', 'CL6O83P', 'd97530f6437e7ffa3a74afe46a953a15', 2328, 33250, 'S', '2019-01-22 16:33:51', ''),
-('4d53266c9ced72da0739503f8bda47c0', 'C9UIHSGS', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'P', '2019-01-22 14:34:59', ''),
-('615f80e5cd95876e5863c6febb244277', 'C3G9MBB', 'd97530f6437e7ffa3a74afe46a953a15', 756, 10800, 'S', '2019-01-22 09:57:50', ''),
-('79344d4499dafc3296379802db3b0a9e', 'C884PC2', 'd97530f6437e7ffa3a74afe46a953a15', 3780, 54000, 'S', '2019-01-22 09:58:42', ''),
-('aa8458ed630f7ca2ab5e8f0b5938a05d', 'CB64RMRQ', 'd97530f6437e7ffa3a74afe46a953a15', 13276, 189650, 'S', '2019-01-26 22:12:56', ''),
-('c05dcc3b2fffb4f1ff32d777cf0f69f4', 'CQ55HBMW', 'd97530f6437e7ffa3a74afe46a953a15', 2744, 39200, 'S', '2019-01-22 10:06:28', ''),
-('de060f4a839857f0a8d8191b20ba5fef', 'C8F1XII3', 'd97530f6437e7ffa3a74afe46a953a15', 2328, 33250, 'S', '2019-01-22 11:56:51', ''),
-('ebeecfa7af58c373c38a353cec083b45', 'CRIZQWRH', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'P', '2019-02-03 22:35:16', '');
+INSERT INTO `reserve_info` (`reserve_key`, `reserve_code`, `reserve_no`, `empolyee`, `reserve_tax`, `reserve_total`, `reserve_status`, `create_date`, `remark`) VALUES
+('58abd91b6a4d8d41bf74eedbf8777e65', 'C46EJIGW', '', '6a7c6fe063021a761c8498b4f11aad85', 0, 0, 'P', '2019-05-09 15:05:22', ''),
+('412e6803ae4a8b4d56a9654ade3a4d8a', 'CA4RWI85', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'P', '2019-05-05 00:14:43', ''),
+('9633399692e492b5a09b4bd0863b9d1b', 'C7VKLPBA', '2019050500C7VKLPBA', 'd97530f6437e7ffa3a74afe46a953a15', 700, 10000, 'S', '2019-05-05 00:22:45', ''),
+('cbaeb31397b1cbd9e4b498be6459f655', 'CFCHEVVT', '', '1', 0, 0, 'P', '2019-04-28 15:23:52', ''),
+('6b373a7bc70d20d99b07a1448aebab10', 'CYR8NVG', '', '6a7c6fe063021a761c8498b4f11aad85', 0, 0, 'P', '2019-05-09 15:19:05', ''),
+('d5e9f312dc1234c5e3a3e09ef52df690', 'C14I474F', '', '6a7c6fe063021a761c8498b4f11aad85', 0, 0, 'P', '2019-05-09 15:37:09', ''),
+('309e95b5468a312fe53e75bc3498f6fc', 'CIF1CX3J', '', '6a7c6fe063021a761c8498b4f11aad85', 0, 0, 'P', '2019-05-09 16:00:10', ''),
+('cdc9ebd7e304d5b6a49bb682e62f50bd', 'CQ3PX7ZS', '2019050900CQ3PX7ZS', '6a7c6fe063021a761c8498b4f11aad85', 4452, 63600, 'S', '2019-05-09 16:03:17', ''),
+('a94eb8d5d9de302cbebed2e6d6d34db9', 'C63NFF80', '', '6a7c6fe063021a761c8498b4f11aad85', 0, 0, 'N', '2019-05-09 16:04:00', '');
 
 -- --------------------------------------------------------
 
@@ -931,29 +1392,161 @@ CREATE TABLE `reserve_item` (
   `item_price` int(11) NOT NULL,
   `item_total` int(11) NOT NULL,
   `item_amt` int(11) NOT NULL,
-  `create_Date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `create_Date` date NOT NULL,
+  `Event_Code` varchar(10) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `reserve_item`
 --
 
-INSERT INTO `reserve_item` (`item_key`, `reserve_key`, `ProductID`, `item_discount`, `item_price`, `item_total`, `item_amt`, `create_Date`) VALUES
-('18fe815d13f1eafb2d0bca727944cc55', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0004', 400, 20000, 58800, 3, '2019-01-26'),
-('2ffc4abab438914f5d9871afd704a2c6', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0003', 500, 10000, 9500, 1, '2019-01-26'),
-('39f521c11aac1e75b1b46d91faab54c9', '16c53ed54b87ae4709488fa65e9699d2', 'P0002', 1200, 12000, 21600, 2, '2019-01-18'),
-('3fc270ba4c1aca10fd13a083a70dddc6', '615f80e5cd95876e5863c6febb244277', 'P0002', 1200, 12000, 10800, 1, '2019-01-22'),
-('40fe0ff65d5a6f85c5a8aa5e591a6f22', '2ff6276734edaa8a9cc03ae5fa36189d', 'P0001', 1750, 35000, 66500, 2, '2019-01-22'),
-('6adb2570d79a1d85a2e79c986cbda436', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0001', 1750, 35000, 99750, 3, '2019-01-26'),
-('75caacf9dc49ed2a25c57ce03c508435', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0002', 1200, 12000, 21600, 2, '2019-01-26'),
-('95128d6eb11e53ac684f1e19ea186fa1', '79344d4499dafc3296379802db3b0a9e', 'P0002', 1200, 12000, 54000, 5, '2019-01-22'),
-('a1ff1faf3792862216c0b32c96b55aed', '356106a76ab2d5dd0fcf7c46c330517d', 'P0001', 1750, 35000, 33250, 1, '2019-01-22'),
-('a7c1a90044e0f525186f1c8a53f687c4', 'de060f4a839857f0a8d8191b20ba5fef', 'P0001', 1750, 35000, 33250, 1, '2019-01-22'),
-('b75f87cdf07933f08b74d2fc48df7149', '23a6d54e9e7cffa8256f85a630bcae68', 'P0002', 1200, 12000, 10800, 1, '2019-01-22'),
-('c358da22918145542a459a2faf2d1bd5', 'ebeecfa7af58c373c38a353cec083b45', 'P0001', 1750, 35000, 33250, 1, '2019-02-03'),
-('ca35b56ae29ff84bca4789ac4573ba5c', '16c53ed54b87ae4709488fa65e9699d2', 'P0003', 500, 10000, 38000, 4, '2019-01-18'),
-('d1c8d4fc55d4c06e2a28f1ca96845ba6', '2ff6276734edaa8a9cc03ae5fa36189d', 'P0002', 1200, 12000, 54000, 5, '2019-01-22'),
-('d9e12a38f2eeb0cd031832da1a18a6e4', 'c05dcc3b2fffb4f1ff32d777cf0f69f4', 'P0004', 400, 20000, 39200, 2, '2019-01-22');
+INSERT INTO `reserve_item` (`item_key`, `reserve_key`, `ProductID`, `item_discount`, `item_price`, `item_total`, `item_amt`, `create_Date`, `Event_Code`) VALUES
+('012c7dcc41269b22bd7577331a70d0ff', '4cdebb270b60e0eb4718eaebbb591171', 'P0008', 0, 4500, 4500, 1, '2019-04-15', ''),
+('02eab9bb156c7eb7b869c1efef99d7ad', 'cf307ddbc0b9714023f3974b3b219f7a', 'P0002', 1200, 12000, 10800, 1, '2019-03-20', ''),
+('03ebc94915125b784bde86fd6ef5d6b0', '4cdebb270b60e0eb4718eaebbb591171', 'P0001', 0, 3000, 12000, 4, '2019-04-15', ''),
+('0580a6ba812a28b691eae3fb99356aa6', '80e9cb0ef93916918db9c8d726b10482', 'P0003', 0, 9500, 38000, 4, '2019-04-15', 'E0001'),
+('09551461884ff08b299968a2897e2787', '69bf2cb93075291325b9bfb32d8b13d0', 'P0001', 0, 35000, 35000, 1, '2019-03-20', ''),
+('0dbbfa73abe996ecc95f872abd57f9b6', 'a21c2ab1eb7b9ca964541fcf0abafdbc', 'P0007', 325, 6500, 49400, 8, '2019-04-07', ''),
+('144c9282479616521da2f5f52dee26f3', 'f78e365e5b85c99ec67a47b4ee003768', 'P0003', 500, 10000, 9500, 1, '2019-03-02', ''),
+('160042436f951167841e03f9a50c02d4', 'ba1bfbd136e5522c7e7916ed6886871f', 'P0003', 0, 9500, 38000, 4, '2019-04-21', 'E0001'),
+('175ad7e13d640e865bc64d776c8c84b1', 'b0e203163247c8775ae9d6de6f98797b', 'P0003', 0, 9500, 38000, 4, '2019-04-15', 'E0001'),
+('18fe815d13f1eafb2d0bca727944cc55', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0004', 400, 20000, 58800, 3, '2019-01-26', ''),
+('1c9bc77a115596656bc9a2899913f400', '4287252495029b01df3bf3419dedc32e', 'P0002', 1200, 12000, 10800, 1, '2019-03-20', ''),
+('1d149a788160ec02c3b618cc03869a42', 'f150f7118f0446edada811f22612c769', 'P0004', 400, 20000, 19600, 1, '2019-03-20', ''),
+('238ab31f338339d2f85023f14e7ba384', '001b5f6ec7f8767a6fb8d078ef8abff7', 'P0001', 0, 35000, 35000, 1, '2019-03-31', ''),
+('23b28a0f055e0297286ce3f2002bd8cc', '4b3e80691dd1fca5cf117945bad2b739', 'P0002', 0, 12000, 48000, 4, '2019-04-14', ''),
+('29fb4e8147f728b744a363db7fdea6ad', '807f984e5ee2249b7e4c191a5eadec18', 'P0003', 500, 10000, 9500, 1, '2019-03-20', ''),
+('2bcb6f20da4ddd1ccd2d0506da385742', '5f1519960f7fa5d55a5b3c4e6635405d', 'P0007', 325, 6500, 18525, 3, '2019-02-19', ''),
+('2d93bd1c43557cce2ac5d4997e723bbf', '157d7800f82adffef91e224b42a69b59', 'P0002', 1200, 12000, 10800, 1, '2019-03-20', ''),
+('2ffc4abab438914f5d9871afd704a2c6', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0003', 500, 10000, 9500, 1, '2019-01-26', ''),
+('3268168bad24d57c1373be0289c6f1f9', '25dbccf452d2b92a6339378ae4333599', 'P0003', 500, 10000, 9500, 1, '2019-03-22', ''),
+('36406526d02a8f7b9c83a42d08ee706b', '4cdebb270b60e0eb4718eaebbb591171', 'P0003', 500, 10000, 9500, 1, '2019-04-15', ''),
+('39f521c11aac1e75b1b46d91faab54c9', '16c53ed54b87ae4709488fa65e9699d2', 'P0002', 1200, 12000, 21600, 2, '2019-01-18', ''),
+('3fc270ba4c1aca10fd13a083a70dddc6', '615f80e5cd95876e5863c6febb244277', 'P0002', 1200, 12000, 10800, 1, '2019-01-22', ''),
+('40fe0ff65d5a6f85c5a8aa5e591a6f22', '2ff6276734edaa8a9cc03ae5fa36189d', 'P0001', 1750, 35000, 66500, 2, '2019-01-22', ''),
+('442c05de1f80457b72b122ed44f5cbd9', '05860be830f63c86894b0eedb1b8943d', 'P0004', 400, 20000, 19600, 1, '2019-03-20', ''),
+('4d0f4324c02627746adf175a04db0068', 'fb0d68556e688ffefe0a4335389808b7', 'P0001', 0, 35000, 35000, 1, '2019-03-20', ''),
+('52629910aa48b38440b8cc2387d513ef', '5e6ae23f631429c796185945fec3426e', 'P0010', 0, 10000, 10000, 1, '2019-03-07', ''),
+('5c6ab53450c539726c5fda8583a117de', 'b0e203163247c8775ae9d6de6f98797b', 'P0003', 0, 9500, 38000, 4, '2019-04-15', 'E0001'),
+('645cd8172ba9e79866996056b29530e7', '9633399692e492b5a09b4bd0863b9d1b', 'P0001', 0, 5000, 5000, 1, '2019-05-05', ''),
+('6493d8e4059b2e0176ee35f567367e2d', '6c9a3f0297345cb9854a52057557281a', 'P0001', 0, 4000, 16000, 4, '2019-04-24', 'E0007'),
+('6795f5c6fdcbadb009898b074e44437d', 'b0e203163247c8775ae9d6de6f98797b', 'P0003', 0, 9500, 38000, 4, '2019-04-15', 'E0001'),
+('67bc37f8ed5aa0773267a398c7297a12', 'd83376c2c04d6e0ae77748d3b14c76cc', 'P0003', 0, 9500, 38000, 4, '2019-04-21', 'E0001'),
+('6adb2570d79a1d85a2e79c986cbda436', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0001', 1750, 35000, 99750, 3, '2019-01-26', ''),
+('6afa19f6b94338670f98f7867b718085', '4cdebb270b60e0eb4718eaebbb591171', 'P0003', 0, 9500, 38000, 4, '2019-04-15', ''),
+('700cdd7c452a6c171ea8040dc9629216', 'f78e365e5b85c99ec67a47b4ee003768', 'P0002', 1200, 12000, 10800, 1, '2019-03-02', ''),
+('74a4e87edbd342be7acf338c784d4ccc', '4cdebb270b60e0eb4718eaebbb591171', 'P0003', 500, 10000, 9500, 1, '2019-04-15', ''),
+('75caacf9dc49ed2a25c57ce03c508435', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0002', 1200, 12000, 21600, 2, '2019-01-26', ''),
+('80a24252e55424833fa5299aacb24093', '0c629d5ed4d08e6c2c83636b00332517', 'P0003', 500, 10000, 9500, 1, '2019-03-20', ''),
+('817d36064a75eb25799841752fd8b82a', '648adb1bef8f4dd0b8c187973a813239', 'P0009', 0, 6000, 6000, 1, '2019-04-13', ''),
+('8938091d7ddd98627bfb1f45775d9fc2', 'b0e203163247c8775ae9d6de6f98797b', 'P0001', 0, 3000, 12000, 4, '2019-04-15', 'E0001'),
+('8991e60a8d88c34d21ec5d3d4d2446cf', 'f78e365e5b85c99ec67a47b4ee003768', 'P0001', 0, 35000, 35000, 1, '2019-03-02', ''),
+('8d5dc1ebcdf38027f33e640dddc7f4a6', 'a21c2ab1eb7b9ca964541fcf0abafdbc', 'P0003', 500, 10000, 9500, 1, '2019-04-07', ''),
+('95128d6eb11e53ac684f1e19ea186fa1', '79344d4499dafc3296379802db3b0a9e', 'P0002', 1200, 12000, 54000, 5, '2019-01-22', ''),
+('99539b19a24e59a62e5cb8d6b9d48c3b', '5b7d4bc906ca9cac8674a8d01a8ee483', 'P0001', 0, 35000, 35000, 1, '2019-03-20', ''),
+('9a801817e2b305aafb9dcc40bd3e1527', 'b0e203163247c8775ae9d6de6f98797b', 'P0001', 0, 3000, 12000, 4, '2019-04-15', 'E0001'),
+('9f59210eee5aabea28d6c0c137b2bea1', '50dd9d0ed2760dce04620a5687e6826b', 'P0001', 0, 35000, 35000, 1, '2019-03-20', ''),
+('a1ff1faf3792862216c0b32c96b55aed', '356106a76ab2d5dd0fcf7c46c330517d', 'P0001', 1750, 35000, 33250, 1, '2019-01-22', ''),
+('a7c1a90044e0f525186f1c8a53f687c4', 'de060f4a839857f0a8d8191b20ba5fef', 'P0001', 1750, 35000, 33250, 1, '2019-01-22', ''),
+('aeaf41eea4808855d67ec46a49471c69', 'b0e203163247c8775ae9d6de6f98797b', 'P0003', 0, 9500, 38000, 4, '2019-04-15', 'E0001'),
+('b0f2fa3ae1ce69be5a5d301bd8309b86', '412e6803ae4a8b4d56a9654ade3a4d8a', 'P0001', 0, 5000, 20000, 4, '2019-05-05', ''),
+('b75f87cdf07933f08b74d2fc48df7149', '23a6d54e9e7cffa8256f85a630bcae68', 'P0002', 1200, 12000, 10800, 1, '2019-01-22', ''),
+('bd8252a24a879330e45ddda9d17df37c', '4cdebb270b60e0eb4718eaebbb591171', 'P0003', 500, 10000, 9500, 1, '2019-04-15', ''),
+('c08bc22adbb221a9b8f50db3e2ee18eb', 'ba1bfbd136e5522c7e7916ed6886871f', 'P0001', 0, 3000, 12000, 4, '2019-04-21', 'E0001'),
+('c25d63f9984e143cf7b8f16b4e4a9579', '6c9a3f0297345cb9854a52057557281a', 'P0001', 0, 4000, 16000, 4, '2019-04-24', 'E0007'),
+('c358da22918145542a459a2faf2d1bd5', 'ebeecfa7af58c373c38a353cec083b45', 'P0001', 1750, 35000, 33250, 1, '2019-02-03', ''),
+('c673e3b3b3ecf08033ecc641e2aa3e41', '48e26108f4f99f2bb986510b30ddc5cb', 'P0002', 1200, 12000, 10800, 1, '2019-03-20', ''),
+('c72152cf50e324a5e453a3b603680d86', '75ebbcffe576a9f69c70ae964768833f', 'P0001', 0, 35000, 35000, 1, '2019-03-20', ''),
+('c821a9d6854a1667b08fd1373557dcac', 'e55953a0adf5fd3115da033ea8eda1e5', 'P0002', 1200, 12000, 10800, 1, '2019-03-07', ''),
+('c893c3293c25cc145dd5b7004a837564', '80e9cb0ef93916918db9c8d726b10482', 'P0001', 0, 3000, 12000, 4, '2019-04-15', 'E0001'),
+('ca35b56ae29ff84bca4789ac4573ba5c', '16c53ed54b87ae4709488fa65e9699d2', 'P0003', 500, 10000, 38000, 4, '2019-01-18', ''),
+('cbf13b8f315c5124ed6c3717df3a89f2', 'd83376c2c04d6e0ae77748d3b14c76cc', 'P0001', 0, 35000, 140000, 4, '2019-04-21', ''),
+('ceb4655b22707a3afea4edbebd577f5e', '8d81cd8cbc68156abfd9bcd388ef3738', 'P0001', 0, 35000, 35000, 1, '2019-03-20', ''),
+('d1c8d4fc55d4c06e2a28f1ca96845ba6', '2ff6276734edaa8a9cc03ae5fa36189d', 'P0002', 1200, 12000, 54000, 5, '2019-01-22', ''),
+('d55d324feffb4440597c9164312603e3', 'b0e203163247c8775ae9d6de6f98797b', 'P0001', 0, 3000, 12000, 4, '2019-04-15', 'E0001'),
+('d9e12a38f2eeb0cd031832da1a18a6e4', 'c05dcc3b2fffb4f1ff32d777cf0f69f4', 'P0004', 400, 20000, 39200, 2, '2019-01-22', ''),
+('dcb4e454b4c846d6b05f3481cc87dd90', 'd83376c2c04d6e0ae77748d3b14c76cc', 'P0001', 0, 3000, 12000, 4, '2019-04-21', 'E0001'),
+('e4ec4fa98a30e1f5e7f297847a1aaa93', '5081ce85fd81dae438ba85efe885e50b', 'P0002', 1200, 12000, 21600, 2, '2019-02-19', ''),
+('e54f265d319e41489bb008f10849d157', '8888f5561ba4609b14df3f4f69b9f8ab', 'P0001', 1750, 35000, 33250, 1, '2019-02-19', ''),
+('e68b4395fb3042e062f2acac9a3ba59e', 'b0e203163247c8775ae9d6de6f98797b', 'P0001', 0, 3000, 12000, 4, '2019-04-15', 'E0001'),
+('eb4390e6ec8692e1444106af863511a8', 'b0e203163247c8775ae9d6de6f98797b', 'P0003', 0, 9500, 38000, 4, '2019-04-15', 'E0001'),
+('f4b6f19db54ed4d3daddb1904d9fe290', 'b0e203163247c8775ae9d6de6f98797b', 'P0001', 0, 3000, 12000, 4, '2019-04-15', 'E0001'),
+('ffebb302df14b0b5488153376cb7bf9b', '4cdebb270b60e0eb4718eaebbb591171', 'P0003', 500, 10000, 9500, 1, '2019-04-15', ''),
+('24f6d31868266663fb75361dd1d74dbd', '58abd91b6a4d8d41bf74eedbf8777e65', 'P0001', 0, 5000, 5000, 1, '2019-05-09', ''),
+('0e3265630c75cd3b5542a03d9186a7eb', '58abd91b6a4d8d41bf74eedbf8777e65', 'P0003', 0, 20000, 20000, 1, '2019-05-09', ''),
+('e72e29c14a62af99d48f8ba94263d4cf', '6b373a7bc70d20d99b07a1448aebab10', 'P0001', 0, 5000, 5000, 1, '2019-05-09', ''),
+('c2fcb7010c1310bf846e36223fb46a31', '6b373a7bc70d20d99b07a1448aebab10', 'P0003', 0, 20000, 20000, 1, '2019-05-09', ''),
+('127e5d19cce338a0e714a31300076f99', '6b373a7bc70d20d99b07a1448aebab10', 'P0004', 0, 2000, 2000, 1, '2019-05-09', ''),
+('9d6c5713f29adbd3b51a8d5914eea78c', '', 'P0001', 0, 47000, 188000, 4, '2019-05-09', 'E0002'),
+('9211ecf5218b86db1e6be220e41b24f7', '', 'P0003', 0, 18000, 72000, 4, '2019-05-09', 'E0002'),
+('69bd93afd96060b624d7ca0aa88e2b67', '309e95b5468a312fe53e75bc3498f6fc', 'P0004', 0, 1900, 7600, 4, '2019-05-09', 'E0003'),
+('d8c9dae94802d18c16144fdeb66eb927', '309e95b5468a312fe53e75bc3498f6fc', 'P0002', 0, 14000, 56000, 4, '2019-05-09', 'E0003'),
+('5e3779be3dacfa9693eb85d4c61311d5', 'cdc9ebd7e304d5b6a49bb682e62f50bd', 'P0004', 0, 1900, 7600, 4, '2019-05-09', 'E0003'),
+('c70a0d4d4265f6438ea87723dfd3640e', 'cdc9ebd7e304d5b6a49bb682e62f50bd', 'P0002', 0, 14000, 56000, 4, '2019-05-09', 'E0003');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rimwheel`
+--
+
+CREATE TABLE `rimwheel` (
+  `id` int(11) NOT NULL,
+  `code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `Description` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `rimwheel`
+--
+
+INSERT INTO `rimwheel` (`id`, `code`, `Description`, `status`) VALUES
+(1, 'WR0001', '5.5', 1),
+(2, 'WR0002', '6', 1),
+(3, 'WR0003', '6.5', 1),
+(4, 'WR0004', '7', 1),
+(5, 'WR0005', '7.5', 1),
+(6, 'WR0006', '8', 1),
+(7, 'WR0007', '8.5', 1),
+(8, 'WR0008', '9', 1),
+(9, 'WR0009', '9.5', 1),
+(10, 'WR0010', '10', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `seriesrubble`
+--
+
+CREATE TABLE `seriesrubble` (
+  `id` int(11) NOT NULL,
+  `code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `Description` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL,
+  `WidthRubble` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `DiameterRubble` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `relationWidth` int(11) NOT NULL,
+  `relationDiameter` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `seriesrubble`
+--
+
+INSERT INTO `seriesrubble` (`id`, `code`, `Description`, `status`, `WidthRubble`, `DiameterRubble`, `relationWidth`, `relationDiameter`) VALUES
+(1, 'RS0001', '25', 1, '', '', 0, 0),
+(2, 'RS0002', '30', 1, '', '', 0, 0),
+(3, 'RS0003', '35', 1, '', '', 0, 0),
+(4, 'RS0004', '40', 1, '', '', 0, 0),
+(5, 'RS0005', '45', 1, '', '', 0, 0),
+(6, 'RS0006', '50', 1, '', '', 0, 0),
+(7, 'RS0007', '55', 1, '', '', 0, 0),
+(8, 'RS0008', '60', 1, '', '', 0, 0),
+(9, 'RS0009', '65', 1, '', '', 0, 0),
+(10, 'RS0010', '70', 1, '', '', 0, 0),
+(11, 'RS0011', '75', 1, '', '', 0, 0),
+(12, 'RS0012', '80', 1, '', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -963,18 +1556,22 @@ INSERT INTO `reserve_item` (`item_key`, `reserve_key`, `ProductID`, `item_discou
 
 CREATE TABLE `shelf` (
   `shelf_id` int(11) NOT NULL,
+  `shelf_code` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `shelf_detail` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `shelf_color` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `shelf_status` varchar(10) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `shelf_status` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `shelf_class` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `shelf`
 --
 
-INSERT INTO `shelf` (`shelf_id`, `shelf_detail`, `shelf_color`, `shelf_status`) VALUES
-(1, 'shelf A ชั้น 2', '#ebb2e8', '1'),
-(2, 'shelf A ชั้น 1', '#fc9f49', '1');
+INSERT INTO `shelf` (`shelf_id`, `shelf_code`, `shelf_detail`, `shelf_color`, `shelf_status`, `shelf_class`) VALUES
+(11, 's0006', 'A', '', '1', 1),
+(12, 's0007', 'A', '', '1', 2),
+(13, 's0008', 'B', '', '1', 1),
+(14, 's0009', 'B', '', '1', 2);
 
 -- --------------------------------------------------------
 
@@ -995,22 +1592,10 @@ CREATE TABLE `stock_tb_receive_master` (
 --
 
 INSERT INTO `stock_tb_receive_master` (`rid`, `po`, `datedo`, `datereceive`, `iduser`) VALUES
-(1, 'P001', '2018-12-16', '2018-12-16', 'pat'),
-(2, 'P002', '2018-12-16', '2018-12-16', 'pat'),
-(3, 'P003', '2018-12-16', '2018-12-16', 'pat'),
-(4, 'P004', '2018-12-16', '2018-12-16', 'pat'),
-(5, 'P005', '2018-12-16', '2018-12-16', 'pat'),
-(6, 'P006', '2018-12-17', '2018-12-17', 'pat'),
-(7, 'P007', '2018-12-17', '2018-12-17', 'pat'),
-(8, 'P008', '2018-12-17', '2018-12-17', 'pat'),
-(9, 'CLRB9T1', '2019-01-02', '2019-01-02', 'pat'),
-(10, 'CGD9ZZ3D', '2019-01-02', '2019-01-02', 'พัชรวี   ส'),
-(11, 'CRF3AFN', '2019-01-02', '2019-01-02', 'พัชรวี   สีดอก'),
-(12, 'C8MD0VVL', '2019-01-15', '2019-01-15', 'พัชรวี   สีดอก'),
-(13, 'CE6ROJC', '2019-01-15', '2019-01-15', 'พัชรวี   สีดอก'),
-(14, 'C7RTZ3XQ', '2019-01-16', '2019-01-16', 'พัชรวี   สีดอก'),
-(15, 'C8B3EO46', '2019-01-16', '2019-01-16', 'พัชรวี   สีดอก'),
-(16, 'CDU16WB2', '2019-02-03', '2019-02-03', 'พัชรวี   สีดอก');
+(1, 'PO0001', '2019-05-05', '2019-05-05', 'พัชรวี   สีดอก'),
+(2, 'PO0002', '2019-05-06', '2019-05-06', 'พัชรวี   สีดอก'),
+(3, 'PO0003', '2019-05-06', '2019-05-06', 'พัชรวี   สีดอก'),
+(4, 'PO0004', '2019-05-09', '2019-05-09', '่jitrawan   chumpai');
 
 -- --------------------------------------------------------
 
@@ -1030,29 +1615,8 @@ CREATE TABLE `stock_tb_receive_master_sub` (
 --
 
 INSERT INTO `stock_tb_receive_master_sub` (`no`, `po`, `ProductID`, `total`) VALUES
-(20, 'P006', 'P0004', 13),
-(19, 'P005', 'P0002', 13),
-(18, 'P005', 'P0001', 6),
-(21, 'P006', 'P0003', 2),
-(22, 'P001', 'P0001', 2),
-(23, 'P008', 'P0001', 2),
-(30, 'CRF3AFN', 'P0001', 10),
-(34, 'C7RTZ3XQ', 'P0001', 5),
-(33, 'CE6ROJC', 'P0002', 4),
-(39, 'C8B3EO46', 'P0002', 10),
-(40, 'C8B3EO46', 'P0001', 20),
-(41, 'P007', 'P0005', 2),
-(42, 'P007', 'P0006', 10),
-(43, 'P004', 'P0001', 2),
-(44, 'P004', 'P0002', 2),
-(45, 'P004', 'P0003', 2),
-(46, 'CRF3AFN', 'P0002', 2),
-(47, 'CRF3AFN', 'P0003', 4),
-(48, 'CRF3AFN', 'P0004', 4),
-(49, 'CLRB9T1', 'P0005', 5),
-(50, 'CLRB9T1', 'P0006', 6),
-(51, 'CLRB9T1', 'P0007', 7),
-(52, 'CLRB9T1', 'P0002', 4);
+(2, 'PO0003', '', 1),
+(3, 'PO0004', 'P0001', 12);
 
 -- --------------------------------------------------------
 
@@ -1065,7 +1629,7 @@ CREATE TABLE `system_font_size` (
   `font_name` varchar(128) NOT NULL,
   `font_size_text` text NOT NULL,
   `font_status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `system_font_size`
@@ -1120,7 +1684,7 @@ CREATE TABLE `system_info` (
   `reciept_title_th` varchar(128) NOT NULL,
   `reciept_note1_th` text NOT NULL,
   `reciept_note2_th` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `system_info`
@@ -1159,6 +1723,28 @@ INSERT INTO `type` (`TypeID`, `TypeName`, `TypeStatus`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `typeformatwheel`
+--
+
+CREATE TABLE `typeformatwheel` (
+  `id` int(11) NOT NULL,
+  `code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `Description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `typeformatwheel`
+--
+
+INSERT INTO `typeformatwheel` (`id`, `code`, `Description`, `status`) VALUES
+(2, 'WT0001', 'ล้อแม็กกะทะ', 1),
+(3, 'WT0002', 'ล้อแม็กนีเซียมอัลลอย', 1),
+(4, 'WT0003', 'ล้อแม็กอลูมินั่มอัลลอย', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -1182,8 +1768,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_key`, `name`, `lastname`, `username`, `password`, `user_photo`, `user_class`, `bed_view`, `user_language`, `system_font_size`, `email`, `user_status`) VALUES
-('1', 'jitrawan', 'chumpai', 'jitrawan.ch@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '', 2, 'box_view', 'th', 'dd7e28065e654467be0f9c16f3bd987d', 'jitrawan.ch@gmail.com', 1),
-('d97530f6437e7ffa3a74afe46a953a15', 'พัชรวี', 'สีดอก', 'pat', '8e3a8d3e644e608d25ec40162988a137', 'noimg.jpg', 3, 'box_view', 'th', '74af75636b4e933684d63b617c97f398', 'applee@gmail.com', 1);
+('1', 'jitrawan', 'chumpai', 'jitrawan.ch@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '', 3, 'box_view', 'th', 'dd7e28065e654467be0f9c16f3bd987d', 'jitrawan.ch@gmail.com', 1),
+('d97530f6437e7ffa3a74afe46a953a15', 'พัชรวี', 'สีดอก', 'pat', '81dc9bdb52d04dc20036dbd8313ed055', 'noimg.jpg', 3, 'box_view', 'th', '74af75636b4e933684d63b617c97f398', 'applee@gmail.com', 1),
+('5e16c811e91f8a4bed61801e7bf1ce20', 'user', '', 'user1', '81dc9bdb52d04dc20036dbd8313ed055', 'noimg.jpg', 2, 'box_view', 'th', 'dd7e28065e654467be0f9c16f3bd987d', '', 1),
+('6a7c6fe063021a761c8498b4f11aad85', '่jitrawan', 'chumpai', 'film', 'e10adc3949ba59abbe56e057f20f883e', 'noimg.jpg', 3, 'box_view', 'th', 'dd7e28065e654467be0f9c16f3bd987d', 'jitrawan.ch@hotmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -1197,7 +1785,7 @@ CREATE TABLE `viewtables` (
   `age` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `gender` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `action` varchar(50) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `viewtables`
@@ -1211,6 +1799,37 @@ INSERT INTO `viewtables` (`id`, `name`, `age`, `gender`, `action`) VALUES
 (5, '[\"[{\"amt\":\"1\",\"pid\":\"P0001\"},{\"amt\":\"1\",\"pid\":\"P0002\"},{\"amt\":\"1\",\"pid\":\"P0003\"},{\"amt\":\"1\",\"pid\":\"P0001\"}]\"]', '', '', ''),
 (6, 'Array', '', '', ''),
 (7, '[{\"amt\":\"1\"', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `widthrubble`
+--
+
+CREATE TABLE `widthrubble` (
+  `id` int(11) NOT NULL,
+  `code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `Description` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL,
+  `relationSeries` int(11) NOT NULL,
+  `relationDiameter` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `widthrubble`
+--
+
+INSERT INTO `widthrubble` (`id`, `code`, `Description`, `status`, `relationSeries`, `relationDiameter`) VALUES
+(1, 'RW0001', '155', 1, 1, 1),
+(2, 'RW0002', '165', 1, 2, 2),
+(3, 'RW0003', '175', 1, 0, 0),
+(4, 'RW0004', '185', 1, 0, 0),
+(5, 'RW0005', '195', 1, 0, 0),
+(6, 'RW0006', '205', 1, 0, 0),
+(7, 'RW0007', '215', 1, 0, 0),
+(8, 'RW0008', '225', 1, 0, 0),
+(9, 'RW0009', '235', 1, 0, 0),
+(12, 'RW0010', '245', 1, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -1235,6 +1854,18 @@ ALTER TABLE `brand`
   ADD PRIMARY KEY (`BrandID`);
 
 --
+-- Indexes for table `brandrubble`
+--
+ALTER TABLE `brandrubble`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `brandwhee`
+--
+ALTER TABLE `brandwhee`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `cancelesd_reserve`
 --
 ALTER TABLE `cancelesd_reserve`
@@ -1245,6 +1876,36 @@ ALTER TABLE `cancelesd_reserve`
 --
 ALTER TABLE `dealer`
   ADD PRIMARY KEY (`dealer_id`);
+
+--
+-- Indexes for table `diameterrubble`
+--
+ALTER TABLE `diameterrubble`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `diameterwhee`
+--
+ALTER TABLE `diameterwhee`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `event_info`
+--
+ALTER TABLE `event_info`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Event_Item`
+--
+ALTER TABLE `Event_Item`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `holesizewhee`
+--
+ALTER TABLE `holesizewhee`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `language`
@@ -1271,6 +1932,12 @@ ALTER TABLE `model`
   ADD PRIMARY KEY (`ModelID`);
 
 --
+-- Indexes for table `offset`
+--
+ALTER TABLE `offset`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
@@ -1295,6 +1962,36 @@ ALTER TABLE `productdetailwheel`
 --
 ALTER TABLE `product_n`
   ADD PRIMARY KEY (`ProductID`);
+
+--
+-- Indexes for table `relationdiameter`
+--
+ALTER TABLE `relationdiameter`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `relationholesize`
+--
+ALTER TABLE `relationholesize`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `relationrim`
+--
+ALTER TABLE `relationrim`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `relationseries`
+--
+ALTER TABLE `relationseries`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `relationwidth`
+--
+ALTER TABLE `relationwidth`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `reprint_reserve`
@@ -1327,6 +2024,18 @@ ALTER TABLE `reserve_item`
   ADD PRIMARY KEY (`item_key`);
 
 --
+-- Indexes for table `rimwheel`
+--
+ALTER TABLE `rimwheel`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `seriesrubble`
+--
+ALTER TABLE `seriesrubble`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `shelf`
 --
 ALTER TABLE `shelf`
@@ -1351,9 +2060,21 @@ ALTER TABLE `type`
   ADD PRIMARY KEY (`TypeID`);
 
 --
+-- Indexes for table `typeformatwheel`
+--
+ALTER TABLE `typeformatwheel`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `viewtables`
 --
 ALTER TABLE `viewtables`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `widthrubble`
+--
+ALTER TABLE `widthrubble`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1367,22 +2088,100 @@ ALTER TABLE `brand`
   MODIFY `BrandID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `brandrubble`
+--
+ALTER TABLE `brandrubble`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `brandwhee`
+--
+ALTER TABLE `brandwhee`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `dealer`
 --
 ALTER TABLE `dealer`
-  MODIFY `dealer_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `dealer_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `diameterrubble`
+--
+ALTER TABLE `diameterrubble`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `diameterwhee`
+--
+ALTER TABLE `diameterwhee`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `event_info`
+--
+ALTER TABLE `event_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `Event_Item`
+--
+ALTER TABLE `Event_Item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `holesizewhee`
+--
+ALTER TABLE `holesizewhee`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `offset`
+--
+ALTER TABLE `offset`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `productdetailrubber`
 --
 ALTER TABLE `productdetailrubber`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `productdetailwheel`
 --
 ALTER TABLE `productdetailwheel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `relationdiameter`
+--
+ALTER TABLE `relationdiameter`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT for table `relationholesize`
+--
+ALTER TABLE `relationholesize`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `relationrim`
+--
+ALTER TABLE `relationrim`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT for table `relationseries`
+--
+ALTER TABLE `relationseries`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+
+--
+-- AUTO_INCREMENT for table `relationwidth`
+--
+ALTER TABLE `relationwidth`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `reserve_detail`
@@ -1391,28 +2190,52 @@ ALTER TABLE `reserve_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `rimwheel`
+--
+ALTER TABLE `rimwheel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `seriesrubble`
+--
+ALTER TABLE `seriesrubble`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `shelf`
 --
 ALTER TABLE `shelf`
-  MODIFY `shelf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `shelf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `stock_tb_receive_master`
 --
 ALTER TABLE `stock_tb_receive_master`
-  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `stock_tb_receive_master_sub`
 --
 ALTER TABLE `stock_tb_receive_master_sub`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `typeformatwheel`
+--
+ALTER TABLE `typeformatwheel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `viewtables`
 --
 ALTER TABLE `viewtables`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `widthrubble`
+--
+ALTER TABLE `widthrubble`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
