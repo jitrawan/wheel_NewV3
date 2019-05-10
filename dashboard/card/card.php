@@ -131,7 +131,7 @@ if(isset($_POST['save_new_status'])){
 
   <form class="navbar-form from-group navbar-right" role="search" method="get" action="?p=search">
 
-    <input type="text" class="form-control" name="q" placeholder="ระบุชื่อ/หมายเลขโทรศัพท์หรือรหัสส่งซ่อม/เคลม เพื่อค้นหา" size="50" autofocus autocomplete="off">
+    <input type="text" class="form-control" name="q" placeholder="ระบุชื่อ/รหัสส่งซ่อม/เคลม เพื่อค้นหา" size="50" autofocus autocomplete="off">
     <input type="hidden" name="p" id="p" value="search" >
 
 </form>

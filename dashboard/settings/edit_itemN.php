@@ -70,7 +70,7 @@ $getitem = mysql_fetch_object($getedit);
 																					 <div class="form-group row">
 	                                               <div class="col-md-2 pr-2">
 	                                               <label for="edit_diameterWheel">ขอบ</label>
-	                                                 <select name="edit_diameterWheel" id="edit_diameterWheel" class="form-control" required>
+	                                                 <select name="edit_diameterWheel" id="edit_diameterWheel" class="form-control">
 	                                                   <option value="" selected="selected">--เลือก--</option>
 																										 <? $getDiameterWhee = $getdata->my_sql_select(NULL,"DiameterWhee","status = '1' ORDER BY id ");
 	                                                     while($showDiameterWhee = mysql_fetch_object($getDiameterWhee)){?>
@@ -200,11 +200,21 @@ $getitem = mysql_fetch_object($getedit);
 																							 <div class="form-group row">
 	                                               <div class="col-md-4 pr-2">
 	                                                  <label for="code">กลุ่มยาง</label>
-	                                                  <input type="text" name="edit_groudRubber" id="edit_groudRubber" class="form-control" value="<?= $getitem->groudRubber?>" >
-	                                               </div>
+	                                                  <select name="edit_groudRubber" id="edit_groudRubber" class="form-control">
+																									 		<option value="" selected="selected">--เลือก--</option>
+																									 		<option value="H/T" >H/T</option>
+																									 		<option value="A/T" >A/T</option>
+																									 		<option value="M/T">M/T</option>
+																									 	</select>
+																								 </div>
 	                                               <div class="col-md-3 pr-2 pl-2">
 	                                                 <label for="code">สัปดาห์ที่ผลิต</label>
-	                                                 <input type="number" name="edit_productionWeek" id="edit_productionWeek" class="form-control" value="<?= $getitem->productionWeek?>" >
+																									 <select name="edit_productionWeek" id="edit_productionWeek" class="form-control">
+																											<option value="" selected="selected">--เลือก--</option>
+																											<? for ($x = 1; $x <= 50; $x++) {?>
+																											 <option value="<?= $x?>" ><?= $x?></option>
+																											 <?}?>
+																										</select>
 	                                              </div>
 	                                              <div class="col-md-2 pr-2 pl-2">
 	                                                <label for="code">ปีที่ผลิต</label>
@@ -219,12 +229,36 @@ $getitem = mysql_fetch_object($getedit);
 	                                             <div class="form-group row">
 	                                               <div class="col-md-4 pr-2">
 	                                                  <label for="code">ดัชนีความเร็ว</label>
-	                                                  <input type="number" name="edit_speedIndex" id="edit_speedIndex" class="form-control" value="<?= $getitem->speedIndex?>" >
-	                                               </div>
+	                                                  <select name="edit_speedIndex" id="edit_speedIndex" class="form-control">
+	                                                    <option value="" selected="selected">--เลือก--</option>
+	                                                    <?
+	                                                    $speed = array("J","K","L","M","N","O","P","Q","R","S","T","H","V","W","VR","ZR");
+	                                                    $speedtext = array(" = 100"," = 110"," = 120"," = 130"," = 140"," = 150"," = 160"," = 170"," = 180"," = 190"," = 210"," = 240"," = 270"," = 300"," > 210"," > 240");
+	                                                    $arrlength = count($speed);
+	                                                    for ($s = 1; $s < $arrlength; $s++) {
+	                                                    ?>
+	                                                    <option value="<?= $speed[$s]?>"><?= $speed[$s]?> <?= $speedtext[$s]?></option>
+
+	                                                    <? } ?>
+	                                                  </select>
+																								 </div>
 	                                               <div class="col-md-4 pr-2 pl-2">
 	                                                 <label for="code">ดัชนีรับน้ำหนัก</label>
-	                                                 <input type="number" name="edit_weightIndex" id="edit_weightIndex" class="form-control" value="<?= $getitem->weightIndex?>" >
-	                                              </div>
+	                                                 <select name="edit_weightIndex" id="edit_weightIndex" class="form-control">
+																								 		 <option value="" selected="selected">--เลือก--</option>
+																								 		 <? $i = 1;
+																								 		 $cars = array("250", "275", "265", "272", "280", "290","300","307","315","325","335","345","355","365","375"
+																								 									,"387","400","412","425","237","450","462","475","487","500","515","530","545","560","580","600","615","630","650","670","690"
+																								 									,"710","730","750","775","800","825","850","875","900","925","950","975","1000","1030","1060","","1090","1120","1150","1180"
+																								 									,"1215","1250","1285","1320","1360");
+																								 		 for ($z = 60; $z <= 119; $z++) {?>
+																								 			<option value="<?= $z?>" ><?= $z?> = <?= $cars[$i]?></option>
+																								 		<?
+																								 		$i++;
+																								 		}
+																								 		?>
+																								 	 </select>
+																								</div>
 	                                              </div>
 	                                          </div>
 
@@ -472,6 +506,11 @@ $getitem = mysql_fetch_object($getedit);
 								$("#edit_detailwheel").hide();
 								$("#edit_detailrubber").show();
 								$('#edit_width').val('<?php echo @$getitem->WidthRubble;?>');
+
+								$('#edit_groudRubber').val('<?php echo @$getitem->groudRubber;?>');
+								$('#edit_productionWeek').val('<?php echo @$getitem->productionWeek;?>');
+								$('#edit_speedIndex').val('<?php echo @$getitem->speedIndex;?>');
+								$('#edit_weightIndex').val('<?php echo @$getitem->weightIndex;?>');
 
 								if('<?php echo @$getitem->hand;?>' == "2"){
 									$("#div_persentrubber").show();
