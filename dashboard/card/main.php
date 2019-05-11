@@ -31,19 +31,23 @@ if(isset($_POST['save_card'])){
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                             <h4 class="modal-title" id="myModalLabel">เพิ่มใบส่งซ่อม/เคลม</h4>
                                         </div>
+                                        <?
+                                        @$getMaxid = $getdata->getMaxID("card_code","card_info","C");
+                                        ?>
+
                                         <div class="modal-body">
                                           <div class="form-group">
                                             <label for="card_code">รหัสการส่งซ่อม/เคลม</label>
-                                            <input type="text" name="card_code" id="card_code" value="<?php echo @RandomString(4,'C',7);?>" class="form-control" readonly>
+                                            <input type="text" name="card_code" id="card_code" value="<?php echo @$getMaxid;?>" class="form-control" readonly>
                                           </div>
                                           <div class="form-group row">
                                            	<div class="col-md-6">
                                            	  <label for="card_customer_name">ชื่อผู้ส่งซ่อม</label>
-                                              <input type="text" name="card_customer_name" id="card_customer_name" class="form-control" autofocus  autocomplete="off">
+                                              <input type="text" name="card_customer_name" id="card_customer_name" class="form-control" autofocus  autocomplete="off" onkeypress='validate(event)' required>
                                            	</div>
                                             <div class="col-md-6">
                                               <label for="card_customer_lastname">นามสกุล</label>
-                                              <input type="text" name="card_customer_lastname" id="card_customer_lastname" class="form-control"  autocomplete="off">
+                                              <input type="text" name="card_customer_lastname" id="card_customer_lastname" class="form-control"  autocomplete="off" onkeypress='validate(event)' required>
                                             </div>
                                           </div>
                                           <div class="form-group">
@@ -53,10 +57,10 @@ if(isset($_POST['save_card'])){
                                           <div class="form-group row">
                                           <div class="col-md-6">
                                             <label for="card_customer_phone">หมายเลขโทรศัพท์</label>
-                                            <input type="text" name="card_customer_phone" id="card_customer_phone" size="10" maxlength="10" class="form-control number"  autocomplete="off">
+                                            <input type="text" name="card_customer_phone" id="card_customer_phone" size="10" maxlength="10" class="form-control number"  autocomplete="off"  onblur='phonenumber(this.value)' required>
                                             </div>
                                             <div class="col-md-6"> <label for="card_customer_email">อีเมล</label>
-                                            <input type="text" name="card_customer_email" id="card_customer_email" class="form-control"  autocomplete="off"></div>
+                                            <input type="email" name="card_customer_email" id="card_customer_email" class="form-control"  autocomplete="off" required></div>
                                           </div>
                                           <div class="form-group">
                                             <label for="card_note">หมายเหตุ</label>
@@ -64,8 +68,8 @@ if(isset($_POST['save_card'])){
                                           </div>
                                       </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times fa-fw"></i><?php echo @LA_BTN_CLOSE;?></button>
-                                          <button type="submit" name="save_card" class="btn btn-primary btn-sm"><i class="fa fa-save fa-fw"></i><?php echo @LA_BTN_SAVE;?></button>
+                                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" onclick="return confirm('ต้องการปิดหน้าต่าง ?');"><i class="fa fa-times fa-fw"></i><?php echo @LA_BTN_CLOSE;?></button>
+                                          <button type="submit" name="save_card" class="btn btn-primary btn-sm" ><i class="fa fa-save fa-fw"></i><?php echo @LA_BTN_SAVE;?></button>
                                         </div>
                                     </div>
                                     <!-- /.modal-content -->
@@ -94,7 +98,7 @@ if(isset($_POST['save_card'])){
 
   <form class="navbar-form from-group navbar-right" role="search" method="get" action="?p=search">
 
-    <input type="text" class="form-control" name="q" placeholder="ระบุชื่อ/หมายเลขโทรศัพท์หรือรหัสส่งซ่อม/เคลม เพื่อค้นหา" size="50" autofocus  autocomplete="off">
+    <input type="text" class="form-control" name="q" placeholder="ระบุชื่อ/รหัสส่งซ่อม/เคลม เพื่อค้นหา" size="50" autofocus  autocomplete="off">
     <input type="hidden" name="p" id="p" value="search" >
 
 </form>
@@ -103,7 +107,7 @@ if(isset($_POST['save_card'])){
   </div>
   </nav>
   <?php
-   $getcard_count = $getdata->my_sql_show_rows("card_info","card_status = ''  ORDER BY card_insert");
+   $getcard_count = $getdata->my_sql_show_rows("card_info","card_status IS NOT NULL  ORDER BY card_insert");
    if($getcard_count != 0){
   ?>
   <div class="table-responsive">
@@ -120,7 +124,7 @@ if(isset($_POST['save_card'])){
   </thead>
   <tbody>
   <?php
-  $getcard = $getdata->my_sql_select(NULL,"card_info"," card_status = ''  ORDER BY card_insert");
+  $getcard = $getdata->my_sql_select(NULL,"card_info"," card_status IS NOT NULL  ORDER BY card_insert");
   while($showcard = mysql_fetch_object($getcard)){
   ?>
   <tr style="font-weight:bold;" id="<?php echo @$showcard->card_key;?>">
@@ -174,5 +178,31 @@ function deleteCard(cardkey){
 	xmlhttp.send();
 	}
 }
+function validate(evt) {
+  var theEvent = evt || window.event;
 
+  // Handle paste
+  if (theEvent.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+  } else {
+  // Handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+  }
+  var regex = /[0-9]|[๐-๙]/;
+  if(regex.test(key) ) {
+    theEvent.returnValue = false;
+    if(theEvent.preventDefault) theEvent.preventDefault();
+  }
+}
+
+function phonenumber(inputtxt){
+  var phoneno = /^\d{10}$/;
+  if(inputtxt.match(phoneno)){
+      return true;
+  }else{
+        alert("กรอกข้อมูลเบอร์โทรศัพท์ไม่ถูกต้อง !");
+        return false;
+  }
+}
 </script>
