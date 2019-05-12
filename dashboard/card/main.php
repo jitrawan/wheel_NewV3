@@ -32,7 +32,7 @@ if(isset($_POST['save_card'])){
                                             <h4 class="modal-title" id="myModalLabel">เพิ่มใบส่งซ่อม/เคลม</h4>
                                         </div>
                                         <?
-                                        @$getMaxid = $getdata->getMaxID("card_code","card_info","C");
+                                        @$getMaxid = $getdata->getMaxID_N("card_code","card_info","C");
                                         ?>
 
                                         <div class="modal-body">

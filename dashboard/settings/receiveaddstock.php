@@ -124,6 +124,9 @@ $getpo = $getdata->my_sql_query(NULL,"stock_tb_receive_master","po='".$_GET['d']
                             <?php
 
                              if(htmlentities($_GET['q']) != ""){
+                               ?>
+                               <script>console.log('<?= htmlentities($_GET['q'])?>')</script>
+                               <?
                                 $getproduct = $getdata->my_sql_query("p.*, r.*, w.* ,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
                                 ,case
                                   when p.TypeID = '2'
@@ -140,7 +143,7 @@ $getpo = $getdata->my_sql_query(NULL,"stock_tb_receive_master","po='".$_GET['d']
                                   "," product_N p
                                   left join productdetailrubber r on p.ProductID = r.ProductID
                                   left join productdetailwheel w on p.ProductID = w.ProductID
-                                  "," p.ProductID = '".htmlentities($_GET['q'])."' ");
+                                  "," (r.code LIKE '%".htmlentities($_GET['q'])."%' or w.code LIKE '%".htmlentities($_GET['q'])."%') ");
 
                                   if($getproduct->TypeID == '1'){
                                     $gettype = "ล้อแม๊ก ".$getproduct->BrandName." ขนาด:".$getproduct->diameterWheel." ขอบ:".$getproduct->whediameter." รู:".$getproduct->holeSize." ประเภท:".$getproduct->typeFormat;
@@ -227,7 +230,7 @@ $getpo = $getdata->my_sql_query(NULL,"stock_tb_receive_master","po='".$_GET['d']
                        <? }
                      }else{ ?>
                        <tr>
-                         <td colspan="3">
+                         <td colspan="4">
                            <?
                         echo '<div class="alert alert-danger alert-dismissable">ไม่พบข้อมูล !</div>';
                           ?>
