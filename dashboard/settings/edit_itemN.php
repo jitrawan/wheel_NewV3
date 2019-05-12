@@ -121,6 +121,16 @@ $getitem = mysql_fetch_object($getedit);
 	                                             </div>
 
 																							 <div class="form-group row">
+																								 <div class="col-md-2 pr-2">
+																									 <label for="edit_genWheel">รุ่น</label>
+																									 <select name="edit_genWheel" id="edit_genWheel" class="form-control">
+																										 <option value="" selected="selected">--เลือก--</option>
+																										 <? $getgen = $getdata->my_sql_select(NULL,"genwhee","Description IS NOT NULL order by Description ");
+																												while($showgen = mysql_fetch_object($getgen)){?>
+																											<option value="<?= $showgen->Description?>" ><?= $showgen->Description?></option>
+																											<?}?>
+																									 </select>
+																								 </div>
 	                                                   <div class="col-md-2 pr-2">
 	                                                     <label for="edit_offset">offset</label>
 	                                                       <!--input type="text" name="edit_offset" id="edit_offset" class="form-control" value="<?php echo @$getitem->offset;?>" -->
@@ -202,7 +212,8 @@ $getitem = mysql_fetch_object($getedit);
 	                                                  <label for="code">กลุ่มยาง</label>
 	                                                  <select name="edit_groudRubber" id="edit_groudRubber" class="form-control">
 																									 		<option value="" selected="selected">--เลือก--</option>
-																									 		<option value="H/T" >H/T</option>
+																											<option value="NO" >ไม่มี</option>
+																											<option value="H/T" >H/T</option>
 																									 		<option value="A/T" >A/T</option>
 																									 		<option value="M/T">M/T</option>
 																									 	</select>
@@ -211,7 +222,7 @@ $getitem = mysql_fetch_object($getedit);
 	                                                 <label for="code">สัปดาห์ที่ผลิต</label>
 																									 <select name="edit_productionWeek" id="edit_productionWeek" class="form-control">
 																											<option value="" selected="selected">--เลือก--</option>
-																											<? for ($x = 1; $x <= 50; $x++) {?>
+																											<? for ($x = 1; $x <= 52; $x++) {?>
 																											 <option value="<?= $x?>" ><?= $x?></option>
 																											 <?}?>
 																										</select>
@@ -310,11 +321,11 @@ $getitem = mysql_fetch_object($getedit);
 	                                         <div class="form-group row">
 	                                             <div class="col-md-4">
 	                                               <label for="edit_PriceSale">ราคาขาย (บาท)</label>
-	                                               <input type="number" name="edit_PriceSale" id="edit_PriceSale" class="form-control number" value="<?php echo @$getitem->PriceSale;?>" style="text-align: right;">
+	                                               <input type="number" name="edit_PriceSale" id="edit_PriceSale" class="form-control number" value="<?php echo @$getitem->PriceSale;?>" onblur="chkprice_edit(this.value)" style="text-align: right;">
 	                                             </div>
 	                                              <div class="col-md-4">
 	                                              <label for="edit_PriceBuy">ราคาซื้อ (บาท)</label>
-	                                             <input type="number" name="edit_PriceBuy" id="edit_PriceBuy" class="form-control number" value="<?php echo @$getitem->PriceBuy;?>" style="text-align: right;">
+	                                             <input type="number" name="edit_PriceBuy" id="edit_PriceBuy" class="form-control number" value="<?php echo @$getitem->PriceBuy;?>" onblur="chkprice_edit(this.value)" style="text-align: right;">
 	                                              </div>
 																								<div class="col-md-3">
 																									<label for="edit_Quantity">คงเหลือ (ชิ้น)</label>
@@ -454,6 +465,8 @@ $getitem = mysql_fetch_object($getedit);
 								$('#edit_brandWheel').val('<?php echo @$getitem->brand;?>');
 								$('#edit_color').val('<?php echo @$getitem->color;?>');
 								$('#edit_offset').val('<?php echo @$getitem->offset;?>');
+								$('#edit_genWheel').val('<?php echo @$getitem->gen;?>');
+
 
 
 
@@ -577,4 +590,19 @@ $getitem = mysql_fetch_object($getedit);
 
 
           });
+
+					function chkprice_edit(price){
+			      var sale = $('#edit_PriceSale').val();
+			      var Buy = $('#edit_PriceBuy').val();
+			      if(sale > 0){
+			        if(Buy > sale){
+			          var txt;
+			          var r = confirm("ต้องการให้ราคาซื้อมากกว่าราคาขาย ?");
+			          if (r != true) {
+			            $('#edit_PriceSale').val("");
+			            $('#edit_PriceBuy').val("");
+			          }
+			        }
+			      }
+			    }
           </script>

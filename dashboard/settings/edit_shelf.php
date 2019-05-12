@@ -44,8 +44,8 @@ $getctype_detail =$getdata->my_sql_query(NULL,"shelf","shelf_id='".addslashes($_
 
                                           <div class="form-group row">
                                             <div class="col-md-6">
-                                              <label for="edit_shelf_color">แทบสี</label>
-                                              <input type="text" name="edit_shelf_color" id="edit_shelf_color" class="form-control cp1" autocomplete="off" value="<?php echo @$getctype_detail->shelf_color;?>">
+                                              <!--label for="edit_shelf_color">แทบสี</label>
+                                              <input type="text" name="edit_shelf_color" id="edit_shelf_color" class="form-control cp1" autocomplete="off" value="<?php echo @$getctype_detail->shelf_color;?>"-->
                                             </div>
  <div class="form-group">
 

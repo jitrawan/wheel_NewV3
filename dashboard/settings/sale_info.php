@@ -302,11 +302,11 @@ while($objShow = mysql_fetch_object($getproduct_info)){
 </div>
 
 
-<div class="form-group row">
+<!--div class="form-group row">
 <div class="col-xs-12" >
     <a data-toggle="modal" data-target="#show_event" style="width: 100%; " name="event" id="event" class="btn btn-info"><i class="fa fa-bookmark-o"></i> Event</a>
   </div>
-</div>
+</div-->
 
 <div class="form-group row">
   <div class="col-xs-2" style="padding-right: 2px;">
@@ -347,7 +347,7 @@ while($objShow = mysql_fetch_object($getproduct_info)){
     <td width="10%" bgcolor="#888888">จำนวน</td>
     <td width="40%" bgcolor="#888888">รายละเอียด</td>
     <td width="15%" bgcolor="#888888">หน่วยละ</td>
-    <!--td width="15%" bgcolor="#888888" colspan="2">ส่วนลด</td-->
+    <td width="15%" bgcolor="#888888" colspan="2">ส่วนลด</td>
     <td width="15%" bgcolor="#888888">จำนวนเงิน (บาท)</td>
     <td width="8%" bgcolor="#888888"></td>
     </tr>
@@ -383,8 +383,8 @@ while($objShow = mysql_fetch_object($getproduct_info)){
         <td class="right"><label class="g-input"><div><input type="text" class="form-control right" readonly="true" size="5" value="<?= @$objShow->item_amt?>" class="price"></div></label></td>
         <td class=""><label class="g-input"><div><input type="text" class="form-control" size="5" readonly="true" value="<?= $gettype?>" class="price"></div></label></td>
         <td class="right"><label class="g-input"><div><input type="text" class="form-control right" readonly="true" size="5" value="<?= convertPoint2($objShow->item_price,2)?>" class="price"></div></label></td>
-        <!--td class="right"><label class="g-input"><span class="g-input"><div class="input-group"><input type="text" class="form-control right" value="<?= $objShow->discount?>"  size="5" class="price" ><span class="input-group-addon">%</span></div></span></label></td-->
-        <!--td class="right"><label class="g-input"><div></div></label></td-->
+        <td class="right"><label class="g-input"><span class="g-input"><div class="input-group"><input type="number" class="form-control right" size="5" class="price" ><span class="input-group-addon">%</span></div></span></label></td>
+        <td class="right"><label class="g-input"><div></div></label></td>
         <td class="right"><label class="g-input"><div><input type="text" class="form-control right" size="5" value="<?= convertPoint2($objShow->item_total,2)?>" class="price"></div></label></td>
         <td style="text-align: center;"><a onClick="javascript:deleteItem('<?php echo @$objShow->item_key;?>');" class="btn btn-xs btn-danger" style="color:#FFF;" title="ลบ"><i class="fa fa-times"></i> <?php echo @LA_BTN_DELETE;?></a></td>
       </tr>
@@ -560,5 +560,11 @@ console.log("dataString ::"+dataString);
             }
         });
 })
+
+function chkdiscount(isvalue,price){
+  if(price > 0){
+      console.log(":::"+(price * isvalue)/100)
+  }
+}
 
 </script>

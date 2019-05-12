@@ -242,6 +242,7 @@ if(isset($_POST['save_new_status'])){
          <label for="code">กลุ่มยาง</label>
          <select name="search_groudRubber" id="search_groudRubber" class="form-control">
             <option value="" selected="selected">--เลือก--</option>
+            <option value="NO" >ไม่มี</option>
             <option value="H/T" >H/T</option>
             <option value="A/T" >A/T</option>
             <option value="M/T">M/T</option>
@@ -251,7 +252,7 @@ if(isset($_POST['save_new_status'])){
         <label for="code">สัปดาห์ที่ผลิต</label>
         <select name="search_productionWeek" id="search_productionWeek" class="form-control">
            <option value="" selected="selected">--เลือก--</option>
-           <? for ($x = 1; $x <= 50; $x++) {?>
+           <? for ($x = 1; $x <= 52; $x++) {?>
             <option value="<?= $x?>" ><?= $x?></option>
             <?}?>
          </select>

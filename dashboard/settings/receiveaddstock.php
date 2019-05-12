@@ -224,7 +224,7 @@ $getpo = $getdata->my_sql_query(NULL,"stock_tb_receive_master","po='".$_GET['d']
                             <td align="center"><?php echo @$getcode->code;?></td>
                             <td align="left"><?php echo @$gettypet;?></td>
                             <td align="right" valign="middle"><strong><?php echo @$showproduct->total;?></strong>&nbsp;</td>
-                            <td align="center"><button type="submit" name="btn_delete" onClick="javascript:deleteProduct('<?php echo @$showproduct->no;?>','<?php echo @$showproduct->ProductID;?>');" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> <?php echo @LA_BTN_DELETE;?></button></td>
+                            <td align="center"><button type="submit" name="btn_delete" onClick="deleteProduct('<?php echo @$showproduct->no;?>','<?php echo @$showproduct->ProductID;?>');" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> <?php echo @LA_BTN_DELETE;?></button></td>
 
                          </tr>
                        <? }
@@ -267,21 +267,26 @@ $(".number").bind('keyup mouseup', function () {
 });
 
 function deleteProduct(cardkey,id){
-  console.log(cardkey +" :: "+ id);
-if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
-  	 	xmlhttp=new XMLHttpRequest();
-  	}else{// code for IE6, IE5
-    		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  	}
+  var txt;
+var r = confirm("คุณต้องการลบข้อมูล ?");
+if (r == true) {
+    if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+      	 	xmlhttp=new XMLHttpRequest();
+      	}else{// code for IE6, IE5
+        		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+      	}
 
-  	xmlhttp.onreadystatechange=function(){
+      	xmlhttp.onreadystatechange=function(){
 
-      	if (xmlhttp.readyState==4 && xmlhttp.status==200){
-  		document.getElementById(cardkey).innerHTML = '';
-    }
-  	}
-  	xmlhttp.open("GET","function.php?type=delete_stock&key="+cardkey+"&id="+id,true);
-  	xmlhttp.send();
+          	if (xmlhttp.readyState==4 && xmlhttp.status==200){
+      		document.getElementById(cardkey).innerHTML = '';
+        }
+      	}
+      	xmlhttp.open("GET","function.php?type=delete_stock&key="+cardkey+"&id="+id,true);
+      	xmlhttp.send();
+      } else {
+        return false;
+      }
 }
 
 </script>

@@ -188,6 +188,13 @@ break;
 										}
 
 		break;
+		case "change_status_genWhee" : if(addslashes($_GET['sts']) == "1"){
+											$getdata->my_sql_update("genwhee","status='0'","id='".addslashes($_GET['key'])."'");
+										}else{
+											$getdata->my_sql_update("genwhee","status='1'","id='".addslashes($_GET['key'])."'");
+										}
+
+		break;
 		case "change_status_DiameterRubble" : if(addslashes($_GET['sts']) == "1"){
 											$getdata->my_sql_update("DiameterRubble","status='0'","id='".addslashes($_GET['key'])."'");
 										}else{
@@ -212,6 +219,8 @@ break;
 											$getdata->my_sql_update("brandRubble","status='1'","id='".addslashes($_GET['key'])."'");
 										}
 		break;
+
+
 
 		case "hide_card" : $getdata->my_sql_update("card_info","card_status='hidden'","card_key='".addslashes($_GET['key'])."'");
 		break;
@@ -306,6 +315,9 @@ break;
 		break;
 		case "delete_offset" : $getdata->my_sql_delete("offset","id='".addslashes($_GET['key'])."'");
 		break;
+		case "delete_genWhee" : $getdata->my_sql_delete("genWhee","id='".addslashes($_GET['key'])."'");
+		break;
+
 
 
 		case "saveTable" :

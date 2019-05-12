@@ -13,9 +13,9 @@
 <?php
 if(isset($_POST['save_card'])){
 	if(addslashes($_POST['shelf_code']) && addslashes($_POST['shelf_detail']) != NULL){
-    $getShelf = $getdata->my_sql_select(NULL,"shelf","shelf_code = '".addslashes($_POST['shelf_code'])."' and shelf_detail ='".addslashes($_POST['shelf_detail'])."' and shelf_class = '".addslashes($_POST['shelf_class'])."' and shelf_color = '".addslashes($_POST['shelf_color'])."' ");
+    $getShelf = $getdata->my_sql_select(NULL,"shelf","shelf_code = '".addslashes($_POST['shelf_code'])."' and shelf_detail ='".addslashes($_POST['shelf_detail'])."' and shelf_class = '".addslashes($_POST['shelf_class'])."'  ");
     if(mysql_num_rows($getShelf) < 1){
-        $getdata->my_sql_insert_New("shelf","shelf_code, shelf_detail, shelf_class, shelf_color, shelf_status","'".addslashes($_POST['shelf_code'])."' ,'".addslashes($_POST['shelf_detail'])."' , '".addslashes($_POST['shelf_class'])."' ,'".addslashes($_POST['shelf_color'])."' ,'".addslashes($_POST['shelf_status'])."'");
+        $getdata->my_sql_insert_New("shelf","shelf_code, shelf_detail, shelf_class, shelf_status","'".addslashes($_POST['shelf_code'])."' ,'".addslashes($_POST['shelf_detail'])."' , '".addslashes($_POST['shelf_class'])."'  ,'".addslashes($_POST['shelf_status'])."'");
     		$alert = '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'.LA_ALERT_ADD_NEW_TYPE_OF_IS_DONE.'</div>';
     }else{
       $alert = '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>ข้อมูลซ้ำ</div>';
@@ -26,9 +26,9 @@ if(isset($_POST['save_card'])){
 }
 if(isset($_POST['save_edit_card'])){
 		 if(addslashes($_POST['edit_shelf_detail'])!= NULL){
-       $getShelf = $getdata->my_sql_select(NULL,"shelf","shelf_detail ='".addslashes($_POST['edit_shelf_detail'])."' and shelf_class = '".addslashes($_POST['edit_shelf_class'])."' and shelf_color = '".addslashes($_POST['edit_shelf_color'])."' ");
+       $getShelf = $getdata->my_sql_select(NULL,"shelf","shelf_detail ='".addslashes($_POST['edit_shelf_detail'])."' and shelf_class = '".addslashes($_POST['edit_shelf_class'])."' ");
        if(mysql_num_rows($getShelf) < 1){
-    			 $getdata->my_sql_update("shelf","shelf_detail='".addslashes($_POST['edit_shelf_detail'])."', shelf_class = '".addslashes($_POST['edit_shelf_class'])."' ,shelf_color='".addslashes($_POST['edit_shelf_color'])."'","shelf_id='".addslashes($_POST['edit_shelf_id'])."'");
+    			 $getdata->my_sql_update("shelf","shelf_detail='".addslashes($_POST['edit_shelf_detail'])."', shelf_class = '".addslashes($_POST['edit_shelf_class'])."' ","shelf_id='".addslashes($_POST['edit_shelf_id'])."'");
     			$alert = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'.LA_ALERT_UPDATE_DATA_DONE.'</div>';
         }else{
           $alert = '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>ข้อมูลซ้ำ</div>';
@@ -89,15 +89,14 @@ if(isset($_POST['save_edit_card'])){
 
                                           <div class="form-group row">
                                             <div class="col-md-6">
-                                              <label for="shelf_color">แทบสี</label>
-                                              <input type="text" name="shelf_color" id="shelf_color" class="form-control cp1" autocomplete="off">
-                                            </div>
-                                             <div class="col-md-6"><label for="shelf_status"><?php echo @LA_LB_STATUS;?></label>
-                                              <select name="shelf_status" id="shelf_status" class="form-control">
-                                                <option value="1" selected="selected"><?php echo @LA_BTN_SHOW;?></option>
-                                                <option value="0"><?php echo @LA_BTN_HIDE;?></option>
+                                              <label for="shelf_status"><?php echo @LA_LB_STATUS;?></label>
+                                               <select name="shelf_status" id="shelf_status" class="form-control">
+                                                 <option value="1" selected="selected"><?php echo @LA_BTN_SHOW;?></option>
+                                                 <option value="0"><?php echo @LA_BTN_HIDE;?></option>
 
-                                              </select></div>
+                                               </select>
+                                            </div>
+                                             <div class="col-md-6"></div>
 
                                           </div>
                                         </div>

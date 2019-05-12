@@ -45,7 +45,8 @@ if(isset($_POST['save_product'])){
              And w.typeFormat = '".addslashes($_POST['typeFormat'])."'
              And w.brand = '".addslashes($_POST['brandWheel'])."'
              And w.color = '".addslashes($_POST['color'])."'
-             And w.offset = '".addslashes($_POST['offset'])."' ");
+             And w.offset = '".addslashes($_POST['offset'])."'
+             And w.gen = '".addslashes($_POST['genWheel'])."'");
         }else{
           $getfont = $getdata->my_sql_selectJoin("p.*, r.*, w.* ,w.code as wcode, r.code as rcode  ,w.diameter as diameterWheel ,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
         ,case
@@ -91,7 +92,7 @@ if(isset($_POST['save_product'])){
             , '".addslashes($_POST['discount'])."' ");
 
             if($_POST['type'] == '1'){
-            $getdata->my_sql_insert_New("productDetailWheel","code, ProductID, diameter, rim, holeSize, typeFormat, brand, offset, color "
+            $getdata->my_sql_insert_New("productDetailWheel","code, ProductID, diameter, rim, holeSize, typeFormat, brand, offset, color, gen "
             ," '".addslashes($_POST['code'])."'
             ,'".addslashes($_POST['ProductID'])."'
             , '".addslashes($_POST['diameterWheel'])."'
@@ -100,7 +101,8 @@ if(isset($_POST['save_product'])){
             , '".addslashes($_POST['typeFormat'])."'
             , '".addslashes($_POST['brandWheel'])."'
             , '".addslashes($_POST['offset'])."'
-            , '".addslashes($_POST['color'])."'");
+            , '".addslashes($_POST['color'])."'
+            , '".addslashes($_POST['genWheel'])."' ");
           }else if ($_POST['type'] == '2'){
               $getdata->my_sql_insert_New("productDetailRubber","code ,ProductID, width, series, diameter, brand , groudRubber, productionWeek, productionYear, genRubber, speedIndex, weightIndex, persentrubber "
               ,"  '".addslashes($_POST['coder'])."'
@@ -133,7 +135,7 @@ if(isset($_POST['save_edit_item'])){
   if(addslashes($_POST['edit_ProductID']) != NULL){
     ?>
 <script>
-
+console.log('<?= $_POST['edit_genWheel']?>');
 //console.log(<?= $_POST['gettype']?>+" :: "+'<?= addslashes($_POST['edit_hand'])?>'+" :: "+'<?= addslashes($_POST['edit_diameterWheel'])?>'+" :: "+ <?= addslashes($_POST['edit_rim'])?> +" :: "+ '<?= addslashes($_POST['edit_holeSize'])?>' +" :: "+'<?= addslashes($_POST['edit_typeFormat'])?>'+" :: "+'<?= addslashes($_POST['edit_brandWheel'])?>');
 </script>
     <?
@@ -165,7 +167,8 @@ if(isset($_POST['save_edit_item'])){
          And w.typeFormat = '".addslashes($_POST['edit_typeFormat'])."'
          And w.brand = '".addslashes($_POST['edit_brandWheel'])."'
          And w.color = '".addslashes($_POST['edit_color'])."'
-         And w.offset = '".addslashes($_POST['edit_offset'])."' ");
+         And w.offset = '".addslashes($_POST['edit_offset'])."'
+         And w.gen = '".addslashes($_POST['edit_genWheel'])."' ");
 
     }else{
       $getfont = $getdata->my_sql_selectJoin("p.*, r.*, w.* ,w.code as wcode, r.code as rcode ,w.diameter as diameterWheel ,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
@@ -212,8 +215,8 @@ if(isset($_POST['save_edit_item'])){
         if($_POST['gettype'] == '1'){
           $table .= " left join productDetailWheel w on p.ProductID = w.ProductID ";
           $Strsql .= " ,w.diameter = '".addslashes($_POST['edit_diameterWheel'])."' ,w.rim = '".addslashes($_POST['edit_rim'])."' ";
-          $Strsql .= " ,w.holeSize = ".addslashes($_POST['edit_holeSize'])." ,w.typeFormat = '".addslashes($_POST['edit_typeFormat'])."', w.brand =  '".addslashes($_POST['edit_brandWheel'])."' ";
-          $Strsql .= " ,w.color = '".addslashes($_POST['edit_color'])."' ,w.offset = '".addslashes($_POST['edit_offset'])."' ";
+          $Strsql .= " ,w.holeSize = '".addslashes($_POST['edit_holeSize'])."' ,w.typeFormat = '".addslashes($_POST['edit_typeFormat'])."', w.brand =  '".addslashes($_POST['edit_brandWheel'])."' ";
+          $Strsql .= " ,w.color = '".addslashes($_POST['edit_color'])."' ,w.offset = '".addslashes($_POST['edit_offset'])."', w.gen =  '".addslashes($_POST['edit_genWheel'])."'";
         }else if($_POST['gettype'] == '2'){
           $table .= " left join productDetailRubber r on p.ProductID = r.ProductID ";
           $Strsql .= " ,r.width = '".addslashes($_POST['edit_width'])."' ,r.series = '".addslashes($_POST['edit_series'])."' ";
@@ -222,6 +225,7 @@ if(isset($_POST['save_edit_item'])){
           $Strsql .= " ,r.productionYear = '".addslashes($_POST['edit_productionYear'])."' ,r.genRubber = '".addslashes($_POST['edit_genRubber'])."' ";
           $Strsql .= " ,r.speedIndex = '".addslashes($_POST['edit_speedIndex'])."' ,r.weightIndex = '".addslashes($_POST['edit_weightIndex'])."' ,r.persentrubber = '".addslashes($_POST['edit_persentrubber'])."' ";
         }
+
 
 	  $getdata->my_sql_updateJoin($table , $Strsql ," p.ProductID = '".addslashes($_POST['edit_ProductID'])."' ");
 
@@ -343,6 +347,16 @@ if(isset($_POST['save_edit_item'])){
                                               </div>
                                             </div>
                                             <div class="form-group row">
+                                              <div class="col-md-2 pr-2">
+                                                <label for="genWheel">รุ่น</label>
+                                                <select name="genWheel" id="genWheel" class="form-control" required>
+                                                  <option value="" selected="selected">--เลือก--</option>
+                                                  <? $getgen = $getdata->my_sql_select(NULL,"genwhee","Description IS NOT NULL order by Description ");
+                                                     while($showgen = mysql_fetch_object($getgen)){?>
+                                                   <option value="<?= $showgen->Description?>" ><?= $showgen->Description?></option>
+                                                   <?}?>
+                                                </select>
+                                              </div>
                                                   <div class="col-md-2 pr-2">
                                                     <label for="brandWheel">offset</label>
                                                     <select name="offset" id="offset" class="form-control cw" required>
@@ -417,6 +431,7 @@ if(isset($_POST['save_edit_item'])){
                                                  <label for="code">กลุ่มยาง</label>
                                                  <select name="groudRubber" id="groudRubber" class="form-control cb" required>
                                                     <option value="" selected="selected">--เลือก--</option>
+                                                    <option value="NO" >ไม่มี</option>
                                                     <option value="H/T" >H/T</option>
                                                     <option value="A/T" >A/T</option>
                                                     <option value="M/T">M/T</option>
@@ -426,7 +441,7 @@ if(isset($_POST['save_edit_item'])){
                                                 <label for="code">สัปดาห์ที่ผลิต</label>
                                                 <select name="productionWeek" id="productionWeek" class="form-control cb" required>
                                                    <option value="" selected="selected">--เลือก--</option>
-                                                   <? for ($x = 1; $x <= 50; $x++) {?>
+                                                   <? for ($x = 1; $x <= 52; $x++) {?>
                                                     <option value="<?= $x?>" ><?= $x?></option>
                                                     <?}?>
                                                  </select>
@@ -525,11 +540,11 @@ if(isset($_POST['save_edit_item'])){
                                         <div class="form-group row">
                                             <div class="col-md-4">
                                               <label for="PriceSale">ราคาขาย (บาท)</label>
-                                              <input type="number"  name="PriceSale" id="PriceSale" class="form-control number" value="0" required style="text-align: right;">
+                                              <input type="number"  name="PriceSale" id="PriceSale" class="form-control number" value="0" onblur="chkprice(this.value)" required style="text-align: right;">
                                             </div>
                                              <div class="col-md-4">
                                              <label for="PriceBuy">ราคาซื้อ (บาท)</label>
-                                            <input type="number" name="PriceBuy" id="PriceBuy" class="form-control number" value="0" required style="text-align: right;">
+                                            <input type="number" name="PriceBuy" id="PriceBuy" class="form-control number" value="0" onblur="chkprice(this.value)" required style="text-align: right;">
                                              </div>
                                              <div class="col-md-3">
                                                <label for="Quantity">คงเหลือ (ชิ้น)</label>
@@ -637,6 +652,18 @@ if(isset($_POST['save_edit_item'])){
               </select>
             </div>
           </div>
+          <div class="form-group row">
+            <div class="col-md-2">
+            <label for="search_rim">รุ่น</label>
+            <select name="search_gen_Wheel" id="search_gen_Wheel" class="form-control">
+              <option value="" selected="selected">--เลือก--</option>
+              <? $getgenWhee = $getdata->my_sql_select(NULL,"genwhee","status = '1' ORDER BY id ");
+                while($showgenWhee = mysql_fetch_object($getgenWhee)){?>
+              <option value="<?= $showgenWhee->Description?>" ><?= $showgenWhee->Description?></option>
+              <?}?>
+            </select>
+            </div>
+          </div>
     </div>
            <!--ยาง-->
     <div id="search_detailrubber" name="search_detailrubber" style="padding: 5px; border: 0px solid #4CAF50;">
@@ -738,8 +765,11 @@ if(isset($_POST['save_edit_item'])){
       if(addslashes($_POST['search_brand_Wheel']) != ""){
         $str_sql  .= " And w.brand = '".addslashes($_POST['search_brand_Wheel'])."' ";
       }
+      if(addslashes($_POST['search_gen_Wheel']) != ""){
+        $str_sql  .= " And w.gen = '".addslashes($_POST['search_gen_Wheel'])."' ";
+      }
 
-      $getproduct = $getdata->my_sql_selectJoin("p.*, r.*, w.* ,w.code as wcode, r.code as rcode ,w.diameter as diameterWheel,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
+      $getproduct = $getdata->my_sql_selectJoin("p.*, r.*, w.* ,w.code as wcode, r.code as rcode ,w.diameter as diameterWheel,w.gen as genWheel,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
       ,case
         when p.TypeID = '2'
         then (select b.Description from brandRubble b where r.brand = b.id)
@@ -788,7 +818,7 @@ if(isset($_POST['save_edit_item'])){
         if(addslashes($_POST['search_weightIndex']) != ""){
           $str_sql  .= " And r.weightIndex = '".addslashes($_POST['search_weightIndex'])."' ";
         }
-      $getproduct = $getdata->my_sql_selectJoin("p.*, r.*, w.* ,w.code as wcode, r.code as rcode ,w.diameter as diameterWheel ,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
+      $getproduct = $getdata->my_sql_selectJoin("p.*, r.*, w.* ,w.code as wcode, r.code as rcode ,w.diameter as diameterWheel,w.gen as genWheel ,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
       ,case
         when p.TypeID = '2'
         then (select b.Description from brandRubble b where r.brand = b.id)
@@ -807,7 +837,7 @@ if(isset($_POST['save_edit_item'])){
         ,"Where p.TypeID = '2' ".$str_sql);
     }
   }else{
-     $getproduct = $getdata->my_sql_selectJoin("p.*, r.*, w.* ,w.code as wcode, r.code as rcode ,w.diameter as diameterWheel,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
+     $getproduct = $getdata->my_sql_selectJoin("p.*, r.*, w.* ,w.code as wcode, r.code as rcode ,w.diameter as diameterWheel,w.gen as genWheel,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
      ,case
        when p.TypeID = '2'
        then (select b.Description from brandRubble b where r.brand = b.id)
@@ -847,7 +877,7 @@ if(isset($_POST['save_edit_item'])){
     while($showproduct = mysql_fetch_object($getproduct)){
       $x++;
       if($showproduct->TypeID == '1'){
-        $gettype = "ล้อแม๊ก ".$showproduct->BrandName." ขนาด:".$showproduct->diameterWheel." ขอบ:".$showproduct->whediameter." รู:".$showproduct->holeSize." ประเภท:".$showproduct->typeFormat;
+        $gettype = "ล้อแม๊ก ".$showproduct->BrandName." รุ่น:".$showproduct->genWheel." ขนาด:".$showproduct->diameterWheel." ขอบ:".$showproduct->whediameter." รู:".$showproduct->holeSize." ประเภท:".$showproduct->typeFormat;
       }else if($showproduct->TypeID == '2'){
         $gettype = "ยาง ".$showproduct->BrandName." ขนาด:".$showproduct->diameterRubber." ซี่รี่:".$showproduct->series." ความกว้าง:".$showproduct->width;
       }else{
@@ -893,6 +923,7 @@ $( document ).ready(function() {
 									$(this).val(0);
 								}
 						});
+
 
   $("#detailrubber").hide();
   $("#search_detailrubber").hide();
@@ -1210,7 +1241,20 @@ function changeproductsStatus(prokey,lang){
             });
     })
 
-
+    function chkprice(price){
+      var sale = $('#PriceSale').val();
+      var Buy = $('#PriceBuy').val();
+      if(sale > 0){
+        if(Buy > sale){
+          var txt;
+          var r = confirm("ต้องการให้ราคาซื้อมากกว่าราคาขาย ?");
+          if (r != true) {
+            $('#PriceSale').val("");
+            $('#PriceBuy').val("");
+          }
+        }
+      }
+    }
 
 
     </script>
