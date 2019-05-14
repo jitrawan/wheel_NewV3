@@ -181,7 +181,7 @@ if($getreserve_key != ""){
 		    <tbody class="member">
 		      <?
 		      $gettotal = 0;
-		      $getproduct_info = $getdata->my_sql_select("i.*, p.*, r.*, w.* ,w.diameter as diameterWheel,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
+		      $getproduct_info = $getdata->my_sql_select("i.*, p.*, r.*, w.* ,w.diameter as diameterWheel,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter,w.gen as genWheel
           ,case
             when p.TypeID = '2'
             then (select b.Description from brandRubble b where r.brand = b.id)
@@ -203,7 +203,7 @@ if($getreserve_key != ""){
 		      while($objShow = mysql_fetch_object($getproduct_info)){
 
             if($objShow->TypeID == '1'){
-              $gettypeshow = "ล้อแม๊ก ".$objShow->BrandName." ขนาด:".$objShow->diameterWheel." ขอบ:".$objShow->whediameter." รู:".$objShow->holeSize." ประเภท:".$objShow->typeFormat;
+              $gettypeshow = "ล้อแม๊ก ".$objShow->BrandName." รุ่น:".$objShow->genWheel." ขนาด:".$objShow->diameterWheel." ขอบ:".$objShow->whediameter." รู:".$objShow->holeSize." ประเภท:".$objShow->typeFormat;
             }else if($objShow->TypeID == '2'){
               $gettypeshow = "ยาง ".$objShow->BrandName." ขนาด:".$objShow->diameterRubber." ซี่รี่:".$objShow->series." ความกว้าง:".$objShow->width;
             }else{
@@ -235,7 +235,7 @@ if($getreserve_key != ""){
   <tr>
 		<?
 if(isset($_GET['paramKey'])){
-  	$product_detail = $getdata->my_sql_query("p.*, r.*, w.* ,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
+  	$product_detail = $getdata->my_sql_query("p.*, r.*, w.* ,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter,w.gen as genWheel
     ,case
       when p.TypeID = '2'
       then (select b.Description from brandRubble b where r.brand = b.id)
@@ -256,7 +256,7 @@ if(isset($_GET['paramKey'])){
 	," p.ProductID='".addslashes($_GET['paramKey'])."'");
 
   if($product_detail->TypeID == '1'){
-    $gettype = "ล้อแม๊ก ".$product_detail->BrandName." ขนาด:".$product_detail->diameterWheel." ขอบ:".$product_detail->whediameter." รู:".$product_detail->holeSize." ประเภท:".$product_detail->typeFormat;
+    $gettype = "ล้อแม๊ก ".$product_detail->BrandName." รุ่น:".$product_detail->genWheel." ขนาด:".$product_detail->diameterWheel." ขอบ:".$product_detail->whediameter." รู:".$product_detail->holeSize." ประเภท:".$product_detail->typeFormat;
   }else if($product_detail->TypeID == '2'){
     $gettype = "ยาง ".$product_detail->BrandName." ขนาด:".$product_detail->diameterRubber." ซี่รี่:".$product_detail->series." ความกว้าง:".$product_detail->width;
   }else{

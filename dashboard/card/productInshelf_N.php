@@ -192,11 +192,20 @@ if(isset($_POST['save_new_status'])){
                 other
             </label>
         </div>
-
-
-
          </div>
-       </div>
+      </div>
+      <div class="form-group row">
+         <div class="col-md-2">
+           <label for="search_offset">รุ่น</label>
+           <select name="search_gen_Wheel" id="search_gen_Wheel" class="form-control">
+                <option value="" selected="selected">--เลือก--</option>
+                <? $getgenWhee = $getdata->my_sql_select(NULL,"genwhee","status = '1' ORDER BY id ");
+                  while($showgenWhee = mysql_fetch_object($getgenWhee)){?>
+                <option value="<?= $showgenWhee->Description?>" ><?= $showgenWhee->Description?></option>
+                <?}?>
+              </select>
+         </div>
+         </div>
 </div>
       <!--ยาง-->
 <div id="search_detailrubber" name="search_detailrubber" style="padding: 5px; border: 0px solid #4CAF50;">
@@ -267,7 +276,7 @@ if(isset($_POST['save_new_status'])){
    </div>
    <div class="col-md-2 pl-2">
      <label for="code">ดัชนีความเร็ว</label>
-     <select name="search_speedIndex" id="search_speedIndex" class="form-control cb" required>
+     <select name="search_speedIndex" id="search_speedIndex" class="form-control cb" >
        <option value="" selected="selected">--เลือก--</option>
        <?
        $speed = array("J","K","L","M","N","O","P","Q","R","S","T","H","V","W","VR","ZR");
@@ -282,7 +291,7 @@ if(isset($_POST['save_new_status'])){
   </div>
   <div class="col-md-2 pl-2">
     <label for="code">ดัชนีรับน้ำหนัก</label>
-    <select name="search_weightIndex" id="search_weightIndex" class="form-control cb" required>
+    <select name="search_weightIndex" id="search_weightIndex" class="form-control cb">
        <option value="" selected="selected">--เลือก--</option>
        <? $i = 1;
        $cars = array("250", "275", "265", "272", "280", "290","300","307","315","325","335","345","355","365","375"
@@ -340,8 +349,8 @@ if(isset($_POST['save_new_status'])){
        if($_POST['search_rim'] != ""){
          $str_sql  .= " And w.rim = '".$_POST['search_rim']."' ";
        }
-       if($_POST['search_holeSize'] != ""){
-         $str_sql  .= " And w.holeSize = ".$_POST['search_holeSize'];
+       if(addslashes($_POST['search_holeSize']) != ""){
+         $str_sql  .= " And w.holeSize = '".addslashes($_POST['search_holeSize'])."' ";
        }
        if(addslashes($_POST['search_typeFormat']) != ""){
          $str_sql  .= " And w.typeFormat = '".addslashes($_POST['search_typeFormat'])."' ";
@@ -352,6 +361,9 @@ if(isset($_POST['save_new_status'])){
        if(addslashes($_POST['search_offset']) != ""){
          $str_sql  .= " And w.offset = '".addslashes($_POST['search_offset'])."' ";
        }
+       if(addslashes($_POST['search_gen_Wheel']) != ""){
+        $str_sql  .= " And w.gen = '".addslashes($_POST['search_gen_Wheel'])."' ";
+      }
        $checkbox1 = $_POST['col'] ;
       for ($i=0; $i<sizeof ($checkbox1);$i++) {
         if($i == sizeof ($checkbox1) - 1){
@@ -453,7 +465,7 @@ if(isset($_POST['save_new_status'])){
          $x++;
 
          if($showproduct->TypeID == '1'){
-           $gettype = "ล้อแม๊ก ".$showproduct->BrandName." ขนาด:".$showproduct->diameterWheel." ขอบ:".$showproduct->whediameter." รู:".$showproduct->holeSize." ประเภท:".$showproduct->typeFormat;
+           $gettype = "ล้อแม๊ก ".$showproduct->BrandName." รุ่น:".$showproduct->gen." ขนาด:".$showproduct->diameterWheel." ขอบ:".$showproduct->whediameter." รู:".$showproduct->holeSize." ประเภท:".$showproduct->typeFormat;
          }else if($showproduct->TypeID == '2'){
            $gettype = "ยาง ".$showproduct->BrandName." ขนาด:".$showproduct->diameterRubber." ขอบ:".$showproduct->rubdiameter." ซี่รี่:".$showproduct->series." ความกว้าง:".$showproduct->width;
          }else{

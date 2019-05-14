@@ -13,9 +13,10 @@
 <?php
 if(isset($_POST['save_card'])){
 	if(addslashes($_POST['shelf_code']) && addslashes($_POST['shelf_detail']) != NULL){
-    $getShelf = $getdata->my_sql_select(NULL,"shelf","shelf_code = '".addslashes($_POST['shelf_code'])."' and shelf_detail ='".addslashes($_POST['shelf_detail'])."' and shelf_class = '".addslashes($_POST['shelf_class'])."'  ");
-    if(mysql_num_rows($getShelf) < 1){
-        $getdata->my_sql_insert_New("shelf","shelf_code, shelf_detail, shelf_class, shelf_status","'".addslashes($_POST['shelf_code'])."' ,'".addslashes($_POST['shelf_detail'])."' , '".addslashes($_POST['shelf_class'])."'  ,'".addslashes($_POST['shelf_status'])."'");
+    $getShelf = $getdata->my_sql_select(NULL,"shelf"," shelf_detail ='".addslashes($_POST['shelf_detail'])."' and shelf_class = '".addslashes($_POST['shelf_class'])."'  ");
+
+if(mysql_num_rows($getShelf) < 1){
+        $getdata->my_sql_insert_New("shelf","shelf_code, shelf_detail, shelf_class, shelf_status, amt","'".addslashes($_POST['shelf_code'])."' ,'".addslashes($_POST['shelf_detail'])."' , '".addslashes($_POST['shelf_class'])."'  ,'".addslashes($_POST['shelf_status'])."',".$_POST['shelf_amt']." ");
     		$alert = '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'.LA_ALERT_ADD_NEW_TYPE_OF_IS_DONE.'</div>';
     }else{
       $alert = '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>ข้อมูลซ้ำ</div>';
@@ -26,9 +27,9 @@ if(isset($_POST['save_card'])){
 }
 if(isset($_POST['save_edit_card'])){
 		 if(addslashes($_POST['edit_shelf_detail'])!= NULL){
-       $getShelf = $getdata->my_sql_select(NULL,"shelf","shelf_detail ='".addslashes($_POST['edit_shelf_detail'])."' and shelf_class = '".addslashes($_POST['edit_shelf_class'])."' ");
+       $getShelf = $getdata->my_sql_select(NULL,"shelf","shelf_detail ='".addslashes($_POST['edit_shelf_detail'])."' and shelf_class = '".addslashes($_POST['edit_shelf_class'])."' and amt = ".$_POST['edit_shelf_amt']." ");
        if(mysql_num_rows($getShelf) < 1){
-    			 $getdata->my_sql_update("shelf","shelf_detail='".addslashes($_POST['edit_shelf_detail'])."', shelf_class = '".addslashes($_POST['edit_shelf_class'])."' ","shelf_id='".addslashes($_POST['edit_shelf_id'])."'");
+    			 $getdata->my_sql_update("shelf","shelf_detail='".addslashes($_POST['edit_shelf_detail'])."', shelf_class = '".addslashes($_POST['edit_shelf_class'])."', amt = ".$_POST['edit_shelf_amt']." ","shelf_id='".addslashes($_POST['edit_shelf_id'])."'");
     			$alert = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'.LA_ALERT_UPDATE_DATA_DONE.'</div>';
         }else{
           $alert = '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>ข้อมูลซ้ำ</div>';
@@ -79,15 +80,19 @@ if(isset($_POST['save_edit_card'])){
                                           <div class="form-group row">
                                             <div class="col-md-6">
                                               <label for="shelf_detail">shelf สินค้า</label>
-                                              <input type="text" name="shelf_detail" id="shelf_detail" class="form-control" autofocus>
+                                              <input type="text" name="shelf_detail" id="shelf_detail" class="form-control" autofocus required>
                                             </div>
                                             <div class="col-md-6">
                                               <label for="shelf_detail">ชั้น สินค้า</label>
-                                              <input type="number" name="shelf_class" id="shelf_detail" class="form-control number">
+                                              <input type="number" name="shelf_class" id="shelf_class" class="form-control number" required>
                                             </div>
                                           </div>
 
                                           <div class="form-group row">
+                                          <!--div class="col-md-6">
+                                              <label for="shelf_status">บรรจุ</label>
+                                              <input type="number" name="shelf_amt" id="shelf_amt" class="form-control number" require>
+                                            </div-->
                                             <div class="col-md-6">
                                               <label for="shelf_status"><?php echo @LA_LB_STATUS;?></label>
                                                <select name="shelf_status" id="shelf_status" class="form-control">
@@ -127,7 +132,8 @@ if(isset($_POST['save_edit_card'])){
   <tr style="color:#FFF;">
     <th width="3%" bgcolor="#5fb760">#</th>
     <th width="10%" bgcolor="#5fb760">รหัส shelf </th>
-    <th width="64%" bgcolor="#5fb760">รายละเอียด shelf </th>
+    <th width="44%" bgcolor="#5fb760">รายละเอียด shelf </th>
+    <!--th width="20%" bgcolor="#5fb760">บรรจุ </th-->
     <th width="23%" bgcolor="#5fb760"><?php echo @LA_LB_MANAGE;?></th>
   </tr>
   </thead>
@@ -142,6 +148,7 @@ if(isset($_POST['save_edit_card'])){
     <td align="center"><?php echo @$x;?></td>
     <td>&nbsp;<?php echo @$showcat->shelf_code;?> </td>
     <td>&nbsp;<?php echo @$showcat->shelf_detail;?> &nbsp; ชั้น &nbsp;<?php echo @$showcat->shelf_class;?></td>
+    <!--td align="right">&nbsp;<?php echo @$showcat->amt;?> &nbsp; ชิ้น</td-->
     <td align="center" valign="middle">
       <?php
 	  if($showcat->shelf_status == '1'){

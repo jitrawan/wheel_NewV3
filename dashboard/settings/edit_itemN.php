@@ -273,39 +273,36 @@ $getitem = mysql_fetch_object($getedit);
 	                                              </div>
 	                                          </div>
 
-																						<div class="form-group row">
-	                                            <div class="col-md-3">
-	                                              <label for="edit_hand">สืินค้ามือ</label>
-	                                             <select name="edit_hand" id="edit_hand" class="form-control" required>
-	                                                  <option value="1" selected="selected">1</option>
-	                                                  <option value="2">2</option>
 
-	                                                </select>
-	                                            </div>
-	                                            <div id="div_persentrubber">
-	                                              <div class="col-md-3">
-	                                                <label for="edit_persentrubber">เปอร์เซ็นยาง (%)</label>
-	                                                     <input type="number" name="edit_persentrubber" id="edit_persentrubber" class="form-control" value="">
-	                                              </div>
-	                                            </div>
-	                                          </div>
 
 	                                            <div class="form-group row">
-	                                             <div class="col-md-6">
-	                                             <label for="edit_shelf_id">shelf</label>
-	                                               <select name="edit_shelf_id" id="edit_shelf_id" class="form-control">
-	                                                 <option value="" selected="selected">--เลือกชั้นวางสินค้า--</option>
-	                                                 <?
-	                                               while($showshelf = mysql_fetch_object($getshelf)){?>
-	                                               <option value="<?php echo @$showshelf->shelf_id;?>"><?php echo @$showshelf->shelf_detail;?></option>
-	                                               <?
-	                                                }
-	                                              ?>
-	                                               </select>
-	                                             </div>
+																								<div class="col-md-3">
+  	                                              <label for="edit_hand">สืินค้ามือ</label>
+  	                                             <select name="edit_hand" id="edit_hand" class="form-control" required>
+  	                                                  <option value="1" selected="selected">1</option>
+  	                                                  <option value="2">2</option>
+
+  	                                                </select>
+  	                                            </div>
+  	                                            <div id="div_persentrubber">
+  	                                              <div class="col-md-3">
+  	                                                <label for="edit_persentrubber">เปอร์เซ็นยาง (%)</label>
+  	                                                     <input type="number" name="edit_persentrubber" id="edit_persentrubber" class="form-control" value="">
+  	                                              </div>
+  	                                            </div>
 
 																								<div class="col-md-6">
- 	                                               <label for="edit_dealer_code">ผู้จำหน่าย</label>
+																									<label for="edit_shelf_id">shelf</label>
+																										<select name="edit_shelf_id" id="edit_shelf_id" class="form-control">
+																											<option value="" selected="selected">--เลือกชั้นวางสินค้า--</option>
+																											<?
+																										while($showshelf = mysql_fetch_object($getshelf)){?>
+																										<option value="<?php echo @$showshelf->shelf_id;?>"><?php echo @$showshelf->shelf_detail;?></option>
+																										<?
+																										 }
+																									 ?>
+																										</select>
+ 	                                               <!--label for="edit_dealer_code">ผู้จำหน่าย</label>
  	                                               <select name="edit_dealer_code" id="edit_dealer_code" class="form-control">
  	                                                 <option value="" selected="selected">--เลือกผู้จำหน่าย--</option>
  	                                                 <?
@@ -314,7 +311,7 @@ $getitem = mysql_fetch_object($getedit);
  	                                                 <?
  	                                                 }
  	                                               ?>
- 	                                                 </select>
+																							 </select-->
  	                                             </div>
 	                                           </div>
 
@@ -332,7 +329,12 @@ $getitem = mysql_fetch_object($getedit);
 																									<input type="number" name="edit_Quantity" id="edit_Quantity" class="form-control number" value="<?php echo @$getitem->Quantity;?>" style="text-align: right;">
 																								</div>
 	                                           </div>
-
+																			<div class="form-group row">
+																				<div class="col-md-2">
+                                              <label for="PriceSale">ลดราคา (%)</label>
+                                              <input type="number"  name="edit_discount" id="edit_discount" class="form-control number" value="<?php echo @$getitem->discount;?>"  style="text-align: right;">
+                                            </div>
+                                          </div>
 
                                         </div>
                                          <div class="modal-footer">
@@ -582,7 +584,7 @@ $getitem = mysql_fetch_object($getedit);
 							var $edit_type = $('input:radio[name=edit_type]');
 							$('input:radio[name="edit_type"]').attr('disabled', true);
 					    $edit_type.filter('[value=<?echo @$getitem->TypeID;?>]').prop('checked', true);
-           $('#edit_dealer_code').val('<?php echo @$getitem->dealer_code;?>');
+           //$('#edit_dealer_code').val('<?php echo @$getitem->dealer_code;?>');
 					 $('#edit_shelf_id').val('<?php echo @$getitem->shelf_id;?>');
 					 $('#edit_hand').val('<?php echo @$getitem->hand;?>');
 

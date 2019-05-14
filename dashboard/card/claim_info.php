@@ -176,7 +176,7 @@ if($dteDiff >= 0){
         <tbody>
           <?
           $gettotal = 0;
-          $getproduct_info = $getdata->my_sql_select("i.* , p.* , r.*, w.* ,w.diameter as diameterWheel,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
+          $getproduct_info = $getdata->my_sql_select("i.* , p.* , r.*, w.* ,w.diameter as diameterWheel,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter,w.gen as genWheel
           ,case
             when p.TypeID = '2'
             then (select b.BrandName from brand b where r.brand = b.BrandID)
@@ -194,7 +194,7 @@ if($dteDiff >= 0){
             ," reserve_key='".$showcard->reserve_key."' ");
           while($objShow = mysql_fetch_object($getproduct_info)){
             if($objShow->TypeID == '1'){
-              $gettype = "ล้อแม๊ก"." ขนาด:".$objShow->diameterWheel." ขอบ:".$objShow->whediameter." รู:".$objShow->holeSize." ประเภท:".$objShow->typeFormat;
+              $gettype = "ล้อแม๊ก"." รุ่น:".$objShow->genWheel." ขนาด:".$objShow->diameterWheel." ขอบ:".$objShow->whediameter." รู:".$objShow->holeSize." ประเภท:".$objShow->typeFormat;
             }else if($objShow->TypeID == '2'){
               $gettype = "ยาง ".$objShow->BrandName." ขนาด:".$objShow->diameterRubber." ขอบ:".$objShow->rubdiameter." ซี่รี่:".$objShow->series." ความกว้าง:".$objShow->width;
             }else{

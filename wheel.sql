@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 09, 2019 at 07:10 PM
+-- Generation Time: May 14, 2019 at 05:54 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -43,7 +43,7 @@ CREATE TABLE `autonumber` (
 --
 
 INSERT INTO `autonumber` (`item_number`, `finance_number`, `quotation_number`, `invoice_number`, `year`, `month`, `day`) VALUES
-(0004, 0001, 0001, 0001, 2019, 05, 09);
+(0005, 0001, 0001, 0001, 2019, 05, 13);
 
 -- --------------------------------------------------------
 
@@ -182,7 +182,8 @@ CREATE TABLE `card_info` (
 
 INSERT INTO `card_info` (`card_key`, `card_code`, `card_customer_name`, `card_customer_lastname`, `card_customer_address`, `card_customer_phone`, `card_customer_email`, `card_note`, `card_done_aprox`, `user_key`, `card_status`, `card_insert`) VALUES
 ('77fa8e1770e8244e27866e95f674058c', 'CQDO6UW', 'tae', 'tae', 'tae', '6543236543', '435345', 'sdfsf', '2019-05-14', 'd97530f6437e7ffa3a74afe46a953a15', 'c382e352e2e620a3c60a2cc7c6a7fa35', '2019-05-05'),
-('cc005e33e32405dd755f4ea01ea9ab19', 'C07153JE', 'test', 'test', '', '0917099645', 'jitrawan.ch@gmail.com', '', '2019-05-31', '6a7c6fe063021a761c8498b4f11aad85', 'c382e352e2e620a3c60a2cc7c6a7fa35', '2019-05-09');
+('cc005e33e32405dd755f4ea01ea9ab19', 'C07153JE', 'test', 'test', '', '0917099645', 'jitrawan.ch@gmail.com', '', '2019-05-31', '6a7c6fe063021a761c8498b4f11aad85', 'c382e352e2e620a3c60a2cc7c6a7fa35', '2019-05-09'),
+('e17956a7518eb0ffd6bf7bb9b8bfc4d4', 'C0001', 'กกก', 'กกกกก', '', '0917099645', 'jitrawan.ch@gmail.com', '', '2019-05-31', 'd97530f6437e7ffa3a74afe46a953a15', 'c382e352e2e620a3c60a2cc7c6a7fa35', '2019-05-13');
 
 -- --------------------------------------------------------
 
@@ -210,7 +211,8 @@ CREATE TABLE `card_item` (
 INSERT INTO `card_item` (`item_key`, `card_key`, `item_number`, `item_name`, `item_note`, `item_price_aprox`, `item_insert`, `reserve_key`, `reseve_item_key`, `item_amt`) VALUES
 ('b81a743c16eebd098e009177b2c20afe', '77fa8e1770e8244e27866e95f674058c', 19050001, 'ล้อแม๊ก RAY Engineering ขนาด: ขอบ:13 รู:4 ประเภท:ล้อแม็กกะทะ', 'แตก', 0, '2019-05-05', '9633399692e492b5a09b4bd0863b9d1b', 'P0001', 1),
 ('1436ffab337d817495af6c29238cfa96', 'cc005e33e32405dd755f4ea01ea9ab19', 19050002, 'ยาง Apollo ขนาด: ซี่รี่:60 ความกว้าง:165', 'test', 0, '2019-05-09', 'cdc9ebd7e304d5b6a49bb682e62f50bd', 'P0004', 4),
-('09fa5c6b29b3a7fa8a965e23e3284f1c', 'cc005e33e32405dd755f4ea01ea9ab19', 19050003, 'ล้อแม๊ก Advan Yokohama ขนาด: ขอบ:13 รู:4H100 ประเภท:ล้อแม็กกะทะ', 'test', 0, '2019-05-09', '', 'W0003', 4);
+('09fa5c6b29b3a7fa8a965e23e3284f1c', 'cc005e33e32405dd755f4ea01ea9ab19', 19050003, 'ล้อแม๊ก Advan Yokohama ขนาด: ขอบ:13 รู:4H100 ประเภท:ล้อแม็กกะทะ', 'test', 0, '2019-05-09', '', 'W0003', 4),
+('8eb2689be68dedc92659aa0e6e5018b2', 'e17956a7518eb0ffd6bf7bb9b8bfc4d4', 19050004, 'ล้อแม๊ก RAY Engineering รุ่น:รุ่น1 ขนาด: ขอบ:13 รู: ประเภท:ล้อแม็กกะทะ', 'test', 0, '2019-05-13', '634f5fff366c5206619f3986592002e8', 'W0001', 1);
 
 -- --------------------------------------------------------
 
@@ -233,7 +235,8 @@ CREATE TABLE `card_status` (
 
 INSERT INTO `card_status` (`cstatus_key`, `card_key`, `card_status`, `card_status_note`, `user_key`, `cstatus_insert`) VALUES
 ('a95c4537f56b5c02730a23938f002d48', '77fa8e1770e8244e27866e95f674058c', 'c382e352e2e620a3c60a2cc7c6a7fa35', 'dsf', 'd97530f6437e7ffa3a74afe46a953a15', '2019-05-04 17:45:04'),
-('13fdceb26693dbe7a2fd15d0590cdac3', 'cc005e33e32405dd755f4ea01ea9ab19', 'c382e352e2e620a3c60a2cc7c6a7fa35', '', '6a7c6fe063021a761c8498b4f11aad85', '2019-05-09 10:25:05');
+('13fdceb26693dbe7a2fd15d0590cdac3', 'cc005e33e32405dd755f4ea01ea9ab19', 'c382e352e2e620a3c60a2cc7c6a7fa35', '', '6a7c6fe063021a761c8498b4f11aad85', '2019-05-09 10:25:05'),
+('21ca71a3811f085244ab91558d84a911', 'e17956a7518eb0ffd6bf7bb9b8bfc4d4', 'c382e352e2e620a3c60a2cc7c6a7fa35', '', 'd97530f6437e7ffa3a74afe46a953a15', '2019-05-13 05:56:01');
 
 -- --------------------------------------------------------
 
@@ -400,10 +403,10 @@ INSERT INTO `event_info` (`id`, `Event_Code`, `Event_Name`, `Event_Status`, `eff
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Event_Item`
+-- Table structure for table `event_item`
 --
 
-CREATE TABLE `Event_Item` (
+CREATE TABLE `event_item` (
   `id` int(11) NOT NULL,
   `Event_Code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `ProductID` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
@@ -413,14 +416,35 @@ CREATE TABLE `Event_Item` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `Event_Item`
+-- Dumping data for table `event_item`
 --
 
-INSERT INTO `Event_Item` (`id`, `Event_Code`, `ProductID`, `code`, `PriceSale`, `item_amt`) VALUES
+INSERT INTO `event_item` (`id`, `Event_Code`, `ProductID`, `code`, `PriceSale`, `item_amt`) VALUES
 (1, 'E0002', 'P0001', '', 47000, 4),
 (2, 'E0002', 'P0003', '', 18000, 4),
 (5, 'E0003', 'P0004', 'T0002', 1900, 4),
 (4, 'E0003', 'P0002', 'W0002', 14000, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `genwhee`
+--
+
+CREATE TABLE `genwhee` (
+  `id` int(11) NOT NULL,
+  `code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `Description` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `genwhee`
+--
+
+INSERT INTO `genwhee` (`id`, `code`, `Description`, `status`) VALUES
+(0, 'WG0001', 'รุ่น1', 1),
+(0, 'WG0002', 'รุ่น2', 1);
 
 -- --------------------------------------------------------
 
@@ -560,7 +584,9 @@ INSERT INTO `list` (`cases`, `menu`, `pages`, `case_status`) VALUES
 ('addEvent', 'settings', 'settings/addEvent.php', 1),
 ('addEvent_Info', 'settings', 'settings/addEvent_Info.php', 1),
 ('reportPopSale', 'settings', 'report/reportPopSale.php', 1),
-('settingOffsetList', 'settings', 'settings/settingOffsetList.php', 1);
+('settingOffsetList', 'settings', 'settings/settingOffsetList.php', 1),
+('settingGenWheelList', 'settings', 'settings/settingGenWheelList.php', 1),
+('addShelf', 'settings', 'settings/addShelf.php', 1);
 
 -- --------------------------------------------------------
 
@@ -815,7 +841,12 @@ INSERT INTO `logs` (`log_key`, `log_date`, `log_ipaddress`, `log_text`, `log_use
 ('65ebe75aa43d15ad', '2019-05-06 16:20:40', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
 ('be16e6538dd4b9bf', '2019-05-09 07:17:33', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
 ('054c3ee5a2872388', '2019-05-09 07:19:31', '::1', 'pat ออกจากระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
-('0a98acacf3a57fc4', '2019-05-09 07:19:37', '::1', 'film เข้าสู่ระบบ.', '6a7c6fe063021a761c8498b4f11aad85');
+('0a98acacf3a57fc4', '2019-05-09 07:19:37', '::1', 'film เข้าสู่ระบบ.', '6a7c6fe063021a761c8498b4f11aad85'),
+('061c203cfc1c2de7', '2019-05-10 02:40:37', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('30edca18c5f00a89', '2019-05-13 05:18:46', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('f8f00c9db1ff6b9b', '2019-05-13 09:53:12', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('26dcd6a2cfde6cab', '2019-05-13 13:22:02', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('cb3fdfb29edd8f6b', '2019-05-13 15:23:35', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15');
 
 -- --------------------------------------------------------
 
@@ -982,17 +1013,18 @@ CREATE TABLE `productdetailwheel` (
   `typeFormat` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `brand` int(11) NOT NULL,
   `color` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `offset` varchar(5) COLLATE utf8_unicode_ci NOT NULL
+  `offset` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `gen` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `productdetailwheel`
 --
 
-INSERT INTO `productdetailwheel` (`id`, `code`, `ProductID`, `diameter`, `rim`, `holeSize`, `typeFormat`, `brand`, `color`, `offset`) VALUES
-(1, 'W0001', 'P0001', 13, '5.5', '4', 'ล้อแม็กกะทะ', 1, 'black', '-'),
-(2, 'W0002', 'P0002', 13, '5.5', '4', 'ล้อแม็กนีเซียมอัลลอย', 2, 'black', '-10'),
-(3, 'W0003', 'P0003', 13, '5.5', '4H100', 'ล้อแม็กกะทะ', 2, 'black', '-11');
+INSERT INTO `productdetailwheel` (`id`, `code`, `ProductID`, `diameter`, `rim`, `holeSize`, `typeFormat`, `brand`, `color`, `offset`, `gen`) VALUES
+(1, 'W0001', 'P0001', 13, '5.5', '', 'ล้อแม็กกะทะ', 1, 'black', '-', 'รุ่น1'),
+(2, 'W0002', 'P0002', 13, '5.5', '4', 'ล้อแม็กนีเซียมอัลลอย', 2, 'black', '-10', ''),
+(3, 'W0003', 'P0003', 13, '5.5', '4H100', 'ล้อแม็กกะทะ', 2, 'black', '-11', '');
 
 -- --------------------------------------------------------
 
@@ -1007,6 +1039,7 @@ CREATE TABLE `product_n` (
   `Quantity` int(11) NOT NULL,
   `PriceSale` double NOT NULL,
   `PriceBuy` double NOT NULL,
+  `PriceBuyOld` double NOT NULL,
   `ProductStatus` char(1) NOT NULL,
   `Warranty` varchar(200) NOT NULL,
   `hand` int(11) NOT NULL,
@@ -1018,11 +1051,11 @@ CREATE TABLE `product_n` (
 -- Dumping data for table `product_n`
 --
 
-INSERT INTO `product_n` (`ProductID`, `shelf_id`, `dealer_code`, `Quantity`, `PriceSale`, `PriceBuy`, `ProductStatus`, `Warranty`, `hand`, `TypeID`, `discount`) VALUES
-('P0001', 11, 'D0002', 21, 5000, 4500, '1', '', 1, 1, 0),
-('P0002', 11, 'D0002', 46, 15000, 10000, '1', '', 1, 1, 0),
-('P0003', 14, 'D0002', 40, 20000, 15000, '1', '', 1, 1, 0),
-('P0004', 11, 'D0002', 36, 2000, 2500, '1', '', 1, 2, 0);
+INSERT INTO `product_n` (`ProductID`, `shelf_id`, `dealer_code`, `Quantity`, `PriceSale`, `PriceBuy`, `PriceBuyOld`, `ProductStatus`, `Warranty`, `hand`, `TypeID`, `discount`) VALUES
+('P0001', 11, 'D0002', 38, 5000, 4500, 4500, '1', '', 1, 1, 10),
+('P0002', 11, 'D0002', 26, 15000, 10000, 0, '1', '', 1, 1, 0),
+('P0003', 14, 'D0002', 20, 20000, 12500, 0, '1', '', 1, 1, 0),
+('P0004', 11, 'D0002', 36, 2000, 2500, 0, '1', '', 1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -1376,7 +1409,14 @@ INSERT INTO `reserve_info` (`reserve_key`, `reserve_code`, `reserve_no`, `empoly
 ('d5e9f312dc1234c5e3a3e09ef52df690', 'C14I474F', '', '6a7c6fe063021a761c8498b4f11aad85', 0, 0, 'P', '2019-05-09 15:37:09', ''),
 ('309e95b5468a312fe53e75bc3498f6fc', 'CIF1CX3J', '', '6a7c6fe063021a761c8498b4f11aad85', 0, 0, 'P', '2019-05-09 16:00:10', ''),
 ('cdc9ebd7e304d5b6a49bb682e62f50bd', 'CQ3PX7ZS', '2019050900CQ3PX7ZS', '6a7c6fe063021a761c8498b4f11aad85', 4452, 63600, 'S', '2019-05-09 16:03:17', ''),
-('a94eb8d5d9de302cbebed2e6d6d34db9', 'C63NFF80', '', '6a7c6fe063021a761c8498b4f11aad85', 0, 0, 'N', '2019-05-09 16:04:00', '');
+('319151ab45a1e2576420f81436445c1c', 'CN8V2BI0', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'P', '2019-05-13 12:36:47', ''),
+('d221db15e51d3ef79dd7334713a795d1', 'CB9TEUF0', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'P', '2019-05-13 12:44:39', ''),
+('5f056816841a0beeff3aceda2ce26067', 'C9IGZSPB', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'P', '2019-05-13 12:46:19', ''),
+('cb7fe47fe844dd102b211fbe3df0e652', 'CZXSJ7BT', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'P', '2019-05-13 12:48:58', ''),
+('9fcd89f77b62ce38903432322258e703', 'CNKCWEB', '2019051300CNKCWEB', 'd97530f6437e7ffa3a74afe46a953a15', 315, 4500, 'S', '2019-05-13 12:49:31', ''),
+('634f5fff366c5206619f3986592002e8', 'CSN22LY9', '2019051300CSN22LY9', 'd97530f6437e7ffa3a74afe46a953a15', 315, 4500, 'S', '2019-05-13 12:49:35', ''),
+('2de0ec95c2fe5f2473a71d94e76a76a7', 'C42XVUTR', '2019051400C42XVUTR', 'd97530f6437e7ffa3a74afe46a953a15', 315, 4500, 'S', '2019-05-14 21:40:08', ''),
+('f374e2121129991c5f6355c9ec66f5fb', 'C599ZPV', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'N', '2019-05-14 22:02:41', '');
 
 -- --------------------------------------------------------
 
@@ -1390,6 +1430,7 @@ CREATE TABLE `reserve_item` (
   `ProductID` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `item_discount` int(11) NOT NULL,
   `item_price` int(11) NOT NULL,
+  `cost_price` decimal(10,0) NOT NULL,
   `item_total` int(11) NOT NULL,
   `item_amt` int(11) NOT NULL,
   `create_Date` date NOT NULL,
@@ -1400,89 +1441,96 @@ CREATE TABLE `reserve_item` (
 -- Dumping data for table `reserve_item`
 --
 
-INSERT INTO `reserve_item` (`item_key`, `reserve_key`, `ProductID`, `item_discount`, `item_price`, `item_total`, `item_amt`, `create_Date`, `Event_Code`) VALUES
-('012c7dcc41269b22bd7577331a70d0ff', '4cdebb270b60e0eb4718eaebbb591171', 'P0008', 0, 4500, 4500, 1, '2019-04-15', ''),
-('02eab9bb156c7eb7b869c1efef99d7ad', 'cf307ddbc0b9714023f3974b3b219f7a', 'P0002', 1200, 12000, 10800, 1, '2019-03-20', ''),
-('03ebc94915125b784bde86fd6ef5d6b0', '4cdebb270b60e0eb4718eaebbb591171', 'P0001', 0, 3000, 12000, 4, '2019-04-15', ''),
-('0580a6ba812a28b691eae3fb99356aa6', '80e9cb0ef93916918db9c8d726b10482', 'P0003', 0, 9500, 38000, 4, '2019-04-15', 'E0001'),
-('09551461884ff08b299968a2897e2787', '69bf2cb93075291325b9bfb32d8b13d0', 'P0001', 0, 35000, 35000, 1, '2019-03-20', ''),
-('0dbbfa73abe996ecc95f872abd57f9b6', 'a21c2ab1eb7b9ca964541fcf0abafdbc', 'P0007', 325, 6500, 49400, 8, '2019-04-07', ''),
-('144c9282479616521da2f5f52dee26f3', 'f78e365e5b85c99ec67a47b4ee003768', 'P0003', 500, 10000, 9500, 1, '2019-03-02', ''),
-('160042436f951167841e03f9a50c02d4', 'ba1bfbd136e5522c7e7916ed6886871f', 'P0003', 0, 9500, 38000, 4, '2019-04-21', 'E0001'),
-('175ad7e13d640e865bc64d776c8c84b1', 'b0e203163247c8775ae9d6de6f98797b', 'P0003', 0, 9500, 38000, 4, '2019-04-15', 'E0001'),
-('18fe815d13f1eafb2d0bca727944cc55', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0004', 400, 20000, 58800, 3, '2019-01-26', ''),
-('1c9bc77a115596656bc9a2899913f400', '4287252495029b01df3bf3419dedc32e', 'P0002', 1200, 12000, 10800, 1, '2019-03-20', ''),
-('1d149a788160ec02c3b618cc03869a42', 'f150f7118f0446edada811f22612c769', 'P0004', 400, 20000, 19600, 1, '2019-03-20', ''),
-('238ab31f338339d2f85023f14e7ba384', '001b5f6ec7f8767a6fb8d078ef8abff7', 'P0001', 0, 35000, 35000, 1, '2019-03-31', ''),
-('23b28a0f055e0297286ce3f2002bd8cc', '4b3e80691dd1fca5cf117945bad2b739', 'P0002', 0, 12000, 48000, 4, '2019-04-14', ''),
-('29fb4e8147f728b744a363db7fdea6ad', '807f984e5ee2249b7e4c191a5eadec18', 'P0003', 500, 10000, 9500, 1, '2019-03-20', ''),
-('2bcb6f20da4ddd1ccd2d0506da385742', '5f1519960f7fa5d55a5b3c4e6635405d', 'P0007', 325, 6500, 18525, 3, '2019-02-19', ''),
-('2d93bd1c43557cce2ac5d4997e723bbf', '157d7800f82adffef91e224b42a69b59', 'P0002', 1200, 12000, 10800, 1, '2019-03-20', ''),
-('2ffc4abab438914f5d9871afd704a2c6', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0003', 500, 10000, 9500, 1, '2019-01-26', ''),
-('3268168bad24d57c1373be0289c6f1f9', '25dbccf452d2b92a6339378ae4333599', 'P0003', 500, 10000, 9500, 1, '2019-03-22', ''),
-('36406526d02a8f7b9c83a42d08ee706b', '4cdebb270b60e0eb4718eaebbb591171', 'P0003', 500, 10000, 9500, 1, '2019-04-15', ''),
-('39f521c11aac1e75b1b46d91faab54c9', '16c53ed54b87ae4709488fa65e9699d2', 'P0002', 1200, 12000, 21600, 2, '2019-01-18', ''),
-('3fc270ba4c1aca10fd13a083a70dddc6', '615f80e5cd95876e5863c6febb244277', 'P0002', 1200, 12000, 10800, 1, '2019-01-22', ''),
-('40fe0ff65d5a6f85c5a8aa5e591a6f22', '2ff6276734edaa8a9cc03ae5fa36189d', 'P0001', 1750, 35000, 66500, 2, '2019-01-22', ''),
-('442c05de1f80457b72b122ed44f5cbd9', '05860be830f63c86894b0eedb1b8943d', 'P0004', 400, 20000, 19600, 1, '2019-03-20', ''),
-('4d0f4324c02627746adf175a04db0068', 'fb0d68556e688ffefe0a4335389808b7', 'P0001', 0, 35000, 35000, 1, '2019-03-20', ''),
-('52629910aa48b38440b8cc2387d513ef', '5e6ae23f631429c796185945fec3426e', 'P0010', 0, 10000, 10000, 1, '2019-03-07', ''),
-('5c6ab53450c539726c5fda8583a117de', 'b0e203163247c8775ae9d6de6f98797b', 'P0003', 0, 9500, 38000, 4, '2019-04-15', 'E0001'),
-('645cd8172ba9e79866996056b29530e7', '9633399692e492b5a09b4bd0863b9d1b', 'P0001', 0, 5000, 5000, 1, '2019-05-05', ''),
-('6493d8e4059b2e0176ee35f567367e2d', '6c9a3f0297345cb9854a52057557281a', 'P0001', 0, 4000, 16000, 4, '2019-04-24', 'E0007'),
-('6795f5c6fdcbadb009898b074e44437d', 'b0e203163247c8775ae9d6de6f98797b', 'P0003', 0, 9500, 38000, 4, '2019-04-15', 'E0001'),
-('67bc37f8ed5aa0773267a398c7297a12', 'd83376c2c04d6e0ae77748d3b14c76cc', 'P0003', 0, 9500, 38000, 4, '2019-04-21', 'E0001'),
-('6adb2570d79a1d85a2e79c986cbda436', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0001', 1750, 35000, 99750, 3, '2019-01-26', ''),
-('6afa19f6b94338670f98f7867b718085', '4cdebb270b60e0eb4718eaebbb591171', 'P0003', 0, 9500, 38000, 4, '2019-04-15', ''),
-('700cdd7c452a6c171ea8040dc9629216', 'f78e365e5b85c99ec67a47b4ee003768', 'P0002', 1200, 12000, 10800, 1, '2019-03-02', ''),
-('74a4e87edbd342be7acf338c784d4ccc', '4cdebb270b60e0eb4718eaebbb591171', 'P0003', 500, 10000, 9500, 1, '2019-04-15', ''),
-('75caacf9dc49ed2a25c57ce03c508435', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0002', 1200, 12000, 21600, 2, '2019-01-26', ''),
-('80a24252e55424833fa5299aacb24093', '0c629d5ed4d08e6c2c83636b00332517', 'P0003', 500, 10000, 9500, 1, '2019-03-20', ''),
-('817d36064a75eb25799841752fd8b82a', '648adb1bef8f4dd0b8c187973a813239', 'P0009', 0, 6000, 6000, 1, '2019-04-13', ''),
-('8938091d7ddd98627bfb1f45775d9fc2', 'b0e203163247c8775ae9d6de6f98797b', 'P0001', 0, 3000, 12000, 4, '2019-04-15', 'E0001'),
-('8991e60a8d88c34d21ec5d3d4d2446cf', 'f78e365e5b85c99ec67a47b4ee003768', 'P0001', 0, 35000, 35000, 1, '2019-03-02', ''),
-('8d5dc1ebcdf38027f33e640dddc7f4a6', 'a21c2ab1eb7b9ca964541fcf0abafdbc', 'P0003', 500, 10000, 9500, 1, '2019-04-07', ''),
-('95128d6eb11e53ac684f1e19ea186fa1', '79344d4499dafc3296379802db3b0a9e', 'P0002', 1200, 12000, 54000, 5, '2019-01-22', ''),
-('99539b19a24e59a62e5cb8d6b9d48c3b', '5b7d4bc906ca9cac8674a8d01a8ee483', 'P0001', 0, 35000, 35000, 1, '2019-03-20', ''),
-('9a801817e2b305aafb9dcc40bd3e1527', 'b0e203163247c8775ae9d6de6f98797b', 'P0001', 0, 3000, 12000, 4, '2019-04-15', 'E0001'),
-('9f59210eee5aabea28d6c0c137b2bea1', '50dd9d0ed2760dce04620a5687e6826b', 'P0001', 0, 35000, 35000, 1, '2019-03-20', ''),
-('a1ff1faf3792862216c0b32c96b55aed', '356106a76ab2d5dd0fcf7c46c330517d', 'P0001', 1750, 35000, 33250, 1, '2019-01-22', ''),
-('a7c1a90044e0f525186f1c8a53f687c4', 'de060f4a839857f0a8d8191b20ba5fef', 'P0001', 1750, 35000, 33250, 1, '2019-01-22', ''),
-('aeaf41eea4808855d67ec46a49471c69', 'b0e203163247c8775ae9d6de6f98797b', 'P0003', 0, 9500, 38000, 4, '2019-04-15', 'E0001'),
-('b0f2fa3ae1ce69be5a5d301bd8309b86', '412e6803ae4a8b4d56a9654ade3a4d8a', 'P0001', 0, 5000, 20000, 4, '2019-05-05', ''),
-('b75f87cdf07933f08b74d2fc48df7149', '23a6d54e9e7cffa8256f85a630bcae68', 'P0002', 1200, 12000, 10800, 1, '2019-01-22', ''),
-('bd8252a24a879330e45ddda9d17df37c', '4cdebb270b60e0eb4718eaebbb591171', 'P0003', 500, 10000, 9500, 1, '2019-04-15', ''),
-('c08bc22adbb221a9b8f50db3e2ee18eb', 'ba1bfbd136e5522c7e7916ed6886871f', 'P0001', 0, 3000, 12000, 4, '2019-04-21', 'E0001'),
-('c25d63f9984e143cf7b8f16b4e4a9579', '6c9a3f0297345cb9854a52057557281a', 'P0001', 0, 4000, 16000, 4, '2019-04-24', 'E0007'),
-('c358da22918145542a459a2faf2d1bd5', 'ebeecfa7af58c373c38a353cec083b45', 'P0001', 1750, 35000, 33250, 1, '2019-02-03', ''),
-('c673e3b3b3ecf08033ecc641e2aa3e41', '48e26108f4f99f2bb986510b30ddc5cb', 'P0002', 1200, 12000, 10800, 1, '2019-03-20', ''),
-('c72152cf50e324a5e453a3b603680d86', '75ebbcffe576a9f69c70ae964768833f', 'P0001', 0, 35000, 35000, 1, '2019-03-20', ''),
-('c821a9d6854a1667b08fd1373557dcac', 'e55953a0adf5fd3115da033ea8eda1e5', 'P0002', 1200, 12000, 10800, 1, '2019-03-07', ''),
-('c893c3293c25cc145dd5b7004a837564', '80e9cb0ef93916918db9c8d726b10482', 'P0001', 0, 3000, 12000, 4, '2019-04-15', 'E0001'),
-('ca35b56ae29ff84bca4789ac4573ba5c', '16c53ed54b87ae4709488fa65e9699d2', 'P0003', 500, 10000, 38000, 4, '2019-01-18', ''),
-('cbf13b8f315c5124ed6c3717df3a89f2', 'd83376c2c04d6e0ae77748d3b14c76cc', 'P0001', 0, 35000, 140000, 4, '2019-04-21', ''),
-('ceb4655b22707a3afea4edbebd577f5e', '8d81cd8cbc68156abfd9bcd388ef3738', 'P0001', 0, 35000, 35000, 1, '2019-03-20', ''),
-('d1c8d4fc55d4c06e2a28f1ca96845ba6', '2ff6276734edaa8a9cc03ae5fa36189d', 'P0002', 1200, 12000, 54000, 5, '2019-01-22', ''),
-('d55d324feffb4440597c9164312603e3', 'b0e203163247c8775ae9d6de6f98797b', 'P0001', 0, 3000, 12000, 4, '2019-04-15', 'E0001'),
-('d9e12a38f2eeb0cd031832da1a18a6e4', 'c05dcc3b2fffb4f1ff32d777cf0f69f4', 'P0004', 400, 20000, 39200, 2, '2019-01-22', ''),
-('dcb4e454b4c846d6b05f3481cc87dd90', 'd83376c2c04d6e0ae77748d3b14c76cc', 'P0001', 0, 3000, 12000, 4, '2019-04-21', 'E0001'),
-('e4ec4fa98a30e1f5e7f297847a1aaa93', '5081ce85fd81dae438ba85efe885e50b', 'P0002', 1200, 12000, 21600, 2, '2019-02-19', ''),
-('e54f265d319e41489bb008f10849d157', '8888f5561ba4609b14df3f4f69b9f8ab', 'P0001', 1750, 35000, 33250, 1, '2019-02-19', ''),
-('e68b4395fb3042e062f2acac9a3ba59e', 'b0e203163247c8775ae9d6de6f98797b', 'P0001', 0, 3000, 12000, 4, '2019-04-15', 'E0001'),
-('eb4390e6ec8692e1444106af863511a8', 'b0e203163247c8775ae9d6de6f98797b', 'P0003', 0, 9500, 38000, 4, '2019-04-15', 'E0001'),
-('f4b6f19db54ed4d3daddb1904d9fe290', 'b0e203163247c8775ae9d6de6f98797b', 'P0001', 0, 3000, 12000, 4, '2019-04-15', 'E0001'),
-('ffebb302df14b0b5488153376cb7bf9b', '4cdebb270b60e0eb4718eaebbb591171', 'P0003', 500, 10000, 9500, 1, '2019-04-15', ''),
-('24f6d31868266663fb75361dd1d74dbd', '58abd91b6a4d8d41bf74eedbf8777e65', 'P0001', 0, 5000, 5000, 1, '2019-05-09', ''),
-('0e3265630c75cd3b5542a03d9186a7eb', '58abd91b6a4d8d41bf74eedbf8777e65', 'P0003', 0, 20000, 20000, 1, '2019-05-09', ''),
-('e72e29c14a62af99d48f8ba94263d4cf', '6b373a7bc70d20d99b07a1448aebab10', 'P0001', 0, 5000, 5000, 1, '2019-05-09', ''),
-('c2fcb7010c1310bf846e36223fb46a31', '6b373a7bc70d20d99b07a1448aebab10', 'P0003', 0, 20000, 20000, 1, '2019-05-09', ''),
-('127e5d19cce338a0e714a31300076f99', '6b373a7bc70d20d99b07a1448aebab10', 'P0004', 0, 2000, 2000, 1, '2019-05-09', ''),
-('9d6c5713f29adbd3b51a8d5914eea78c', '', 'P0001', 0, 47000, 188000, 4, '2019-05-09', 'E0002'),
-('9211ecf5218b86db1e6be220e41b24f7', '', 'P0003', 0, 18000, 72000, 4, '2019-05-09', 'E0002'),
-('69bd93afd96060b624d7ca0aa88e2b67', '309e95b5468a312fe53e75bc3498f6fc', 'P0004', 0, 1900, 7600, 4, '2019-05-09', 'E0003'),
-('d8c9dae94802d18c16144fdeb66eb927', '309e95b5468a312fe53e75bc3498f6fc', 'P0002', 0, 14000, 56000, 4, '2019-05-09', 'E0003'),
-('5e3779be3dacfa9693eb85d4c61311d5', 'cdc9ebd7e304d5b6a49bb682e62f50bd', 'P0004', 0, 1900, 7600, 4, '2019-05-09', 'E0003'),
-('c70a0d4d4265f6438ea87723dfd3640e', 'cdc9ebd7e304d5b6a49bb682e62f50bd', 'P0002', 0, 14000, 56000, 4, '2019-05-09', 'E0003');
+INSERT INTO `reserve_item` (`item_key`, `reserve_key`, `ProductID`, `item_discount`, `item_price`, `cost_price`, `item_total`, `item_amt`, `create_Date`, `Event_Code`) VALUES
+('012c7dcc41269b22bd7577331a70d0ff', '4cdebb270b60e0eb4718eaebbb591171', 'P0008', 0, 4500, '0', 4500, 1, '2019-04-15', ''),
+('02eab9bb156c7eb7b869c1efef99d7ad', 'cf307ddbc0b9714023f3974b3b219f7a', 'P0002', 1200, 12000, '0', 10800, 1, '2019-03-20', ''),
+('03ebc94915125b784bde86fd6ef5d6b0', '4cdebb270b60e0eb4718eaebbb591171', 'P0001', 0, 3000, '0', 12000, 4, '2019-04-15', ''),
+('0580a6ba812a28b691eae3fb99356aa6', '80e9cb0ef93916918db9c8d726b10482', 'P0003', 0, 9500, '0', 38000, 4, '2019-04-15', 'E0001'),
+('09551461884ff08b299968a2897e2787', '69bf2cb93075291325b9bfb32d8b13d0', 'P0001', 0, 35000, '0', 35000, 1, '2019-03-20', ''),
+('0dbbfa73abe996ecc95f872abd57f9b6', 'a21c2ab1eb7b9ca964541fcf0abafdbc', 'P0007', 325, 6500, '0', 49400, 8, '2019-04-07', ''),
+('144c9282479616521da2f5f52dee26f3', 'f78e365e5b85c99ec67a47b4ee003768', 'P0003', 500, 10000, '0', 9500, 1, '2019-03-02', ''),
+('160042436f951167841e03f9a50c02d4', 'ba1bfbd136e5522c7e7916ed6886871f', 'P0003', 0, 9500, '0', 38000, 4, '2019-04-21', 'E0001'),
+('175ad7e13d640e865bc64d776c8c84b1', 'b0e203163247c8775ae9d6de6f98797b', 'P0003', 0, 9500, '0', 38000, 4, '2019-04-15', 'E0001'),
+('18fe815d13f1eafb2d0bca727944cc55', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0004', 400, 20000, '0', 58800, 3, '2019-01-26', ''),
+('1c9bc77a115596656bc9a2899913f400', '4287252495029b01df3bf3419dedc32e', 'P0002', 1200, 12000, '0', 10800, 1, '2019-03-20', ''),
+('1d149a788160ec02c3b618cc03869a42', 'f150f7118f0446edada811f22612c769', 'P0004', 400, 20000, '0', 19600, 1, '2019-03-20', ''),
+('238ab31f338339d2f85023f14e7ba384', '001b5f6ec7f8767a6fb8d078ef8abff7', 'P0001', 0, 35000, '0', 35000, 1, '2019-03-31', ''),
+('23b28a0f055e0297286ce3f2002bd8cc', '4b3e80691dd1fca5cf117945bad2b739', 'P0002', 0, 12000, '0', 48000, 4, '2019-04-14', ''),
+('29fb4e8147f728b744a363db7fdea6ad', '807f984e5ee2249b7e4c191a5eadec18', 'P0003', 500, 10000, '0', 9500, 1, '2019-03-20', ''),
+('2bcb6f20da4ddd1ccd2d0506da385742', '5f1519960f7fa5d55a5b3c4e6635405d', 'P0007', 325, 6500, '0', 18525, 3, '2019-02-19', ''),
+('2d93bd1c43557cce2ac5d4997e723bbf', '157d7800f82adffef91e224b42a69b59', 'P0002', 1200, 12000, '0', 10800, 1, '2019-03-20', ''),
+('2ffc4abab438914f5d9871afd704a2c6', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0003', 500, 10000, '0', 9500, 1, '2019-01-26', ''),
+('3268168bad24d57c1373be0289c6f1f9', '25dbccf452d2b92a6339378ae4333599', 'P0003', 500, 10000, '0', 9500, 1, '2019-03-22', ''),
+('36406526d02a8f7b9c83a42d08ee706b', '4cdebb270b60e0eb4718eaebbb591171', 'P0003', 500, 10000, '0', 9500, 1, '2019-04-15', ''),
+('39f521c11aac1e75b1b46d91faab54c9', '16c53ed54b87ae4709488fa65e9699d2', 'P0002', 1200, 12000, '0', 21600, 2, '2019-01-18', ''),
+('3fc270ba4c1aca10fd13a083a70dddc6', '615f80e5cd95876e5863c6febb244277', 'P0002', 1200, 12000, '0', 10800, 1, '2019-01-22', ''),
+('40fe0ff65d5a6f85c5a8aa5e591a6f22', '2ff6276734edaa8a9cc03ae5fa36189d', 'P0001', 1750, 35000, '0', 66500, 2, '2019-01-22', ''),
+('442c05de1f80457b72b122ed44f5cbd9', '05860be830f63c86894b0eedb1b8943d', 'P0004', 400, 20000, '0', 19600, 1, '2019-03-20', ''),
+('4d0f4324c02627746adf175a04db0068', 'fb0d68556e688ffefe0a4335389808b7', 'P0001', 0, 35000, '0', 35000, 1, '2019-03-20', ''),
+('52629910aa48b38440b8cc2387d513ef', '5e6ae23f631429c796185945fec3426e', 'P0010', 0, 10000, '0', 10000, 1, '2019-03-07', ''),
+('5c6ab53450c539726c5fda8583a117de', 'b0e203163247c8775ae9d6de6f98797b', 'P0003', 0, 9500, '0', 38000, 4, '2019-04-15', 'E0001'),
+('645cd8172ba9e79866996056b29530e7', '9633399692e492b5a09b4bd0863b9d1b', 'P0001', 0, 5000, '0', 5000, 1, '2019-05-05', ''),
+('6493d8e4059b2e0176ee35f567367e2d', '6c9a3f0297345cb9854a52057557281a', 'P0001', 0, 4000, '0', 16000, 4, '2019-04-24', 'E0007'),
+('6795f5c6fdcbadb009898b074e44437d', 'b0e203163247c8775ae9d6de6f98797b', 'P0003', 0, 9500, '0', 38000, 4, '2019-04-15', 'E0001'),
+('67bc37f8ed5aa0773267a398c7297a12', 'd83376c2c04d6e0ae77748d3b14c76cc', 'P0003', 0, 9500, '0', 38000, 4, '2019-04-21', 'E0001'),
+('6adb2570d79a1d85a2e79c986cbda436', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0001', 1750, 35000, '0', 99750, 3, '2019-01-26', ''),
+('6afa19f6b94338670f98f7867b718085', '4cdebb270b60e0eb4718eaebbb591171', 'P0003', 0, 9500, '0', 38000, 4, '2019-04-15', ''),
+('700cdd7c452a6c171ea8040dc9629216', 'f78e365e5b85c99ec67a47b4ee003768', 'P0002', 1200, 12000, '0', 10800, 1, '2019-03-02', ''),
+('74a4e87edbd342be7acf338c784d4ccc', '4cdebb270b60e0eb4718eaebbb591171', 'P0003', 500, 10000, '0', 9500, 1, '2019-04-15', ''),
+('75caacf9dc49ed2a25c57ce03c508435', 'aa8458ed630f7ca2ab5e8f0b5938a05d', 'P0002', 1200, 12000, '0', 21600, 2, '2019-01-26', ''),
+('80a24252e55424833fa5299aacb24093', '0c629d5ed4d08e6c2c83636b00332517', 'P0003', 500, 10000, '0', 9500, 1, '2019-03-20', ''),
+('817d36064a75eb25799841752fd8b82a', '648adb1bef8f4dd0b8c187973a813239', 'P0009', 0, 6000, '0', 6000, 1, '2019-04-13', ''),
+('8938091d7ddd98627bfb1f45775d9fc2', 'b0e203163247c8775ae9d6de6f98797b', 'P0001', 0, 3000, '0', 12000, 4, '2019-04-15', 'E0001'),
+('8991e60a8d88c34d21ec5d3d4d2446cf', 'f78e365e5b85c99ec67a47b4ee003768', 'P0001', 0, 35000, '0', 35000, 1, '2019-03-02', ''),
+('8d5dc1ebcdf38027f33e640dddc7f4a6', 'a21c2ab1eb7b9ca964541fcf0abafdbc', 'P0003', 500, 10000, '0', 9500, 1, '2019-04-07', ''),
+('95128d6eb11e53ac684f1e19ea186fa1', '79344d4499dafc3296379802db3b0a9e', 'P0002', 1200, 12000, '0', 54000, 5, '2019-01-22', ''),
+('99539b19a24e59a62e5cb8d6b9d48c3b', '5b7d4bc906ca9cac8674a8d01a8ee483', 'P0001', 0, 35000, '0', 35000, 1, '2019-03-20', ''),
+('9a801817e2b305aafb9dcc40bd3e1527', 'b0e203163247c8775ae9d6de6f98797b', 'P0001', 0, 3000, '0', 12000, 4, '2019-04-15', 'E0001'),
+('9f59210eee5aabea28d6c0c137b2bea1', '50dd9d0ed2760dce04620a5687e6826b', 'P0001', 0, 35000, '0', 35000, 1, '2019-03-20', ''),
+('a1ff1faf3792862216c0b32c96b55aed', '356106a76ab2d5dd0fcf7c46c330517d', 'P0001', 1750, 35000, '0', 33250, 1, '2019-01-22', ''),
+('a7c1a90044e0f525186f1c8a53f687c4', 'de060f4a839857f0a8d8191b20ba5fef', 'P0001', 1750, 35000, '0', 33250, 1, '2019-01-22', ''),
+('aeaf41eea4808855d67ec46a49471c69', 'b0e203163247c8775ae9d6de6f98797b', 'P0003', 0, 9500, '0', 38000, 4, '2019-04-15', 'E0001'),
+('b0f2fa3ae1ce69be5a5d301bd8309b86', '412e6803ae4a8b4d56a9654ade3a4d8a', 'P0001', 0, 5000, '0', 20000, 4, '2019-05-05', ''),
+('b75f87cdf07933f08b74d2fc48df7149', '23a6d54e9e7cffa8256f85a630bcae68', 'P0002', 1200, 12000, '0', 10800, 1, '2019-01-22', ''),
+('bd8252a24a879330e45ddda9d17df37c', '4cdebb270b60e0eb4718eaebbb591171', 'P0003', 500, 10000, '0', 9500, 1, '2019-04-15', ''),
+('c08bc22adbb221a9b8f50db3e2ee18eb', 'ba1bfbd136e5522c7e7916ed6886871f', 'P0001', 0, 3000, '0', 12000, 4, '2019-04-21', 'E0001'),
+('c25d63f9984e143cf7b8f16b4e4a9579', '6c9a3f0297345cb9854a52057557281a', 'P0001', 0, 4000, '0', 16000, 4, '2019-04-24', 'E0007'),
+('c358da22918145542a459a2faf2d1bd5', 'ebeecfa7af58c373c38a353cec083b45', 'P0001', 1750, 35000, '0', 33250, 1, '2019-02-03', ''),
+('c673e3b3b3ecf08033ecc641e2aa3e41', '48e26108f4f99f2bb986510b30ddc5cb', 'P0002', 1200, 12000, '0', 10800, 1, '2019-03-20', ''),
+('c72152cf50e324a5e453a3b603680d86', '75ebbcffe576a9f69c70ae964768833f', 'P0001', 0, 35000, '0', 35000, 1, '2019-03-20', ''),
+('c821a9d6854a1667b08fd1373557dcac', 'e55953a0adf5fd3115da033ea8eda1e5', 'P0002', 1200, 12000, '0', 10800, 1, '2019-03-07', ''),
+('c893c3293c25cc145dd5b7004a837564', '80e9cb0ef93916918db9c8d726b10482', 'P0001', 0, 3000, '0', 12000, 4, '2019-04-15', 'E0001'),
+('ca35b56ae29ff84bca4789ac4573ba5c', '16c53ed54b87ae4709488fa65e9699d2', 'P0003', 500, 10000, '0', 38000, 4, '2019-01-18', ''),
+('cbf13b8f315c5124ed6c3717df3a89f2', 'd83376c2c04d6e0ae77748d3b14c76cc', 'P0001', 0, 35000, '0', 140000, 4, '2019-04-21', ''),
+('ceb4655b22707a3afea4edbebd577f5e', '8d81cd8cbc68156abfd9bcd388ef3738', 'P0001', 0, 35000, '0', 35000, 1, '2019-03-20', ''),
+('d1c8d4fc55d4c06e2a28f1ca96845ba6', '2ff6276734edaa8a9cc03ae5fa36189d', 'P0002', 1200, 12000, '0', 54000, 5, '2019-01-22', ''),
+('d55d324feffb4440597c9164312603e3', 'b0e203163247c8775ae9d6de6f98797b', 'P0001', 0, 3000, '0', 12000, 4, '2019-04-15', 'E0001'),
+('d9e12a38f2eeb0cd031832da1a18a6e4', 'c05dcc3b2fffb4f1ff32d777cf0f69f4', 'P0004', 400, 20000, '0', 39200, 2, '2019-01-22', ''),
+('dcb4e454b4c846d6b05f3481cc87dd90', 'd83376c2c04d6e0ae77748d3b14c76cc', 'P0001', 0, 3000, '0', 12000, 4, '2019-04-21', 'E0001'),
+('e4ec4fa98a30e1f5e7f297847a1aaa93', '5081ce85fd81dae438ba85efe885e50b', 'P0002', 1200, 12000, '0', 21600, 2, '2019-02-19', ''),
+('e54f265d319e41489bb008f10849d157', '8888f5561ba4609b14df3f4f69b9f8ab', 'P0001', 1750, 35000, '0', 33250, 1, '2019-02-19', ''),
+('e68b4395fb3042e062f2acac9a3ba59e', 'b0e203163247c8775ae9d6de6f98797b', 'P0001', 0, 3000, '0', 12000, 4, '2019-04-15', 'E0001'),
+('eb4390e6ec8692e1444106af863511a8', 'b0e203163247c8775ae9d6de6f98797b', 'P0003', 0, 9500, '0', 38000, 4, '2019-04-15', 'E0001'),
+('f4b6f19db54ed4d3daddb1904d9fe290', 'b0e203163247c8775ae9d6de6f98797b', 'P0001', 0, 3000, '0', 12000, 4, '2019-04-15', 'E0001'),
+('ffebb302df14b0b5488153376cb7bf9b', '4cdebb270b60e0eb4718eaebbb591171', 'P0003', 500, 10000, '0', 9500, 1, '2019-04-15', ''),
+('24f6d31868266663fb75361dd1d74dbd', '58abd91b6a4d8d41bf74eedbf8777e65', 'P0001', 0, 5000, '0', 5000, 1, '2019-05-09', ''),
+('0e3265630c75cd3b5542a03d9186a7eb', '58abd91b6a4d8d41bf74eedbf8777e65', 'P0003', 0, 20000, '0', 20000, 1, '2019-05-09', ''),
+('e72e29c14a62af99d48f8ba94263d4cf', '6b373a7bc70d20d99b07a1448aebab10', 'P0001', 0, 5000, '0', 5000, 1, '2019-05-09', ''),
+('c2fcb7010c1310bf846e36223fb46a31', '6b373a7bc70d20d99b07a1448aebab10', 'P0003', 0, 20000, '0', 20000, 1, '2019-05-09', ''),
+('127e5d19cce338a0e714a31300076f99', '6b373a7bc70d20d99b07a1448aebab10', 'P0004', 0, 2000, '0', 2000, 1, '2019-05-09', ''),
+('9d6c5713f29adbd3b51a8d5914eea78c', '', 'P0001', 0, 47000, '0', 188000, 4, '2019-05-09', 'E0002'),
+('9211ecf5218b86db1e6be220e41b24f7', '', 'P0003', 0, 18000, '0', 72000, 4, '2019-05-09', 'E0002'),
+('69bd93afd96060b624d7ca0aa88e2b67', '309e95b5468a312fe53e75bc3498f6fc', 'P0004', 0, 1900, '0', 7600, 4, '2019-05-09', 'E0003'),
+('d8c9dae94802d18c16144fdeb66eb927', '309e95b5468a312fe53e75bc3498f6fc', 'P0002', 0, 14000, '0', 56000, 4, '2019-05-09', 'E0003'),
+('5e3779be3dacfa9693eb85d4c61311d5', 'cdc9ebd7e304d5b6a49bb682e62f50bd', 'P0004', 0, 1900, '0', 7600, 4, '2019-05-09', 'E0003'),
+('c70a0d4d4265f6438ea87723dfd3640e', 'cdc9ebd7e304d5b6a49bb682e62f50bd', 'P0002', 0, 14000, '0', 56000, 4, '2019-05-09', 'E0003'),
+('ca003bec88aeacc1075232f8cdcb8870', '319151ab45a1e2576420f81436445c1c', 'P0001', 0, 5000, '0', 5000, 1, '2019-05-13', ''),
+('c5f59bda4564742e0dc893f7267ce819', 'd221db15e51d3ef79dd7334713a795d1', 'P0001', 500, 5000, '0', 4500, 1, '2019-05-13', ''),
+('edcf61335fdaa8024b373254e7f9fbf2', '5f056816841a0beeff3aceda2ce26067', 'P0001', 500, 5000, '0', 4500, 1, '2019-05-13', ''),
+('4727f60a4457d088dc6ba3f4b3a12c21', 'cb7fe47fe844dd102b211fbe3df0e652', 'P0001', 500, 5000, '0', 4500, 1, '2019-05-13', ''),
+('6c87f075c016060e6baacf8651923d7e', '9fcd89f77b62ce38903432322258e703', 'P0001', 500, 5000, '0', 4500, 1, '2019-05-13', ''),
+('ad746ea61bb0d2fb498a6428bc58090e', '634f5fff366c5206619f3986592002e8', 'P0001', 500, 5000, '0', 4500, 1, '2019-05-13', ''),
+('a96361428a4be0452bdb2addf6c21a24', '2de0ec95c2fe5f2473a71d94e76a76a7', 'P0001', 500, 5000, '4500', 4500, 1, '2019-05-14', '');
 
 -- --------------------------------------------------------
 
@@ -1560,18 +1608,41 @@ CREATE TABLE `shelf` (
   `shelf_detail` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `shelf_color` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `shelf_status` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `shelf_class` int(11) NOT NULL
+  `shelf_class` int(11) NOT NULL,
+  `amt` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `shelf`
 --
 
-INSERT INTO `shelf` (`shelf_id`, `shelf_code`, `shelf_detail`, `shelf_color`, `shelf_status`, `shelf_class`) VALUES
-(11, 's0006', 'A', '', '1', 1),
-(12, 's0007', 'A', '', '1', 2),
-(13, 's0008', 'B', '', '1', 1),
-(14, 's0009', 'B', '', '1', 2);
+INSERT INTO `shelf` (`shelf_id`, `shelf_code`, `shelf_detail`, `shelf_color`, `shelf_status`, `shelf_class`, `amt`) VALUES
+(11, 's0006', 'A', '', '1', 1, 20),
+(12, 's0007', 'A', '', '1', 2, 40),
+(13, 's0008', 'B', '', '1', 1, 50),
+(14, 's0009', 'B', '', '1', 2, 30);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shelf_detail`
+--
+
+CREATE TABLE `shelf_detail` (
+  `id` int(11) NOT NULL,
+  `shelf_code` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `ProductID` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `amt_rimit` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `shelf_detail`
+--
+
+INSERT INTO `shelf_detail` (`id`, `shelf_code`, `ProductID`, `amt_rimit`) VALUES
+(1, 's0006', 'W0002', 10),
+(2, 's0007', 'W0001', 5),
+(3, 's0006', 'W0001', 10);
 
 -- --------------------------------------------------------
 
@@ -1595,7 +1666,13 @@ INSERT INTO `stock_tb_receive_master` (`rid`, `po`, `datedo`, `datereceive`, `id
 (1, 'PO0001', '2019-05-05', '2019-05-05', 'พัชรวี   สีดอก'),
 (2, 'PO0002', '2019-05-06', '2019-05-06', 'พัชรวี   สีดอก'),
 (3, 'PO0003', '2019-05-06', '2019-05-06', 'พัชรวี   สีดอก'),
-(4, 'PO0004', '2019-05-09', '2019-05-09', '่jitrawan   chumpai');
+(4, 'PO0004', '2019-05-09', '2019-05-09', '่jitrawan   chumpai'),
+(5, 'PO0005', '2019-05-13', '2019-05-13', 'พัชรวี   สีดอก'),
+(6, 'PO0006', '2019-05-13', '2019-05-13', 'พัชรวี   สีดอก'),
+(7, 'PO0007', '2019-05-13', '2019-05-13', 'พัชรวี   สีดอก'),
+(8, 'PO0008', '2019-05-13', '2019-05-13', 'พัชรวี   สีดอก'),
+(9, 'PO0009', '2019-05-14', '2019-05-14', 'พัชรวี   สีดอก'),
+(10, 'PO0010', '2019-05-14', '2019-05-14', 'พัชรวี   สีดอก');
 
 -- --------------------------------------------------------
 
@@ -1607,16 +1684,20 @@ CREATE TABLE `stock_tb_receive_master_sub` (
   `no` int(11) NOT NULL,
   `po` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `ProductID` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `total` int(11) NOT NULL
+  `total` int(11) NOT NULL,
+  `price` double NOT NULL,
+  `shelf_code` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dealer_code` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `stock_tb_receive_master_sub`
 --
 
-INSERT INTO `stock_tb_receive_master_sub` (`no`, `po`, `ProductID`, `total`) VALUES
-(2, 'PO0003', '', 1),
-(3, 'PO0004', 'P0001', 12);
+INSERT INTO `stock_tb_receive_master_sub` (`no`, `po`, `ProductID`, `total`, `price`, `shelf_code`, `dealer_code`) VALUES
+(2, 'PO0003', '', 1, 0, NULL, NULL),
+(3, 'PO0004', 'P0001', 12, 0, NULL, NULL),
+(12, 'PO0010', 'P0001', 20, 4500, NULL, 'D0002');
 
 -- --------------------------------------------------------
 
@@ -1896,9 +1977,9 @@ ALTER TABLE `event_info`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `Event_Item`
+-- Indexes for table `event_item`
 --
-ALTER TABLE `Event_Item`
+ALTER TABLE `event_item`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2042,6 +2123,12 @@ ALTER TABLE `shelf`
   ADD PRIMARY KEY (`shelf_id`);
 
 --
+-- Indexes for table `shelf_detail`
+--
+ALTER TABLE `shelf_detail`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `stock_tb_receive_master`
 --
 ALTER TABLE `stock_tb_receive_master`
@@ -2124,9 +2211,9 @@ ALTER TABLE `event_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `Event_Item`
+-- AUTO_INCREMENT for table `event_item`
 --
-ALTER TABLE `Event_Item`
+ALTER TABLE `event_item`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
@@ -2208,16 +2295,22 @@ ALTER TABLE `shelf`
   MODIFY `shelf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- AUTO_INCREMENT for table `shelf_detail`
+--
+ALTER TABLE `shelf_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `stock_tb_receive_master`
 --
 ALTER TABLE `stock_tb_receive_master`
-  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `stock_tb_receive_master_sub`
 --
 ALTER TABLE `stock_tb_receive_master_sub`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `typeformatwheel`

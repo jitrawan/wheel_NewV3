@@ -270,7 +270,7 @@ break;
 		break;
 		case "delete_stock" :
 					$getpo = $getdata->my_sql_query(NULL,"stock_tb_receive_master_sub","no= '".addslashes($_GET['key'])."' ");
-					$getdata->my_sql_update("product_N"," Quantity =  Quantity - '".addslashes($getpo->total)."' ","ProductID='".addslashes($_GET['id'])."' ");
+					$getdata->my_sql_update("product_N"," Quantity =  Quantity - '".addslashes($getpo->total)."', PriceBuy = ".addslashes($_GET['old'])." ","ProductID='".addslashes($_GET['id'])."' ");
 					$getdata->my_sql_delete(" stock_tb_receive_master_sub "," no='".addslashes($_GET['key'])."' ");
 
 		break;

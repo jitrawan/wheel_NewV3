@@ -110,8 +110,9 @@ if(isset($_POST['tSave'])){
 
   $getdata->my_sql_update("reserve_info"," reserve_status='P' "," reserve_key='".$_POST['reserve_key']."' ");
 
-  $getproduct_info = $getdata->my_sql_query(" p.*,r.*,w.*,p.ProductID as setProductID "
-  ," product_N p left join productDetailWheel w on p.ProductID = w.ProductID
+  $getproduct_info = $getdata->my_sql_query(" p.*,r.*,w.*,p.ProductID as setProductID, p.PriceBuy as PriceBuy "
+  ," product_N p
+     left join productDetailWheel w on p.ProductID = w.ProductID
      left join productDetailRubber r on p.ProductID = r.ProductID "
   ," p.ProductID='".$getProductID->ProductID."' ");
 
@@ -129,6 +130,7 @@ if(isset($_POST['tSave'])){
     ,item_discount='".$getdicountTotal."'
     ,item_price='".$getproduct_info->PriceSale."'
     ,item_total='".$gettotal."'
+    ,cost_price=".$getproduct_info->PriceBuy."
     ,create_Date=NOW() ");
 
     $getreserve_info = $getdata->my_sql_query(NULL,"reserve_info"," reserve_key='".$_POST['reserve_key']."' ");
@@ -354,7 +356,7 @@ while($objShow = mysql_fetch_object($getproduct_info)){
     <tbody>
       <?
       $gettotal = 0;
-      $getproduct_info = $getdata->my_sql_select("i.* ,p.*,w.code as wheelCode ,r.code as rubbleCode, r.*, w.* ,w.diameter as diameterWheel,r.diameter as diameterRubber,p.ProductID as ProductID ,w.rim as whediameter
+      $getproduct_info = $getdata->my_sql_select("i.* ,p.*,w.code as wheelCode ,r.code as rubbleCode, r.*, w.* ,w.diameter as diameterWheel,w.gen as genWheel,r.diameter as diameterRubber,p.ProductID as ProductID ,w.rim as whediameter
       ,case
         when p.TypeID = '2'
         then (select b.Description from brandRubble b where r.brand = b.id)
@@ -370,7 +372,7 @@ while($objShow = mysql_fetch_object($getproduct_info)){
           $Isevent = "SetPromotion";
         }
         if($objShow->TypeID == '1'){
-          $gettype = $objShow->wheelCode." ล้อแม๊ก ".$objShow->BrandName." ขอบ:".$objShow->diameterWheel." ขนาด:".$objShow->whediameter." รู:".$objShow->holeSize." ประเภท:".$objShow->typeFormat." ".$Isevent;
+          $gettype = $objShow->wheelCode." ล้อแม๊ก ".$objShow->BrandName." รุ่น:".$objShow->genWheel." ขอบ:".$objShow->diameterWheel." ขนาด:".$objShow->whediameter." รู:".$objShow->holeSize." ประเภท:".$objShow->typeFormat." ".$Isevent;
         }else if($objShow->TypeID == '2'){
           $gettype = $objShow->rubbleCode." ยาง ".$objShow->BrandName." ขนาด:".$objShow->diameterRubber." ความกว้าง:".$objShow->width." ซี่รี่:".$objShow->series."  ".$Isevent;
         }else{
@@ -383,7 +385,7 @@ while($objShow = mysql_fetch_object($getproduct_info)){
         <td class="right"><label class="g-input"><div><input type="text" class="form-control right" readonly="true" size="5" value="<?= @$objShow->item_amt?>" class="price"></div></label></td>
         <td class=""><label class="g-input"><div><input type="text" class="form-control" size="5" readonly="true" value="<?= $gettype?>" class="price"></div></label></td>
         <td class="right"><label class="g-input"><div><input type="text" class="form-control right" readonly="true" size="5" value="<?= convertPoint2($objShow->item_price,2)?>" class="price"></div></label></td>
-        <td class="right"><label class="g-input"><span class="g-input"><div class="input-group"><input type="number" class="form-control right" size="5" class="price" ><span class="input-group-addon">%</span></div></span></label></td>
+        <td class="right"><label class="g-input"><span class="g-input"><div class="input-group"><input type="number" class="form-control right" size="5" value="<?=$objShow->discount?>"class="price" ><span class="input-group-addon">%</span></div></span></label></td>
         <td class="right"><label class="g-input"><div></div></label></td>
         <td class="right"><label class="g-input"><div><input type="text" class="form-control right" size="5" value="<?= convertPoint2($objShow->item_total,2)?>" class="price"></div></label></td>
         <td style="text-align: center;"><a onClick="javascript:deleteItem('<?php echo @$objShow->item_key;?>');" class="btn btn-xs btn-danger" style="color:#FFF;" title="ลบ"><i class="fa fa-times"></i> <?php echo @LA_BTN_DELETE;?></a></td>

@@ -157,7 +157,7 @@ if (mysql_num_rows($GroupType) > 0) {
 
                       </tr>';
 
-            $DetailProduct = $getdata->my_sql_select(" p.*, r.*, w.* ,w.diameter as diameterWheel,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
+            $DetailProduct = $getdata->my_sql_select(" p.*, r.*, w.* ,w.diameter as diameterWheel,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter,w.gen as genWheel
 						,case
 				      when p.TypeID = '2'
 				      then (select b.Description from brandRubble b where r.brand = b.id)
@@ -184,20 +184,16 @@ if (mysql_num_rows($GroupType) > 0) {
                 while($showDetailProduct = mysql_fetch_object($DetailProduct)){
 
 									$sumPriceBuy = $sumPriceBuy + $showDetailProduct->PriceBuy;
-									$sumPriceSale = $sumPriceSale + $showDetailProduct->PriceSale;
-                    if($showDetailProduct->TypeID == '1'){
-
-                      $gettype = $showDetailProduct->BrandName." ขนาด:".$showDetailProduct->diameterWheel." ขอบ:".$showDetailProduct->whediameter." รู:".$showDetailProduct->holeSize." ประเภท:".$showDetailProduct->typeFormat;
-
-                    }else if($showDetailProduct->TypeID == '2'){
-
-                      $gettype = $showDetailProduct->BrandName." ขนาด:".$showDetailProduct->diameterRubber." ขอบ:".$showDetailProduct->rubdiameter." ซี่รี่:".$showDetailProduct->series." ความกว้าง:".$showDetailProduct->width;
-
-                    }else{
-
-                      $gettype = "";
-
-                    }
+                  $sumPriceSale = $sumPriceSale + $showDetailProduct->PriceSale;
+                  
+                  if($showDetailProduct->TypeID == '1'){
+                    $gettype = $showDetailProduct->BrandName." รุ่น:".$showDetailProduct->genWheel." ขนาด:".$showDetailProduct->diameterWheel." ขอบ:".$showDetailProduct->whediameter." รู:".$showDetailProduct->holeSize." ประเภท:".$showDetailProduct->typeFormat;
+                  }else if($showDetailProduct->TypeID == '2'){
+                    $gettype = $showDetailProduct->BrandName." ขนาด:".$showDetailProduct->diameterRubber." ขอบ:".$showDetailProduct->rubdiameter." ซี่รี่:".$showDetailProduct->series." ความกว้าง:".$showDetailProduct->width;
+                  }else{
+                    $gettype = "";
+                  }
+                  
 
                 $content .='<tr>
 

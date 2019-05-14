@@ -34,16 +34,18 @@ $getctype_detail =$getdata->my_sql_query(NULL,"shelf","shelf_id='".addslashes($_
 		 <div class="col-md-6">
 			 <label for="edit_shelf_detail">shelf สินค้า</label>
 			 <input type="hidden" name="edit_shelf_id" id="edit_shelf_id" class="form-control" value="<?php echo @$getctype_detail->shelf_id;?>">
-			 <input type="text" name="edit_shelf_detail" id="edit_shelf_detail" class="form-control" value="<?php echo @$getctype_detail->shelf_detail;?>" autofocus>
+			 <input type="text" name="edit_shelf_detail" id="edit_shelf_detail" class="form-control" value="<?php echo @$getctype_detail->shelf_detail;?>" autofocus required>
 		 </div>
 		 <div class="col-md-6">
 			 <label for="edit_shelf_detail">ชั้น สินค้า</label>
-			 <input type="number" name="edit_shelf_class" id="edit_shelf_class" class="form-control number" value="<?php echo @$getctype_detail->shelf_class;?>">
+			 <input type="number" name="edit_shelf_class" id="edit_shelf_class" class="form-control number" value="<?php echo @$getctype_detail->shelf_class;?>" required>
 		 </div>
 	 </div>
 
                                           <div class="form-group row">
                                             <div class="col-md-6">
+											<!--label for="shelf_status">บรรจุ</label>
+                                              <input type="number" name="edit_shelf_amt" id="edit_shelf_amt" value="<?php echo @$getctype_detail->amt;?>" class="form-control number" require-->
                                               <!--label for="edit_shelf_color">แทบสี</label>
                                               <input type="text" name="edit_shelf_color" id="edit_shelf_color" class="form-control cp1" autocomplete="off" value="<?php echo @$getctype_detail->shelf_color;?>"-->
                                             </div>

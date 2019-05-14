@@ -78,10 +78,9 @@ if(isset($_POST['save_product'])){
           And r.persentrubber = '".addslashes($_POST['persentrubber'])."' ");
         }
         if(mysql_num_rows($getfont) < 1){
-            $getdata->my_sql_insert_New("product_N","ProductID, dealer_code
+            $getdata->my_sql_insert_New("product_N","ProductID
             , Quantity, PriceSale, PriceBuy, TypeID, ProductStatus, shelf_id, hand, discount "
             ," '".addslashes($_POST['ProductID'])."'
-            ,'".addslashes($_POST['dealer_code'])."'
             ,'".addslashes($_POST['Quantity'])."'
             ,'".addslashes($_POST['PriceSale'])."'
             ,'".addslashes($_POST['PriceBuy'])."'
@@ -161,6 +160,7 @@ console.log('<?= $_POST['edit_genWheel']?>');
         And p.PriceBuy = '".addslashes($_POST['edit_PriceBuy'])."'
         And p.dealer_code = '".addslashes($_POST['edit_dealer_code'])."'
         And p.Quantity = '".addslashes($_POST['edit_Quantity'])."'
+        And p.discount = '".addslashes($_POST['edit_discount'])."'
          And w.diameter = '".addslashes($_POST['edit_diameterWheel'])."'
          And w.rim = '".addslashes($_POST['edit_rim'])."'
          And w.holeSize = '".addslashes($_POST['edit_holeSize'])."'
@@ -192,6 +192,7 @@ console.log('<?= $_POST['edit_genWheel']?>');
       And p.PriceBuy = '".addslashes($_POST['edit_PriceBuy'])."'
       And p.dealer_code = '".addslashes($_POST['edit_dealer_code'])."'
       And p.Quantity = '".addslashes($_POST['edit_Quantity'])."'
+      And p.discount = '".addslashes($_POST['edit_discount'])."'
       And r.diameter = '".addslashes($_POST['edit_diameterRubber'])."'
       And r.series = '".addslashes($_POST['edit_series'])."'
       And r.width = '".addslashes($_POST['edit_width'])."'
@@ -208,10 +209,10 @@ console.log('<?= $_POST['edit_genWheel']?>');
     }
     if(mysql_num_rows($getfont) < 1){
         $table = "product_N p ";
-        $Strsql = " p.shelf_id = ".addslashes($_POST['edit_shelf_id']).", p.dealer_code = '".addslashes($_POST['edit_dealer_code'])."' ";
+        $Strsql = " p.shelf_id = ".addslashes($_POST['edit_shelf_id'])." ";
         $Strsql .= " ,p.Quantity=".addslashes($_POST['edit_Quantity'])." , p.PriceSale= ".addslashes($_POST['edit_PriceSale'])." ";
         $Strsql .= " ,p.PriceBuy=".addslashes($_POST['edit_PriceBuy'])." ";
-        $Strsql .= " ,p.hand = '".addslashes($_POST['edit_hand'])."',p.discount = '".addslashes($_POST['discount'])."' ";
+        $Strsql .= " ,p.hand = '".addslashes($_POST['edit_hand'])."',p.discount = '".addslashes($_POST['edit_discount'])."' ";
         if($_POST['gettype'] == '1'){
           $table .= " left join productDetailWheel w on p.ProductID = w.ProductID ";
           $Strsql .= " ,w.diameter = '".addslashes($_POST['edit_diameterWheel'])."' ,w.rim = '".addslashes($_POST['edit_rim'])."' ";
@@ -492,39 +493,36 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                              </div>
                                          </div>
 
-                                         <div class="form-group row">
-                                           <div class="col-md-3">
-                                             <label for="hand">สืินค้ามือ</label>
-                                            <select name="hand" id="hand" class="form-control" required>
-                                                 <option value="1" selected="selected">1</option>
-                                                 <option value="2">2</option>
 
-                                               </select>
-                                           </div>
-                                           <div id="div_persentrubber">
-                                             <div class="col-md-3">
-                                               <label for="hand">เปอร์เซ็นยาง (%)</label>
-                                                    <input type="number" name="persentrubber" id="persentrubber" class="form-control" value="">
-                                             </div>
-                                           </div>
-                                         </div>
 
                                            <div class="form-group row">
-                                            <div class="col-md-6">
-                                            <label for="shelf_id">shelf</label>
-                                              <select name="shelf_id" id="shelf_id" class="form-control" required>
-                                                <option value="" selected="selected">--เลือกชั้นวางสินค้า--</option>
-                                                <?
-                                              while($showshelf = mysql_fetch_object($getshelf)){?>
-                                              <option value="<?php echo @$showshelf->shelf_id;?>"><?php echo @$showshelf->shelf_detail;?> ชั้น <?php echo @$showshelf->shelf_class;?></option>
-                                              <?
-                                               }
-                                             ?>
-                                              </select>
-                                            </div>
+                                             <div class="col-md-3">
+                                               <label for="hand">สืินค้ามือ</label>
+                                              <select name="hand" id="hand" class="form-control" required>
+                                                   <option value="1" selected="selected">1</option>
+                                                   <option value="2">2</option>
+
+                                                 </select>
+                                             </div>
+                                             <div id="div_persentrubber">
+                                               <div class="col-md-3">
+                                                 <label for="hand">เปอร์เซ็นยาง (%)</label>
+                                                      <input type="number" name="persentrubber" id="persentrubber" class="form-control" value="">
+                                               </div>
+                                             </div>
 
                                             <div class="col-md-6">
-                                              <label for="dealer_code">ผู้จำหน่าย</label>
+                                              <label for="shelf_id">shelf</label>
+                                                <select name="shelf_id" id="shelf_id" class="form-control" required>
+                                                  <option value="" selected="selected">--เลือกชั้นวางสินค้า--</option>
+                                                  <?
+                                                while($showshelf = mysql_fetch_object($getshelf)){?>
+                                                <option value="<?php echo @$showshelf->shelf_id;?>"><?php echo @$showshelf->shelf_detail;?> ชั้น <?php echo @$showshelf->shelf_class;?></option>
+                                                <?
+                                                 }
+                                               ?>
+                                                </select>
+                                              <!--label for="dealer_code">ผู้จำหน่าย</label>
                                               <select name="dealer_code" id="dealer_code" class="form-control" required>
                                                 <option value="" selected="selected">--เลือกผู้จำหน่าย--</option>
                                                 <?
@@ -533,7 +531,7 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                                 <?
                                                 }
                                               ?>
-                                                </select>
+                                            </select-->
                                             </div>
                                           </div>
 
@@ -551,6 +549,14 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                                <input type="number" name="Quantity" id="Quantity" class="form-control number" value="0" required style="text-align: right;">
                                              </div>
                                           </div>
+
+                                          <div class="form-group row">
+                                            <div class="col-md-2">
+                                              <label for="PriceSale">ลดราคา (%)</label>
+                                              <input type="number"  name="discount" id="discount" class="form-control number" value="0"  style="text-align: right;">
+                                            </div>
+                                          </div>
+
 
                                            <div class="form-group row">
                                             <div class="col-md-3">
