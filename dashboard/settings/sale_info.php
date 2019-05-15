@@ -99,24 +99,35 @@ if(isset($_POST['tSave'])){
   echo "<script>window.location=\"../dashboard/?p=saleProduct\"</script>";
 
 }else if(isset($_POST['save_item'])){
-/*ขั้นตอนการ save product info*/
- $getProductID = $getdata->my_sql_query("p.ProductID","product_N p
+
+  $getProductID = $getdata->my_sql_query("p.ProductID","product_N p
  left join productDetailWheel w on p.ProductID = w.ProductID
  left join productDetailRubber r on p.ProductID = r.ProductID "
  ," (w.code='".addslashes($_POST['setProductID'])."' or r.code='".addslashes($_POST['setProductID'])."') ");
 
+ $getproduct_info = $getdata->my_sql_query(" p.*,r.*,w.*,p.ProductID as setProductID, p.PriceBuy as PriceBuy "
+ ," product_N p
+    left join productDetailWheel w on p.ProductID = w.ProductID
+    left join productDetailRubber r on p.ProductID = r.ProductID "
+ ," p.ProductID='".$getProductID->ProductID."' ");
 
+  if ($_POST['setdiscount'] > 0 ){// update discount
+    
+    $getdicountTotal = ($getproduct_info->PriceSale * $getproduct_info->discount) / 100;
+    $getprice = $getproduct_info->PriceSale - $getdicountTotal;
+    $gettotal = $getprice * $_POST['product_quantity'];
+
+    $getdata->my_sql_update("reserve_item"
+    ,"item_discountPercent = ".$_POST['setdiscount']." 
+      , "
+    ,"");
+  }else{
+/*ขั้นตอนการ save product info*/
   $reserve_key=md5($_POST['reserve_key'].$getProductID->ProductID.'/'.@RandomString(4,'C',7));
 
   $getdata->my_sql_update("reserve_info"," reserve_status='P' "," reserve_key='".$_POST['reserve_key']."' ");
 
-  $getproduct_info = $getdata->my_sql_query(" p.*,r.*,w.*,p.ProductID as setProductID, p.PriceBuy as PriceBuy "
-  ," product_N p
-     left join productDetailWheel w on p.ProductID = w.ProductID
-     left join productDetailRubber r on p.ProductID = r.ProductID "
-  ," p.ProductID='".$getProductID->ProductID."' ");
-
-//ลดราคา
+ //ลดราคา
   $getdicountTotal = ($getproduct_info->PriceSale * $getproduct_info->discount) / 100;
   $getprice = $getproduct_info->PriceSale - $getdicountTotal;
   $gettotal = $getprice * $_POST['product_quantity'];
@@ -135,10 +146,11 @@ if(isset($_POST['tSave'])){
 
     $getreserve_info = $getdata->my_sql_query(NULL,"reserve_info"," reserve_key='".$_POST['reserve_key']."' ");
     $getreserveCode = $getreserve_info->reserve_code;
-
+ 
   }else{
     $alert = '<div class="alert alert-danger alert-dismissable" id="alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>จำนวนสินค้าไม่พอจำหน่าย กรุณาระบุใหม่อีกครั้ง !</div>';
   }
+}
 
 }else if(isset($_POST['save_itemEvent'])){
 
@@ -333,7 +345,8 @@ while($objShow = mysql_fetch_object($getproduct_info)){
 <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-shopping-cart"></i></span>
   <input class="form-control" placeholder="กรอกรหัสสินค้า เพื่อค้นหา" type="text" name="ProductID" id="ProductID" autocomplete="off">
-  <input class="form-control" type="hidden" name="setProductID" id="setProductID">
+  <input class="form-control" type="text" name="setProductID" id="setProductID">
+  <input class="form-control" type="hidden" name="setdiscount" id="setdiscount">
   <div class="autocomplete" style="width:50%;"></div>
 </div>
 <button type="submit" name="save_item" id="save_item" style="display:none;"></button>
@@ -385,7 +398,7 @@ while($objShow = mysql_fetch_object($getproduct_info)){
         <td class="right"><label class="g-input"><div><input type="text" class="form-control right" readonly="true" size="5" value="<?= @$objShow->item_amt?>" class="price"></div></label></td>
         <td class=""><label class="g-input"><div><input type="text" class="form-control" size="5" readonly="true" value="<?= $gettype?>" class="price"></div></label></td>
         <td class="right"><label class="g-input"><div><input type="text" class="form-control right" readonly="true" size="5" value="<?= convertPoint2($objShow->item_price,2)?>" class="price"></div></label></td>
-        <td class="right"><label class="g-input"><span class="g-input"><div class="input-group"><input type="number" class="form-control right" size="5" value="<?=$objShow->discount?>"class="price" ><span class="input-group-addon">%</span></div></span></label></td>
+        <td class="right"><label class="g-input"><span class="g-input"><div class="input-group"><input type="number" class="form-control right" size="5" value="0" onblur="discount('<?php echo @$objShow->item_key;?>',this.value)" class="price" ><span class="input-group-addon">%</span></div></span></label></td>
         <td class="right"><label class="g-input"><div></div></label></td>
         <td class="right"><label class="g-input"><div><input type="text" class="form-control right" size="5" value="<?= convertPoint2($objShow->item_total,2)?>" class="price"></div></label></td>
         <td style="text-align: center;"><a onClick="javascript:deleteItem('<?php echo @$objShow->item_key;?>');" class="btn btn-xs btn-danger" style="color:#FFF;" title="ลบ"><i class="fa fa-times"></i> <?php echo @LA_BTN_DELETE;?></a></td>
@@ -486,7 +499,7 @@ $(document).ready(function(){
                var str = ui.item.value;
                $('#setProductID').val(str);
                $('#save_item').click();
-              }
+               }
     });
 
     $("#ispack").change(function() {
@@ -563,10 +576,11 @@ console.log("dataString ::"+dataString);
         });
 })
 
-function chkdiscount(isvalue,price){
-  if(price > 0){
-      console.log(":::"+(price * isvalue)/100)
-  }
+function discount(id,price){
+  console.log(id);
+  console.log(price);
+  $('#setdiscount').val(price);
+  $('#save_item').click();
 }
 
 </script>
