@@ -33,7 +33,10 @@ $getctype_detail =$getdata->my_sql_query(NULL,"WidthRubble","id='".addslashes($_
 																					<div class="form-group row">
 																						<div class="col-md-6">
 																								<label for="edit_shelf_detail">รายละเอียด</label>
-																								<input type="text" name="edit_shelf_detail" id="edit_shelf_detail" class="form-control" value="<?php echo @$getctype_detail->Description;?>" autofocus>
+																								<input type="number" name="edit_shelf_detail" id="edit_shelf_detail"
+																								oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+																								maxlength="3"
+																								class="form-control" value="<?php echo @$getctype_detail->Description;?>" autofocus>
                                               </div>
                                             </div>
 																							<!--div class="form-group row">

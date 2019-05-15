@@ -137,6 +137,24 @@ body{
 			<td>พนักงาน : <?php echo @$getmember_info->name;?> <?php echo @$getmember_info->lastname;?></td>
 			<td align="right"></td>
 		</tr>
+		<?if(@$card_detail->name != "" && @$card_detail->lname){?>
+		<tr>
+			<td>ชื่อลูกค้า : <?php echo @$card_detail->name;?> <?php echo @$card_detail->lname;?></td>
+			<td align="right"></td>
+		</tr>
+<?	} ?>
+<?if(@$card_detail->company != ""){?>
+<tr>
+	<td>บริษัทลูกค้า : <?php echo @$card_detail->company;?></td>
+	<td align="right"></td>
+</tr>
+<?	} ?>
+<?if(@$card_detail->address != ""){?>
+<tr>
+	<td>ที่อยู่ลูกค้า : <?php echo @$card_detail->address;?></td>
+	<td align="right"></td>
+</tr>
+<?	} ?>
     <tr>
 			<td></td>
 			<td align="right"></td>

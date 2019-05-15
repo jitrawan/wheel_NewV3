@@ -69,7 +69,7 @@ $getitem = mysql_fetch_object($getedit);
 																					 	</div>
 																					 <div class="form-group row">
 	                                               <div class="col-md-2 pr-2">
-	                                               <label for="edit_diameterWheel">ขอบ</label>
+	                                               <label for="edit_diameterWheel">ขอบ(lnch)</label>
 	                                                 <select name="edit_diameterWheel" id="edit_diameterWheel" class="form-control">
 	                                                   <option value="" selected="selected">--เลือก--</option>
 																										 <? $getDiameterWhee = $getdata->my_sql_select(NULL,"DiameterWhee","status = '1' ORDER BY id ");
@@ -79,7 +79,7 @@ $getitem = mysql_fetch_object($getedit);
 	                                                 </select>
 	                                               </div>
 	                                               <div class="col-md-2 pr-2 pl-2">
-	                                               <label for="edit_rim">ขนาด</label>
+	                                               <label for="edit_rim">ขนาด(lnch)</label>
 	                                               <select name="edit_rim" id="edit_rim" class="form-control">
 	                                                   <option value="" selected="selected">--เลือก--</option>
 																										 <? $getRimWheel = $getdata->my_sql_select(NULL,"RimWheel","status = '1' ORDER BY id ");
@@ -132,7 +132,7 @@ $getitem = mysql_fetch_object($getedit);
 																									 </select>
 																								 </div>
 	                                                   <div class="col-md-2 pr-2">
-	                                                     <label for="edit_offset">offset</label>
+	                                                     <label for="edit_offset">offset(mm)</label>
 	                                                       <!--input type="text" name="edit_offset" id="edit_offset" class="form-control" value="<?php echo @$getitem->offset;?>" -->
 																												 <select name="edit_offset" id="edit_offset" class="form-control">
 																													 <option value="" selected="selected">--เลือก--</option>
@@ -166,7 +166,7 @@ $getitem = mysql_fetch_object($getedit);
 																							</div>
 																						<div class="form-group row">
 																							<div class="col-md-2 pr-2">
-																							<label for="edit_width">ความกว้าง</label>
+																							<label for="edit_width">ความกว้าง(mm)</label>
 																								<select name="edit_width" id="edit_width" class="form-control">
 																									<option value="" selected="selected">--เลือก--</option>
 																									<? $getWidthRubble = $getdata->my_sql_select(NULL,"WidthRubble","status = '1' ORDER BY id ");
@@ -176,7 +176,7 @@ $getitem = mysql_fetch_object($getedit);
 																								</select>
 																							</div>
 	                                               <div class="col-md-3 pr-2 pl-2">
-	                                               <label for="edit_series">ซี่รี่</label>
+	                                               <label for="edit_series">ซี่รี่(%)</label>
 	                                               <select name="edit_series" id="edit_series" class="form-control">
 	                                                   <option value="" selected="selected">--เลือก--</option>
 																										 <? $getSeriesRubble = $getdata->my_sql_select(NULL,"SeriesRubble","status = '1' ORDER BY id ");
@@ -187,7 +187,7 @@ $getitem = mysql_fetch_object($getedit);
 	                                               </div>
 
 																								 <div class="col-md-3 pr-2  pl-2">
-	                                               <label for="edit_diameterRubber">ขนาด</label>
+	                                               <label for="edit_diameterRubber">ขนาด(lnch)</label>
 	                                                <select name="edit_diameterRubber" id="edit_diameterRubber" class="form-control">
 	                                                   <option value="" selected="selected">--เลือก--</option>
 																										 <? $getDiameterRubble = $getdata->my_sql_select(NULL,"DiameterRubble","status = '1' ORDER BY id ");
@@ -228,7 +228,7 @@ $getitem = mysql_fetch_object($getedit);
 																										</select>
 	                                              </div>
 	                                              <div class="col-md-2 pr-2 pl-2">
-	                                                <label for="code">ปีที่ผลิต</label>
+	                                                <label for="code">ปีที่ผลิต(Ex.2019)</label>
 	                                                <input type="number" name="edit_productionYear" id="edit_productionYear" class="form-control" value="<?= $getitem->productionYear?>" >
 	                                             </div>
 	                                             <div class="col-md-3 pr-2 pl-2">
@@ -239,7 +239,7 @@ $getitem = mysql_fetch_object($getedit);
 	                                             </div>
 	                                             <div class="form-group row">
 	                                               <div class="col-md-4 pr-2">
-	                                                  <label for="code">ดัชนีความเร็ว</label>
+	                                                  <label for="code">ดัชนีความเร็ว(Km/h)</label>
 	                                                  <select name="edit_speedIndex" id="edit_speedIndex" class="form-control">
 	                                                    <option value="" selected="selected">--เลือก--</option>
 	                                                    <?
@@ -254,7 +254,7 @@ $getitem = mysql_fetch_object($getedit);
 	                                                  </select>
 																								 </div>
 	                                               <div class="col-md-4 pr-2 pl-2">
-	                                                 <label for="code">ดัชนีรับน้ำหนัก</label>
+	                                                 <label for="code">ดัชนีรับน้ำหนัก(Kg)</label>
 	                                                 <select name="edit_weightIndex" id="edit_weightIndex" class="form-control">
 																								 		 <option value="" selected="selected">--เลือก--</option>
 																								 		 <? $i = 1;

@@ -303,7 +303,7 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                           </div>
                                         <div class="form-group row">
                                               <div class="col-md-2" style="padding-right: 2px;">
-                                              <label for="diameterWheel">ขอบ</label>
+                                              <label for="diameterWheel">ขอบ(lnch)</label>
                                                 <select name="diameterWheel" id="diameterWheel" class="form-control cw" required>
                                                   <option value="" selected="selected">--เลือก--</option>
                                                   <? $getDiameterWhee = $getdata->my_sql_select(NULL,"DiameterWhee","status = '1' ORDER BY id ");
@@ -313,7 +313,7 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                                 </select>
                                               </div>
                                               <div class="col-md-2" style="padding-left: 2px; padding-right: 2px;">
-                                              <label for="rim">ขนาด</label>
+                                              <label for="rim">ขนาด(lnch)</label>
                                               <select name="rim" id="rim" class="form-control cw" required>
                                                   <option value="" selected="selected">--เลือก--</option>
 
@@ -359,7 +359,7 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                                 </select>
                                               </div>
                                                   <div class="col-md-2 pr-2">
-                                                    <label for="brandWheel">offset</label>
+                                                    <label for="brandWheel">offset(mm)</label>
                                                     <select name="offset" id="offset" class="form-control cw" required>
                                                       <option value="" selected="selected">--เลือก--</option>
                                                       <? $getoffset = $getdata->my_sql_select(NULL,"offset","Description IS NOT NULL order by Description ");
@@ -393,7 +393,7 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                            </div>
                                          <div class="form-group row">
                                            <div class="col-md-2 pr-2">
-                                           <label for="width">ความกว้าง</label>
+                                           <label for="width">ความกว้าง(mm)</label>
                                              <select name="width" id="width" class="form-control cb" required>
                                                <option value="" selected="selected">--เลือก--</option>
                                                <? $getWidthRubble = $getdata->my_sql_select(NULL,"WidthRubble","status = '1' ORDER BY id ");
@@ -403,14 +403,14 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                              </select>
                                            </div>
                                               <div class="col-md-3 pr-2 pl-2">
-                                              <label for="series">ซี่รี่</label>
+                                              <label for="series">ซี่รี(%)</label>
                                               <select name="series" id="series" class="form-control cb" required>
                                                   <option value="" selected="selected">--เลือก--</option>
 
                                                 </select>
                                               </div>
                                               <div class="col-md-3 pr-2 pl-2">
-                                              <label for="diameterRubber">ขนาด</label>
+                                              <label for="diameterRubber">ขนาด(lnch)</label>
                                                <select name="diameterRubber" id="diameterRubber" class="form-control cb" required>
                                                   <option value="" selected="selected">--เลือก--</option>
 
@@ -448,8 +448,11 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                                  </select>
                                              </div>
                                              <div class="col-md-2 pr-2 pl-2">
-                                               <label for="code">ปีที่ผลิต</label>
-                                               <input type="number" name="productionYear" id="productionYear" class="form-control cb" value="" required>
+                                               <label for="code">ปีที่ผลิต(Ex.2019)</label>
+                                               <input type="number" name="productionYear" id="productionYear"
+                                               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                               maxlength="4"
+                                               class="form-control cb" value="" required>
                                             </div>
                                             <div class="col-md-3 pr-2 pl-2">
                                               <label for="code">รุ่นยาง</label>
@@ -459,7 +462,7 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                             </div>
                                             <div class="form-group row">
                                               <div class="col-md-4 pr-2">
-                                                 <label for="code">ดัชนีความเร็ว</label>
+                                                 <label for="code">ดัชนีความเร็ว(Km/h)</label>
                                                   <select name="speedIndex" id="speedIndex" class="form-control cb" required>
                                                     <option value="" selected="selected">--เลือก--</option>
                                                     <?
@@ -474,7 +477,7 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                                   </select>
                                               </div>
                                               <div class="col-md-4 pr-2 pl-2">
-                                                <label for="code">ดัชนีรับน้ำหนัก</label>
+                                                <label for="code">ดัชนีรับน้ำหนัก(Kg)</label>
                                                 <select name="weightIndex" id="weightIndex" class="form-control cb" required>
                                                    <option value="" selected="selected">--เลือก--</option>
                                                    <? $i = 1;

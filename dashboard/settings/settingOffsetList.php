@@ -40,7 +40,10 @@ if(isset($_POST['save_card'])){
 
                                           <div class="form-group">
                                             <label for="shelf_detail">รายละเอียด</label>
-                                            <input type="text" name="shelf_detail" id="shelf_detail" class="form-control" autofocus>
+                                            <input type="number" name="shelf_detail" id="shelf_detail" class="form-control"
+                                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                            maxlength="3" 
+                                            autofocus>
                                           </div>
 
 

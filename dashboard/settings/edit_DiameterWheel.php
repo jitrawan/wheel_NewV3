@@ -28,7 +28,10 @@ $getctype_detail =$getdata->my_sql_query(NULL,"DiameterWhee","id='".addslashes($
  <div class="form-group">
                                             <label for="edit_shelf_detail">รายละเอียด</label>
                                             <input type="hidden" name="edit_shelf_id" id="edit_shelf_id" class="form-control" value="<?php echo @$getctype_detail->id;?>">
-                                            <input type="text" name="edit_shelf_detail" id="edit_shelf_detail" class="form-control" value="<?php echo @$getctype_detail->Description;?>" autofocus>
+                                            <input type="number" name="edit_shelf_detail" id="edit_shelf_detail" class="form-control"
+																						oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                            maxlength="2"
+																						value="<?php echo @$getctype_detail->Description;?>" autofocus>
                                           </div>
 
                                           <div class="form-group row">
