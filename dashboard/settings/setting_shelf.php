@@ -16,7 +16,7 @@ if(isset($_POST['save_card'])){
     $getShelf = $getdata->my_sql_select(NULL,"shelf"," shelf_detail ='".addslashes($_POST['shelf_detail'])."' and shelf_class = '".addslashes($_POST['shelf_class'])."'  ");
 
 if(mysql_num_rows($getShelf) < 1){
-        $getdata->my_sql_insert_New("shelf","shelf_code, shelf_detail, shelf_class, shelf_status, amt","'".addslashes($_POST['shelf_code'])."' ,'".addslashes($_POST['shelf_detail'])."' , '".addslashes($_POST['shelf_class'])."'  ,'".addslashes($_POST['shelf_status'])."',".$_POST['shelf_amt']." ");
+        $getdata->my_sql_insert_New("shelf","shelf_code, shelf_detail, shelf_class, shelf_status ","'".addslashes($_POST['shelf_code'])."' ,'".addslashes($_POST['shelf_detail'])."' , '".addslashes($_POST['shelf_class'])."'  ,'".addslashes($_POST['shelf_status'])."' ");
     		$alert = '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'.LA_ALERT_ADD_NEW_TYPE_OF_IS_DONE.'</div>';
     }else{
       $alert = '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>ข้อมูลซ้ำ</div>';
@@ -29,7 +29,7 @@ if(isset($_POST['save_edit_card'])){
 		 if(addslashes($_POST['edit_shelf_detail'])!= NULL){
        $getShelf = $getdata->my_sql_select(NULL,"shelf","shelf_detail ='".addslashes($_POST['edit_shelf_detail'])."' and shelf_class = '".addslashes($_POST['edit_shelf_class'])."' and amt = ".$_POST['edit_shelf_amt']." ");
        if(mysql_num_rows($getShelf) < 1){
-    			 $getdata->my_sql_update("shelf","shelf_detail='".addslashes($_POST['edit_shelf_detail'])."', shelf_class = '".addslashes($_POST['edit_shelf_class'])."', amt = ".$_POST['edit_shelf_amt']." ","shelf_id='".addslashes($_POST['edit_shelf_id'])."'");
+    			 $getdata->my_sql_update("shelf","shelf_detail='".addslashes($_POST['edit_shelf_detail'])."', shelf_class = '".addslashes($_POST['edit_shelf_class'])."' ","shelf_id='".addslashes($_POST['edit_shelf_id'])."'");
     			$alert = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'.LA_ALERT_UPDATE_DATA_DONE.'</div>';
         }else{
           $alert = '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>ข้อมูลซ้ำ</div>';
