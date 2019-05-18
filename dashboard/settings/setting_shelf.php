@@ -39,6 +39,23 @@ if(isset($_POST['save_edit_card'])){
 		 }
 	 }
 ?>
+<!-- Modal detail shelf -->
+<div class="modal fade" id="detailShelf" tabindex="-1" role="dialog" aria-labelledby="memberModalLabel" aria-hidden="true">
+    <form id="form2" name="form2" method="post">
+     <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php echo @LA_BTN_CLOSE;?></span></button>
+                    <h4 class="modal-title" id="memberModalLabel">รายการสินค้าในshelf</h4>
+                </div>
+                <div class="ct">
+
+                </div>
+            </div>
+        </div>
+  </form>
+</div>
+
 <!-- Modal Edit -->
 <div class="modal fade" id="edit_card_type" tabindex="-1" role="dialog" aria-labelledby="memberModalLabel" aria-hidden="true">
     <form id="form2" name="form2" method="post">
@@ -89,10 +106,10 @@ if(isset($_POST['save_edit_card'])){
                                           </div>
 
                                           <div class="form-group row">
-                                          <!--div class="col-md-6">
+                                          <div class="col-md-6">
                                               <label for="shelf_status">บรรจุ</label>
                                               <input type="number" name="shelf_amt" id="shelf_amt" class="form-control number" require>
-                                            </div-->
+                                            </div>
                                             <div class="col-md-6">
                                               <label for="shelf_status"><?php echo @LA_LB_STATUS;?></label>
                                                <select name="shelf_status" id="shelf_status" class="form-control">
@@ -133,14 +150,17 @@ if(isset($_POST['save_edit_card'])){
     <th width="3%" bgcolor="#5fb760">#</th>
     <th width="10%" bgcolor="#5fb760">รหัส shelf </th>
     <th width="44%" bgcolor="#5fb760">รายละเอียด shelf </th>
-    <!--th width="20%" bgcolor="#5fb760">บรรจุ </th-->
+    <th width="20%" bgcolor="#5fb760">บรรจุ </th>
     <th width="23%" bgcolor="#5fb760"><?php echo @LA_LB_MANAGE;?></th>
   </tr>
   </thead>
   <tbody>
   <?php
   $x=0;
-  $getcat = $getdata->my_sql_select(NULL,"shelf","shelf_status in ('1','0') ORDER BY shelf_code,shelf_detail, shelf_class ");
+  $getcat = $getdata->my_sql_select("s.shelf_code,s.*
+  ,(select sum(d.amt_rimit) FROM shelf_detail d where d.shelf_code = s.shelf_code) as useAmt "
+  ,"shelf s"
+  ,"s.shelf_status in ('1','0') ORDER BY s.shelf_code, s.shelf_detail, s.shelf_class ");
   while($showcat = mysql_fetch_object($getcat)){
 	  $x++;
   ?>
@@ -148,7 +168,7 @@ if(isset($_POST['save_edit_card'])){
     <td align="center"><?php echo @$x;?></td>
     <td>&nbsp;<?php echo @$showcat->shelf_code;?> </td>
     <td>&nbsp;<?php echo @$showcat->shelf_detail;?> &nbsp; ชั้น &nbsp;<?php echo @$showcat->shelf_class;?></td>
-    <!--td align="right">&nbsp;<?php echo @$showcat->amt;?> &nbsp; ชิ้น</td-->
+    <td align="right"><a data-toggle="modal" data-target="#detailShelf" data-whatever="<?php echo @$showcat->shelf_code;?>"><?php if(@$showcat->useAmt > 0){echo @$showcat->useAmt;}else{echo 0;}  ;?>/<?php echo @$showcat->amt;?> &nbsp; ชิ้น</a></td>
     <td align="center" valign="middle">
       <?php
 	  if($showcat->shelf_status == '1'){
@@ -269,6 +289,27 @@ function changecatStatus(catkey,lang){
             $.ajax({
                 type: "GET",
                 url: "settings/edit_shelf.php",
+                data: dataString,
+                cache: false,
+                success: function (data) {
+                   // console.log(data);
+                    modal.find('.ct').html(data);
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+    })
+
+     $('#detailShelf').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var recipient = button.data('whatever') // Extract info from data-* attributes
+          var modal = $(this);
+          var dataString = 'key=' + recipient;
+
+            $.ajax({
+                type: "GET",
+                url: "settings/detailShelf.php",
                 data: dataString,
                 cache: false,
                 success: function (data) {

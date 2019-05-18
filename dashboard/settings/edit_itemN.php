@@ -290,8 +290,12 @@ $getitem = mysql_fetch_object($getedit);
   	                                                     <input type="number" name="edit_persentrubber" id="edit_persentrubber" class="form-control" value="">
   	                                              </div>
   	                                            </div>
-
-																								<div class="col-md-6">
+																										 
+																								<div class="col-md-4">
+	                                               <label for="edit_PriceSale">ราคาขาย (บาท)</label>
+	                                               <input type="number" name="edit_PriceSale" id="edit_PriceSale" class="form-control number" value="<?php echo @$getitem->PriceSale;?>" onblur="chkprice_edit(this.value)" style="text-align: right;">
+	                                             </div>
+																								<!--div class="col-md-6">
 																									<label for="edit_shelf_id">shelf</label>
 																										<select name="edit_shelf_id" id="edit_shelf_id" class="form-control">
 																											<option value="" selected="selected">--เลือกชั้นวางสินค้า--</option>
@@ -301,7 +305,7 @@ $getitem = mysql_fetch_object($getedit);
 																										<?
 																										 }
 																									 ?>
-																										</select>
+																										</select-->
  	                                               <!--label for="edit_dealer_code">ผู้จำหน่าย</label>
  	                                               <select name="edit_dealer_code" id="edit_dealer_code" class="form-control">
  	                                                 <option value="" selected="selected">--เลือกผู้จำหน่าย--</option>
@@ -312,31 +316,28 @@ $getitem = mysql_fetch_object($getedit);
  	                                                 }
  	                                               ?>
 																							 </select-->
- 	                                             </div>
+ 	                                             <!--/div-->
 	                                           </div>
 
 	                                         <div class="form-group row">
-	                                             <div class="col-md-4">
-	                                               <label for="edit_PriceSale">ราคาขาย (บาท)</label>
-	                                               <input type="number" name="edit_PriceSale" id="edit_PriceSale" class="form-control number" value="<?php echo @$getitem->PriceSale;?>" onblur="chkprice_edit(this.value)" style="text-align: right;">
-	                                             </div>
-	                                              <div class="col-md-4">
+	                                           
+	                                              <!--div class="col-md-4">
 	                                              <label for="edit_PriceBuy">ราคาซื้อ (บาท)</label>
 	                                             <input type="number" name="edit_PriceBuy" id="edit_PriceBuy" class="form-control number" value="<?php echo @$getitem->PriceBuy;?>" onblur="chkprice_edit(this.value)" style="text-align: right;">
-	                                              </div>
-																								<div class="col-md-3">
+	                                              </div-->
+																								<!--div class="col-md-3">
 																									<label for="edit_Quantity">คงเหลือ (ชิ้น)</label>
 																									<input type="number" name="edit_Quantity" id="edit_Quantity" class="form-control number" value="<?php echo @$getitem->Quantity;?>" style="text-align: right;">
-																								</div>
+																								</div-->
 	                                           </div>
-																			<div class="form-group row">
+																			<!--div class="form-group row">
 																				<div class="col-md-2">
                                               <label for="PriceSale">ลดราคา (%)</label>
                                               <input type="number"  name="edit_discount" id="edit_discount" class="form-control number" value="<?php echo @$getitem->discount;?>"  style="text-align: right;">
                                             </div>
                                           </div>
 
-                                        </div>
+                                        </div-->
                                          <div class="modal-footer">
                                             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times fa-fw"></i><?php echo @LA_BTN_CLOSE;?></button>
                                           <button type="submit" name="save_edit_item" id="save_edit_item" class="btn btn-primary btn-sm"><i class="fa fa-save fa-fw"></i><?php echo @LA_BTN_SAVE;?></button>
@@ -585,7 +586,7 @@ $getitem = mysql_fetch_object($getedit);
 							$('input:radio[name="edit_type"]').attr('disabled', true);
 					    $edit_type.filter('[value=<?echo @$getitem->TypeID;?>]').prop('checked', true);
            //$('#edit_dealer_code').val('<?php echo @$getitem->dealer_code;?>');
-					 $('#edit_shelf_id').val('<?php echo @$getitem->shelf_id;?>');
+					// $('#edit_shelf_id').val('<?php echo @$getitem->shelf_id;?>');
 					 $('#edit_hand').val('<?php echo @$getitem->hand;?>');
 
 

@@ -256,11 +256,11 @@ $getpo = $getdata->my_sql_query(NULL,"stock_tb_receive_master","po='".$_GET['d']
                               </div>
                             </div>
 
-                            <!--div class="form-group row ">
+                            <div class="form-group row ">
                                 <div id="shelfDiv" class="col-xs-4 cssshelf cssfalse">
-                                  <button type="button" id="Manshelf" name="Manshelf" onclick=" window.location='../dashboard/index.php?p=addShelf&ProductID='+'<?php echo @$getproduct->code;?>'+'&PO='+'<?php echo @$getpo->po;?>'+'&Amt='+ $('#total').val() " style="width: 200px;" class="btn btn-info"><i class="fa fa-plus-square"></i> จัดการ Shelf</button><i class="fa fa-check-circle fa-fw icontrue" style="display:none; font-size:36px; color:green;"></i>  <i  class="icontrue" style="display:none; font-size:16px; color:green;"> จัดการshelfเรียบร้อย</i>
+                                  <button type="button" id="Manshelf" name="Manshelf" onclick="manshelf('<?php echo @$getproduct->code;?>')" style="width: 200px;" class="btn btn-info"><i class="fa fa-plus-square"></i> จัดการ Shelf</button><i class="fa fa-check-circle fa-fw icontrue" style="display:none; font-size:36px; color:green;"></i>  <i  class="icontrue" style="display:none; font-size:16px; color:green;"> จัดการshelfเรียบร้อย</i>
                                  </div>
-                            </div-->
+                            </div>
 
                           <div class="form-group row">
                               <div class="col-xs-3">
@@ -400,6 +400,15 @@ if (r == true) {
 
 function setchekc_total(Isvalue){
   $('#chekc_total').val(Isvalue);
+}
+
+function manshelf(code){
+  if($('#total').val() > 0){
+    window.location='../dashboard/index.php?p=addShelf&ProductID='+code+'&PO='+'<?php echo @$getpo->po;?>'+'&Amt='+ $('#total').val()
+  }else{
+    alert("กรุณากรอกจำนวน !");
+  }
+ 
 }
 
 </script>

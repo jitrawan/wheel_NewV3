@@ -79,16 +79,12 @@ if(isset($_POST['save_product'])){
         }
         if(mysql_num_rows($getfont) < 1){
             $getdata->my_sql_insert_New("product_N","ProductID
-            , Quantity, PriceSale, PriceBuy, TypeID, ProductStatus, shelf_id, hand, discount "
+            , PriceSale, TypeID, ProductStatus, hand "
             ," '".addslashes($_POST['ProductID'])."'
-            ,'".addslashes($_POST['Quantity'])."'
             ,'".addslashes($_POST['PriceSale'])."'
-            ,'".addslashes($_POST['PriceBuy'])."'
             ,'".addslashes($_POST['type'])."'
             ,'".addslashes($_POST['pro_status'])."'
-            ,'".addslashes($_POST['shelf_id'])."'
-            , '".addslashes($_POST['hand'])."'
-            , '".addslashes($_POST['discount'])."' ");
+           , '".addslashes($_POST['hand'])."' ");
 
             if($_POST['type'] == '1'){
             $getdata->my_sql_insert_New("productDetailWheel","code, ProductID, diameter, rim, holeSize, typeFormat, brand, offset, color, gen "
@@ -157,11 +153,8 @@ console.log('<?= $_POST['edit_genWheel']?>');
         left join productdetailrubber r on p.ProductID = r.ProductID "
         ,"Where p.TypeID = '1' And p.hand = '".addslashes($_POST['edit_hand'])."'
         And p.PriceSale = '".addslashes($_POST['edit_PriceSale'])."'
-        And p.PriceBuy = '".addslashes($_POST['edit_PriceBuy'])."'
         And p.dealer_code = '".addslashes($_POST['edit_dealer_code'])."'
-        And p.Quantity = '".addslashes($_POST['edit_Quantity'])."'
-        And p.discount = '".addslashes($_POST['edit_discount'])."'
-         And w.diameter = '".addslashes($_POST['edit_diameterWheel'])."'
+        And w.diameter = '".addslashes($_POST['edit_diameterWheel'])."'
          And w.rim = '".addslashes($_POST['edit_rim'])."'
          And w.holeSize = '".addslashes($_POST['edit_holeSize'])."'
          And w.typeFormat = '".addslashes($_POST['edit_typeFormat'])."'
@@ -188,11 +181,8 @@ console.log('<?= $_POST['edit_genWheel']?>');
       ,"productDetailWheel w on p.ProductID = w.ProductID
       left join productdetailrubber r on p.ProductID = r.ProductID "
       ,"Where p.TypeID = '2' And p.hand = '".addslashes($_POST['edit_hand'])."'
-      And p.PriceSale = '".addslashes($_POST['edit_PriceSale'])."'
       And p.PriceBuy = '".addslashes($_POST['edit_PriceBuy'])."'
       And p.dealer_code = '".addslashes($_POST['edit_dealer_code'])."'
-      And p.Quantity = '".addslashes($_POST['edit_Quantity'])."'
-      And p.discount = '".addslashes($_POST['edit_discount'])."'
       And r.diameter = '".addslashes($_POST['edit_diameterRubber'])."'
       And r.series = '".addslashes($_POST['edit_series'])."'
       And r.width = '".addslashes($_POST['edit_width'])."'
@@ -209,10 +199,8 @@ console.log('<?= $_POST['edit_genWheel']?>');
     }
     if(mysql_num_rows($getfont) < 1){
         $table = "product_N p ";
-        $Strsql = " p.shelf_id = ".addslashes($_POST['edit_shelf_id'])." ";
-        $Strsql .= " ,p.Quantity=".addslashes($_POST['edit_Quantity'])." , p.PriceSale= ".addslashes($_POST['edit_PriceSale'])." ";
-        $Strsql .= " ,p.PriceBuy=".addslashes($_POST['edit_PriceBuy'])." ";
-        $Strsql .= " ,p.hand = '".addslashes($_POST['edit_hand'])."',p.discount = '".addslashes($_POST['edit_discount'])."' ";
+         $Strsql .= " , p.PriceSale= ".addslashes($_POST['edit_PriceSale'])." ";
+        $Strsql .= " ,p.hand = '".addslashes($_POST['edit_hand'])."' ";
         if($_POST['gettype'] == '1'){
           $table .= " left join productDetailWheel w on p.ProductID = w.ProductID ";
           $Strsql .= " ,w.diameter = '".addslashes($_POST['edit_diameterWheel'])."' ,w.rim = '".addslashes($_POST['edit_rim'])."' ";
@@ -512,10 +500,15 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                                  <label for="hand">เปอร์เซ็นยาง (%)</label>
                                                       <input type="number" name="persentrubber" id="persentrubber" class="form-control" value="">
                                                </div>
+                                               
                                              </div>
+                                             <div class="col-md-4">
+                                              <label for="PriceSale">ราคาขาย (บาท)</label>
+                                              <input type="number"  name="PriceSale" id="PriceSale" class="form-control number" value="0" onblur="chkprice(this.value)" required style="text-align: right;">
+                                            </div>
 
-                                            <div class="col-md-6">
-                                              <label for="shelf_id">shelf</label>
+                                            <!--div class="col-md-6"-->
+                                              <!--label for="shelf_id">shelf</label>
                                                 <select name="shelf_id" id="shelf_id" class="form-control" required>
                                                   <option value="" selected="selected">--เลือกชั้นวางสินค้า--</option>
                                                   <?
@@ -524,7 +517,7 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                                 <?
                                                  }
                                                ?>
-                                                </select>
+                                                </select-->
                                               <!--label for="dealer_code">ผู้จำหน่าย</label>
                                               <select name="dealer_code" id="dealer_code" class="form-control" required>
                                                 <option value="" selected="selected">--เลือกผู้จำหน่าย--</option>
@@ -535,30 +528,27 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                                 }
                                               ?>
                                             </select-->
-                                            </div>
+                                            <!--/div-->
                                           </div>
 
                                         <div class="form-group row">
-                                            <div class="col-md-4">
-                                              <label for="PriceSale">ราคาขาย (บาท)</label>
-                                              <input type="number"  name="PriceSale" id="PriceSale" class="form-control number" value="0" onblur="chkprice(this.value)" required style="text-align: right;">
-                                            </div>
-                                             <div class="col-md-4">
+                                            
+                                             <!--div class="col-md-4">
                                              <label for="PriceBuy">ราคาซื้อ (บาท)</label>
                                             <input type="number" name="PriceBuy" id="PriceBuy" class="form-control number" value="0" onblur="chkprice(this.value)" required style="text-align: right;">
-                                             </div>
-                                             <div class="col-md-3">
+                                             </div-->
+                                             <!--div class="col-md-3">
                                                <label for="Quantity">คงเหลือ (ชิ้น)</label>
                                                <input type="number" name="Quantity" id="Quantity" class="form-control number" value="0" required style="text-align: right;">
-                                             </div>
+                                             </div-->
                                           </div>
 
-                                          <div class="form-group row">
+                                          <!--div class="form-group row">
                                             <div class="col-md-2">
                                               <label for="PriceSale">ลดราคา (%)</label>
                                               <input type="number"  name="discount" id="discount" class="form-control number" value="0"  style="text-align: right;">
                                             </div>
-                                          </div>
+                                          </div-->
 
 
                                            <div class="form-group row">
@@ -1251,7 +1241,7 @@ function changeproductsStatus(prokey,lang){
     })
 
     function chkprice(price){
-      var sale = $('#PriceSale').val();
+      /*var sale = $('#PriceSale').val();
       var Buy = $('#PriceBuy').val();
       if(sale > 0){
         if(Buy > sale){
@@ -1262,7 +1252,7 @@ function changeproductsStatus(prokey,lang){
             $('#PriceBuy').val("");
           }
         }
-      }
+      }*/
     }
 
 

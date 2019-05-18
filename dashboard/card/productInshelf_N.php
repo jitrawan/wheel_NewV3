@@ -451,12 +451,13 @@ if(isset($_POST['save_new_status'])){
        <table width="100%" border="0" class="table table-bordered">
        <thead>
      <tr style="font-weight:bold; color:#FFF; text-align:center; background:#ff7709;">
-       <td width="12%">รหัสสินค้า</td>
-       <td width="10%">shelf</td>
-       <td width="26%">ผู้จำหน่าย</td>
-       <td width="26%">รายละเอียด</td>
-       <td width="10%">คงเหลือ</td>
-       <td width="10%">ราคา</td>
+      <td width="10%">shelf</td>
+       <td width="5%">รหัสสินค้า</td>
+      <!--td width="26%">ผู้จำหน่าย</td-->
+       <td width="40%">รายละเอียด</td>
+       <td width="5%">คงเหลือ</td>
+       <td width="5%">ราคาต้นทุน</td>
+       <td width="5%">ราคาขาย</td>
      </tr>
      </thead>
        <tbody>
@@ -465,20 +466,22 @@ if(isset($_POST['save_new_status'])){
          $x++;
 
          if($showproduct->TypeID == '1'){
-           $gettype = "ล้อแม๊ก ".$showproduct->BrandName." รุ่น:".$showproduct->gen." ขนาด:".$showproduct->diameterWheel." ขอบ:".$showproduct->whediameter." รู:".$showproduct->holeSize." ประเภท:".$showproduct->typeFormat;
+           $gettype = "ล้อแม๊ก ".$showproduct->BrandName." รุ่น:".$showproduct->gen." ขนาด:".$showproduct->diameterWheel." ขอบ:".$showproduct->whediameter." รู:".$showproduct->holeSize." ประเภท:".$showproduct->typeFormat." <br>ยี่ห้อ:".$showproduct->BrandName." offset:".$showproduct->offset." สี: ".$showproduct->color." รุ่น: ".$showproduct->gen ;
          }else if($showproduct->TypeID == '2'){
-           $gettype = "ยาง ".$showproduct->BrandName." ขนาด:".$showproduct->diameterRubber." ขอบ:".$showproduct->rubdiameter." ซี่รี่:".$showproduct->series." ความกว้าง:".$showproduct->width;
+           $gettype = "ยาง ".$showproduct->BrandName." ขนาด:".$showproduct->diameterRubber." ขอบ:".$showproduct->rubdiameter." ซี่รี่:".$showproduct->series." ความกว้าง:".$showproduct->width." ยี่ห้อ:".$showproduct->BrandName." กลุ่มยาง: ".$showproduct->groudRubber
+           ." <br>สัปดาห์: ".$showproduct->productionWeek." ปี: ".$showproduct->productionYear." รุ่น: ".$showproduct->genRubber." ดัชนีความเร็ว: ".$showproduct->speedIndex." ดัชนีน้ำหนัก: ".$showproduct->weightIndex;
          }else{
            $gettype = "";
          }
 
        ?>
        <tr>
-         <td align="center"><?php echo @$showproduct->code;?></td>
          <td >&nbsp;<?php echo @$showproduct->shelf_detail;?>&nbsp; ชั้น &nbsp;<?php echo @$showproduct->shelf_class;?></td>
-         <td valign="middle"><strong><?php echo @$showproduct->dealer_code;?> | <?php echo @$showproduct->dealer_name;?> | <?php echo @$showproduct->mobile;?></strong></td>
-         <td valign="middle"><strong><? echo $gettype?></strong></td>
+         <td align="center"><?php echo @$showproduct->code;?></td>
+         <!--td valign="middle"><strong><?php echo @$showproduct->dealer_code;?> | <?php echo @$showproduct->dealer_name;?> | <?php echo @$showproduct->mobile;?></strong></td-->
+         <td valign="middle"><? echo $gettype?></td>
          <td align="right" valign="middle"><strong><?php echo @convertPoint2(@$showproduct->Quantity,'0');?></strong>&nbsp;</td>
+         <td align="right" valign="middle"><strong><?php echo @convertPoint2(@$showproduct->PriceBuy,'2');?></strong>&nbsp;</td>
          <td align="right" valign="middle"><strong><?php echo @convertPoint2(@$showproduct->PriceSale,'2');?></strong>&nbsp;</td>
       </tr>
     <? } ?>
