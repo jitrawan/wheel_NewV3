@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.6.6
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 15, 2019 at 05:59 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 5.6.40
+-- Generation Time: May 18, 2019 at 08:26 AM
+-- Server version: 5.7.17-log
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -848,7 +846,9 @@ INSERT INTO `logs` (`log_key`, `log_date`, `log_ipaddress`, `log_text`, `log_use
 ('26dcd6a2cfde6cab', '2019-05-13 13:22:02', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
 ('cb3fdfb29edd8f6b', '2019-05-13 15:23:35', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
 ('b453e51e1d1cdb7a', '2019-05-15 08:42:02', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
-('491b7031ebc0492e', '2019-05-15 12:50:00', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15');
+('491b7031ebc0492e', '2019-05-15 12:50:00', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('09853a572d7e4690', '2019-05-17 06:54:07', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('139d6cc02ef4cd76', '2019-05-17 14:38:03', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15');
 
 -- --------------------------------------------------------
 
@@ -1026,7 +1026,8 @@ CREATE TABLE `productdetailwheel` (
 INSERT INTO `productdetailwheel` (`id`, `code`, `ProductID`, `diameter`, `rim`, `holeSize`, `typeFormat`, `brand`, `color`, `offset`, `gen`) VALUES
 (1, 'W0001', 'P0001', 13, '5.5', '', 'ล้อแม็กกะทะ', 1, 'black', '-', 'รุ่น1'),
 (2, 'W0002', 'P0002', 13, '5.5', '4', 'ล้อแม็กนีเซียมอัลลอย', 2, 'black', '-10', ''),
-(3, 'W0003', 'P0003', 13, '5.5', '4H100', 'ล้อแม็กกะทะ', 2, 'black', '-11', '');
+(3, 'W0003', 'P0003', 13, '5.5', '4H100', 'ล้อแม็กกะทะ', 2, 'black', '-11', ''),
+(4, 'W0004', 'P0005', 13, '5.5', '4H100', 'ล้อแม็กกะทะ', 1, 'silver', '-10', 'รุ่น1');
 
 -- --------------------------------------------------------
 
@@ -1057,7 +1058,8 @@ INSERT INTO `product_n` (`ProductID`, `shelf_id`, `dealer_code`, `Quantity`, `Pr
 ('P0001', 11, 'D0002', 34, 5000, 4500, 4500, '1', '', 1, 1, 10),
 ('P0002', 11, 'D0002', 25, 15000, 10000, 0, '1', '', 1, 1, 0),
 ('P0003', 14, 'D0002', 18, 20000, 12500, 0, '1', '', 1, 1, 0),
-('P0004', 11, 'D0002', 36, 2000, 2500, 0, '1', '', 1, 2, 0);
+('P0004', 11, 'D0002', 36, 2000, 2500, 0, '1', '', 1, 2, 0),
+('P0005', 11, '', 50, 5000, 4500, 0, '1', '', 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -1436,7 +1438,7 @@ INSERT INTO `reserve_info` (`reserve_key`, `reserve_code`, `reserve_no`, `empoly
 ('32c76639812529d519d42757ff053431', 'CY1IJUYA', '2019051500CY1IJUYA', 'd97530f6437e7ffa3a74afe46a953a15', 315, 4500, 'S', '2019-05-15 21:53:32', '', 'ddd', 'ggg', 'eeee', 'dddd'),
 ('27b240c8ddf2b2895f46d8ea57546491', 'CGGUKALP', '2019051500CGGUKALP', 'd97530f6437e7ffa3a74afe46a953a15', 315, 4500, 'S', '2019-05-15 21:59:40', '', 'ddd', 'fff', 'rrrr', 'gggg'),
 ('0a99102ab2b7db969065bf63e41e589b', 'C86UJ76S', '2019051500C86UJ76S', 'd97530f6437e7ffa3a74afe46a953a15', 1400, 20000, 'S', '2019-05-15 21:59:57', '', 'ddd', 'ggg', 'rrrr', 'wwwww'),
-('135c9e11c18e0115eb0dd84340025c7e', 'CX6Z9O2', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'N', '2019-05-15 22:02:35', '', '', '', '', '');
+('2e787495905eabc26f4c85f588e2b44c', 'C91CC4JH', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'N', '2019-05-17 22:58:20', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1586,7 +1588,7 @@ CREATE TABLE `shelf_detail` (
 
 INSERT INTO `shelf_detail` (`id`, `shelf_code`, `ProductID`, `amt_rimit`) VALUES
 (1, 's0006', 'W0002', 10),
-(2, 's0007', 'W0001', 5),
+(2, 's0007', 'W0001', 10),
 (3, 's0006', 'W0001', 10);
 
 -- --------------------------------------------------------
@@ -1617,7 +1619,10 @@ INSERT INTO `stock_tb_receive_master` (`rid`, `po`, `datedo`, `datereceive`, `id
 (7, 'PO0007', '2019-05-13', '2019-05-13', 'พัชรวี   สีดอก'),
 (8, 'PO0008', '2019-05-13', '2019-05-13', 'พัชรวี   สีดอก'),
 (9, 'PO0009', '2019-05-14', '2019-05-14', 'พัชรวี   สีดอก'),
-(10, 'PO0010', '2019-05-14', '2019-05-14', 'พัชรวี   สีดอก');
+(10, 'PO0010', '2019-05-14', '2019-05-14', 'พัชรวี   สีดอก'),
+(11, 'PO0011', '2019-05-17', '2019-05-17', 'พัชรวี   สีดอก'),
+(12, 'PO0012', '2019-05-18', '2019-05-18', 'พัชรวี   สีดอก'),
+(13, 'PO0013', '2019-05-18', '2019-05-18', 'พัชรวี   สีดอก');
 
 -- --------------------------------------------------------
 
@@ -1642,7 +1647,8 @@ CREATE TABLE `stock_tb_receive_master_sub` (
 INSERT INTO `stock_tb_receive_master_sub` (`no`, `po`, `ProductID`, `total`, `price`, `shelf_code`, `dealer_code`) VALUES
 (2, 'PO0003', '', 1, 0, NULL, NULL),
 (3, 'PO0004', 'P0001', 12, 0, NULL, NULL),
-(12, 'PO0010', 'P0001', 20, 4500, NULL, 'D0002');
+(12, 'PO0010', 'P0001', 20, 4500, NULL, 'D0002'),
+(13, 'PO0011', 'P0005', 50, 4500, NULL, 'D0002');
 
 -- --------------------------------------------------------
 
@@ -2118,164 +2124,136 @@ ALTER TABLE `widthrubble`
 --
 ALTER TABLE `brand`
   MODIFY `BrandID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT for table `brandrubble`
 --
 ALTER TABLE `brandrubble`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `brandwhee`
 --
 ALTER TABLE `brandwhee`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT for table `dealer`
 --
 ALTER TABLE `dealer`
   MODIFY `dealer_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `diameterrubble`
 --
 ALTER TABLE `diameterrubble`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT for table `diameterwhee`
 --
 ALTER TABLE `diameterwhee`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
 --
 -- AUTO_INCREMENT for table `event_info`
 --
 ALTER TABLE `event_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `event_item`
 --
 ALTER TABLE `event_item`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT for table `holesizewhee`
 --
 ALTER TABLE `holesizewhee`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT for table `offset`
 --
 ALTER TABLE `offset`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `productdetailrubber`
 --
 ALTER TABLE `productdetailrubber`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `productdetailwheel`
 --
 ALTER TABLE `productdetailwheel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `relationdiameter`
 --
 ALTER TABLE `relationdiameter`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
-
 --
 -- AUTO_INCREMENT for table `relationholesize`
 --
 ALTER TABLE `relationholesize`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
 --
 -- AUTO_INCREMENT for table `relationrim`
 --
 ALTER TABLE `relationrim`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
 --
 -- AUTO_INCREMENT for table `relationseries`
 --
 ALTER TABLE `relationseries`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
-
 --
 -- AUTO_INCREMENT for table `relationwidth`
 --
 ALTER TABLE `relationwidth`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `reserve_detail`
 --
 ALTER TABLE `reserve_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `rimwheel`
 --
 ALTER TABLE `rimwheel`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `seriesrubble`
 --
 ALTER TABLE `seriesrubble`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT for table `shelf`
 --
 ALTER TABLE `shelf`
   MODIFY `shelf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
 --
 -- AUTO_INCREMENT for table `shelf_detail`
 --
 ALTER TABLE `shelf_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `stock_tb_receive_master`
 --
 ALTER TABLE `stock_tb_receive_master`
-  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
+  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `stock_tb_receive_master_sub`
 --
 ALTER TABLE `stock_tb_receive_master_sub`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `typeformatwheel`
 --
 ALTER TABLE `typeformatwheel`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `viewtables`
 --
 ALTER TABLE `viewtables`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT for table `widthrubble`
 --
 ALTER TABLE `widthrubble`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
