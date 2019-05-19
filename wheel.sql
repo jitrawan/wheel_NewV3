@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 18, 2019 at 08:26 AM
--- Server version: 5.7.17-log
--- PHP Version: 5.6.30
+-- Generation Time: May 19, 2019 at 05:07 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -41,7 +43,7 @@ CREATE TABLE `autonumber` (
 --
 
 INSERT INTO `autonumber` (`item_number`, `finance_number`, `quotation_number`, `invoice_number`, `year`, `month`, `day`) VALUES
-(0005, 0001, 0001, 0001, 2019, 05, 13);
+(0005, 0001, 0001, 0001, 2019, 05, 19);
 
 -- --------------------------------------------------------
 
@@ -848,7 +850,8 @@ INSERT INTO `logs` (`log_key`, `log_date`, `log_ipaddress`, `log_text`, `log_use
 ('b453e51e1d1cdb7a', '2019-05-15 08:42:02', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
 ('491b7031ebc0492e', '2019-05-15 12:50:00', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
 ('09853a572d7e4690', '2019-05-17 06:54:07', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
-('139d6cc02ef4cd76', '2019-05-17 14:38:03', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15');
+('139d6cc02ef4cd76', '2019-05-17 14:38:03', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15'),
+('c95575b95e301d3b', '2019-05-18 09:21:31', '::1', 'pat เข้าสู่ระบบ.', 'd97530f6437e7ffa3a74afe46a953a15');
 
 -- --------------------------------------------------------
 
@@ -997,7 +1000,8 @@ CREATE TABLE `productdetailrubber` (
 --
 
 INSERT INTO `productdetailrubber` (`id`, `code`, `ProductID`, `width`, `series`, `diameter`, `brand`, `groudRubber`, `productionWeek`, `productionYear`, `genRubber`, `speedIndex`, `weightIndex`, `persentrubber`) VALUES
-(3, 'T0002', 'P0004', 165, 60, 10, 1, '2', 20, 2562, '112', 30, 400, 0);
+(3, 'T0002', 'P0004', 165, 60, 10, 1, '2', 20, 2562, '112', 30, 400, 0),
+(4, 'T0003', 'P0006', 155, 70, 12, 2, 'NO', 2, 2019, '112', 0, 62, 0);
 
 -- --------------------------------------------------------
 
@@ -1055,11 +1059,12 @@ CREATE TABLE `product_n` (
 --
 
 INSERT INTO `product_n` (`ProductID`, `shelf_id`, `dealer_code`, `Quantity`, `PriceSale`, `PriceBuy`, `PriceBuyOld`, `ProductStatus`, `Warranty`, `hand`, `TypeID`, `discount`) VALUES
-('P0001', 11, 'D0002', 34, 5000, 4500, 4500, '1', '', 1, 1, 10),
-('P0002', 11, 'D0002', 25, 15000, 10000, 0, '1', '', 1, 1, 0),
-('P0003', 14, 'D0002', 18, 20000, 12500, 0, '1', '', 1, 1, 0),
+('P0001', 11, 'D0002', 75, 5000, 4500, 4500, '1', '', 1, 1, 10),
+('P0002', 11, 'D0002', 44, 15000, 10000, 0, '1', '', 1, 1, 0),
+('P0003', 14, 'D0002', 25, 20000, 12500, 0, '1', '', 1, 1, 0),
 ('P0004', 11, 'D0002', 36, 2000, 2500, 0, '1', '', 1, 2, 0),
-('P0005', 11, '', 50, 5000, 4500, 0, '1', '', 1, 1, 0);
+('P0005', 11, '', 50, 5000, 4500, 0, '1', '', 1, 1, 0),
+('P0006', 0, '', 0, 2500, 0, 0, '1', '', 1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -1438,7 +1443,21 @@ INSERT INTO `reserve_info` (`reserve_key`, `reserve_code`, `reserve_no`, `empoly
 ('32c76639812529d519d42757ff053431', 'CY1IJUYA', '2019051500CY1IJUYA', 'd97530f6437e7ffa3a74afe46a953a15', 315, 4500, 'S', '2019-05-15 21:53:32', '', 'ddd', 'ggg', 'eeee', 'dddd'),
 ('27b240c8ddf2b2895f46d8ea57546491', 'CGGUKALP', '2019051500CGGUKALP', 'd97530f6437e7ffa3a74afe46a953a15', 315, 4500, 'S', '2019-05-15 21:59:40', '', 'ddd', 'fff', 'rrrr', 'gggg'),
 ('0a99102ab2b7db969065bf63e41e589b', 'C86UJ76S', '2019051500C86UJ76S', 'd97530f6437e7ffa3a74afe46a953a15', 1400, 20000, 'S', '2019-05-15 21:59:57', '', 'ddd', 'ggg', 'rrrr', 'wwwww'),
-('2e787495905eabc26f4c85f588e2b44c', 'C91CC4JH', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'N', '2019-05-17 22:58:20', '', '', '', '', '');
+('e34c9527be65b8b74cc597ff521ff88e', 'CJ8HXF7F', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'P', '2019-05-19 01:24:19', '', '', '', '', ''),
+('3ce31e21b35133967259a0cbec6480e6', 'C29J1VKH', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'P', '2019-05-19 02:18:59', '', '', '', '', ''),
+('1dffe2102e0675e9d96a1097c932dc01', 'CBTS13K1', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'P', '2019-05-19 02:25:42', '', '', '', '', ''),
+('de2dca1202298b74ee8a0d748f5bf3b0', 'CITJVJMW', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'P', '2019-05-19 12:47:23', '', '', '', '', ''),
+('6b11689250b269445fe8f1e821830c2b', 'C13KN41T', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'P', '2019-05-19 13:02:53', '', '', '', '', ''),
+('2ce280d9967a62b955518ae2a7adbe4a', 'CZQF66O3', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'P', '2019-05-19 13:03:31', '', '', '', '', ''),
+('1ad0010077e5cb0214a8f9e186518b3e', 'CKEMMGZI', '2019051900CKEMMGZI', 'd97530f6437e7ffa3a74afe46a953a15', 315, 4500, 'S', '2019-05-19 13:34:24', '', '', '', '', ''),
+('79f5046775b423e6815c9a54361d37e6', 'C9HM0G89', '2019051900C9HM0G89', 'd97530f6437e7ffa3a74afe46a953a15', 315, 4500, 'S', '2019-05-19 13:38:07', '', '', '', '', ''),
+('f8eedb02b5c6f55013cf77ed3bb44523', 'C7GJT5J', '2019051900C7GJT5J', 'd97530f6437e7ffa3a74afe46a953a15', 315, 4500, 'S', '2019-05-19 13:38:56', '', '', '', '', ''),
+('582cf7392c852fcef1008b1570909442', 'CCYM71LR', '2019051900CCYM71LR', 'd97530f6437e7ffa3a74afe46a953a15', 315, 4500, 'S', '2019-05-19 13:52:57', '', '', '', '', ''),
+('b93291d6734e9ee94c31eeb82b907c9e', 'C1QBOJ', '2019051900C1QBOJ', 'd97530f6437e7ffa3a74afe46a953a15', 315, 4500, 'S', '2019-05-19 13:57:32', '', '', '', '', ''),
+('c40386267d32e463f26722803ff7ff07', 'C17SFR1V', '2019051900C17SFR1V', 'd97530f6437e7ffa3a74afe46a953a15', 315, 4500, 'S', '2019-05-19 13:59:11', '', '', '', '', ''),
+('1c344d4e4578bf466b24420c99554bdc', 'CRICO074', '2019051900CRICO074', 'd97530f6437e7ffa3a74afe46a953a15', 315, 4500, 'S', '2019-05-19 13:59:48', '', '', '', '', ''),
+('3ad4926213ca7b5a03e7e725f2d96bae', 'C3EW4FOX', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'P', '2019-05-19 14:12:12', '', '', '', '', ''),
+('eae6f6cfec507746501e3de9fd2cbec1', 'CZK84MKZ', '', 'd97530f6437e7ffa3a74afe46a953a15', 0, 0, 'N', '2019-05-19 14:13:28', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1457,27 +1476,33 @@ CREATE TABLE `reserve_item` (
   `item_total` int(11) NOT NULL,
   `item_amt` int(11) NOT NULL,
   `create_Date` date NOT NULL,
-  `Event_Code` varchar(10) COLLATE utf8_unicode_ci NOT NULL
+  `Event_Code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `shelf_code` varchar(5) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `reserve_item`
 --
 
-INSERT INTO `reserve_item` (`item_key`, `reserve_key`, `ProductID`, `item_discount`, `item_discountPercent`, `item_price`, `cost_price`, `item_total`, `item_amt`, `create_Date`, `Event_Code`) VALUES
-('76fdef6bdae944de220ae1d7df07c487', '4d97baf670ab612f6bad82a7644a9347', 'P0001', 1000, 20, 5000, '4500.00', 4000, 1, '2019-05-15', ''),
-('4b2066013e591769504b4d18392a7419', '2bdc1b646b06ff54d06a0515ab4ecb24', 'P0001', 1000, 20, 5000, '4500.00', 4000, 1, '2019-05-15', ''),
-('45ca361f433b0b0cc98897bffb83cfff', '2bdc1b646b06ff54d06a0515ab4ecb24', 'P0002', 750, 5, 15000, '10000.00', 14250, 1, '2019-05-15', ''),
-('081520958ff00b30476f888c41fa0788', '4e8f72e6cff8600f6c8acad3de61f1c1', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-15', ''),
-('af68c6050a0f4f9b79e4506beec8eb99', '8e10de7fcbf51ebbaa075fd142cfa44b', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-15', ''),
-('96fc3e0821c65b795b74821108df20b5', '8e10de7fcbf51ebbaa075fd142cfa44b', 'P0003', 0, 0, 20000, '12500.00', 20000, 1, '2019-05-15', ''),
-('2447d70e78b44f393f5c8340f4b81871', 'a4fc8fb6fde85b8be957cfdff686061a', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-15', ''),
-('1cdffa6c761f26ebc387beb351e3a0cb', '4ae23128030002ad8c8876b8a60019eb', 'P0002', 0, 0, 15000, '10000.00', 15000, 1, '2019-05-15', ''),
-('e52ba321ae025d23f2be3c2b91c87654', '', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-15', ''),
-('3af6f001ce655816fedde8ecc13977cf', '', 'P0002', 0, 0, 15000, '10000.00', 15000, 1, '2019-05-15', ''),
-('27a02a63d672ce73d66e1ab13dae6d45', '32c76639812529d519d42757ff053431', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-15', ''),
-('09b3391c6486a4757b82d3f00d4b0d31', '27b240c8ddf2b2895f46d8ea57546491', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-15', ''),
-('89caf63d14ee6a50e396cad5d09f2e12', '0a99102ab2b7db969065bf63e41e589b', 'P0003', 0, 0, 20000, '12500.00', 20000, 1, '2019-05-15', '');
+INSERT INTO `reserve_item` (`item_key`, `reserve_key`, `ProductID`, `item_discount`, `item_discountPercent`, `item_price`, `cost_price`, `item_total`, `item_amt`, `create_Date`, `Event_Code`, `shelf_code`) VALUES
+('91150b821026527955e01808ea02bb3c', '3ad4926213ca7b5a03e7e725f2d96bae', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-19', '', 's0007'),
+('69bb5a60f6f6046a940398eb007e2dfa', '2ce280d9967a62b955518ae2a7adbe4a', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-19', '', 's0007'),
+('341bec974aee133d4063a26c2843cc9c', '2ce280d9967a62b955518ae2a7adbe4a', 'P0002', 0, 0, 15000, '10000.00', 15000, 1, '2019-05-19', '', 's0007'),
+('764da3b07ea1d836bfb1bf1a9dbe58c1', '2ce280d9967a62b955518ae2a7adbe4a', 'P0002', 0, 0, 15000, '10000.00', 15000, 1, '2019-05-19', '', 's0008'),
+('0df7ee933c7cbc7c1cf6d5eb720fc7da', '1ad0010077e5cb0214a8f9e186518b3e', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-19', '', 's0008'),
+('5ee5a08795ff8d35569cb3649a330ea2', '79f5046775b423e6815c9a54361d37e6', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-19', '', 's0007'),
+('728cea7eebe54500378e3baa65f92373', 'f8eedb02b5c6f55013cf77ed3bb44523', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-19', '', 's0007'),
+('ff2ab822ffd89e58e3ddbbc639a7e84a', '', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-19', '', 's0007'),
+('db7ffd758b83abb8c595ebd5052b0614', '', 'P0002', 0, 0, 15000, '10000.00', 15000, 1, '2019-05-19', '', 's0006'),
+('692d5e160838e1f7fadf3ea0344eaefd', '582cf7392c852fcef1008b1570909442', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-19', '', 's0007'),
+('4cf4a0b1e9c8bb8fffc2331c4ae92b06', 'b93291d6734e9ee94c31eeb82b907c9e', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-19', '', 's0007'),
+('b15eef5d2650399572f4571d833eb8d9', 'c40386267d32e463f26722803ff7ff07', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-19', '', 's0007'),
+('2dadb7fe7b36879d6284f5e2538ec507', '1c344d4e4578bf466b24420c99554bdc', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-19', '', 's0007'),
+('33b3fbf25c1d08ec690d15cba17094a4', '2ce280d9967a62b955518ae2a7adbe4a', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-19', '', 's0007'),
+('784958cce00ca034ff708982dc522009', '3ad4926213ca7b5a03e7e725f2d96bae', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-19', '', 's0007'),
+('4c71d004ff8ebc91674873b206f13fc6', '3ad4926213ca7b5a03e7e725f2d96bae', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-19', '', 's0007'),
+('700a87277948a9a493818dc882c27141', '3ad4926213ca7b5a03e7e725f2d96bae', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-19', '', 's0007'),
+('8e28efab5ff873f75b16be3ee53b0bca', '3ad4926213ca7b5a03e7e725f2d96bae', 'P0001', 500, 0, 5000, '4500.00', 4500, 1, '2019-05-19', '', 's0007');
 
 -- --------------------------------------------------------
 
@@ -1588,8 +1613,14 @@ CREATE TABLE `shelf_detail` (
 
 INSERT INTO `shelf_detail` (`id`, `shelf_code`, `ProductID`, `amt_rimit`) VALUES
 (1, 's0006', 'W0002', 10),
-(2, 's0007', 'W0001', 10),
-(3, 's0006', 'W0001', 10);
+(2, 's0007', 'W0001', 14),
+(3, 's0006', 'W0001', 10),
+(6, 's0009', 'W0001', 14),
+(7, 's0008', 'W0001', 4),
+(8, 's0007', 'W0002', 5),
+(9, 's0008', 'W0002', 15),
+(10, 's0008', 'W0003', 2),
+(11, 's0007', 'W0003', 5);
 
 -- --------------------------------------------------------
 
@@ -1622,7 +1653,10 @@ INSERT INTO `stock_tb_receive_master` (`rid`, `po`, `datedo`, `datereceive`, `id
 (10, 'PO0010', '2019-05-14', '2019-05-14', 'พัชรวี   สีดอก'),
 (11, 'PO0011', '2019-05-17', '2019-05-17', 'พัชรวี   สีดอก'),
 (12, 'PO0012', '2019-05-18', '2019-05-18', 'พัชรวี   สีดอก'),
-(13, 'PO0013', '2019-05-18', '2019-05-18', 'พัชรวี   สีดอก');
+(13, 'PO0013', '2019-05-18', '2019-05-18', 'พัชรวี   สีดอก'),
+(14, 'PO0014', '2019-05-18', '2019-05-18', 'พัชรวี   สีดอก'),
+(15, 'PO0015', '2019-05-19', '2019-05-19', 'พัชรวี   สีดอก'),
+(16, 'PO0016', '2019-05-19', '2019-05-19', 'พัชรวี   สีดอก');
 
 -- --------------------------------------------------------
 
@@ -1648,7 +1682,8 @@ INSERT INTO `stock_tb_receive_master_sub` (`no`, `po`, `ProductID`, `total`, `pr
 (2, 'PO0003', '', 1, 0, NULL, NULL),
 (3, 'PO0004', 'P0001', 12, 0, NULL, NULL),
 (12, 'PO0010', 'P0001', 20, 4500, NULL, 'D0002'),
-(13, 'PO0011', 'P0005', 50, 4500, NULL, 'D0002');
+(13, 'PO0011', 'P0005', 50, 4500, NULL, 'D0002'),
+(14, 'PO0014', 'P0001', 1, 4000, NULL, 'D0002');
 
 -- --------------------------------------------------------
 
@@ -2124,136 +2159,164 @@ ALTER TABLE `widthrubble`
 --
 ALTER TABLE `brand`
   MODIFY `BrandID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `brandrubble`
 --
 ALTER TABLE `brandrubble`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `brandwhee`
 --
 ALTER TABLE `brandwhee`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `dealer`
 --
 ALTER TABLE `dealer`
   MODIFY `dealer_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `diameterrubble`
 --
 ALTER TABLE `diameterrubble`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `diameterwhee`
 --
 ALTER TABLE `diameterwhee`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
 --
 -- AUTO_INCREMENT for table `event_info`
 --
 ALTER TABLE `event_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `event_item`
 --
 ALTER TABLE `event_item`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `holesizewhee`
 --
 ALTER TABLE `holesizewhee`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `offset`
 --
 ALTER TABLE `offset`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `productdetailrubber`
 --
 ALTER TABLE `productdetailrubber`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `productdetailwheel`
 --
 ALTER TABLE `productdetailwheel`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `relationdiameter`
 --
 ALTER TABLE `relationdiameter`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
 --
 -- AUTO_INCREMENT for table `relationholesize`
 --
 ALTER TABLE `relationholesize`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
 --
 -- AUTO_INCREMENT for table `relationrim`
 --
 ALTER TABLE `relationrim`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
 --
 -- AUTO_INCREMENT for table `relationseries`
 --
 ALTER TABLE `relationseries`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+
 --
 -- AUTO_INCREMENT for table `relationwidth`
 --
 ALTER TABLE `relationwidth`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `reserve_detail`
 --
 ALTER TABLE `reserve_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `rimwheel`
 --
 ALTER TABLE `rimwheel`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `seriesrubble`
 --
 ALTER TABLE `seriesrubble`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `shelf`
 --
 ALTER TABLE `shelf`
   MODIFY `shelf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
 --
 -- AUTO_INCREMENT for table `shelf_detail`
 --
 ALTER TABLE `shelf_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `stock_tb_receive_master`
 --
 ALTER TABLE `stock_tb_receive_master`
-  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 --
 -- AUTO_INCREMENT for table `stock_tb_receive_master_sub`
 --
 ALTER TABLE `stock_tb_receive_master_sub`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
 --
 -- AUTO_INCREMENT for table `typeformatwheel`
 --
 ALTER TABLE `typeformatwheel`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `viewtables`
 --
 ALTER TABLE `viewtables`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `widthrubble`
 --
 ALTER TABLE `widthrubble`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
