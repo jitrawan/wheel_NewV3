@@ -11,6 +11,9 @@
 </ol>
 
 <?php
+
+
+
 if(isset($_POST['save_card'])){
 	if(addslashes($_POST['shelf_code']) && addslashes($_POST['shelf_detail']) != NULL){
     $getShelf = $getdata->my_sql_select(NULL,"shelf"," shelf_detail ='".addslashes($_POST['shelf_detail'])."' and shelf_class = '".addslashes($_POST['shelf_class'])."'  ");
@@ -137,6 +140,34 @@ if(isset($_POST['save_edit_card'])){
   echo @$alert;
   ?>
 
+  <nav class="navbar navbar-default" role="navigation">
+   <div class="container-fluid">
+     <!-- Brand and toggle get grouped for better mobile display -->
+     <div class="navbar-header">
+       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+         <span class="sr-only">Toggle navigation</span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </button>
+       <a class="navbar-brand" href="#"><i class="fa fa-search"></i></a>
+     </div>
+
+     <!-- Collect the nav links, forms, and other content for toggling -->
+     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+       <form class="navbar-form navbar-left" role="search" method="get">
+         <div class="form-group">
+         <input type="hidden" name="p" id="p" value="setting_shelf" >
+         <input type="text" class="form-control" name="q" placeholder="ค้นหา" value="<?php echo @htmlentities($_GET['q']);?>" size="100">
+         </div>
+         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> <?php echo @LA_BTN_SEARCH;?></button>
+       </form>
+
+     </div><!-- /.navbar-collapse -->
+   </div><!-- /.container-fluid -->
+ </nav>
+
  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus fa-fw"></i> เพิ่มshelf สินค้า</button><br/><br/>
  <div class="panel panel-default">
   <!-- Default panel contents -->
@@ -156,11 +187,17 @@ if(isset($_POST['save_edit_card'])){
   </thead>
   <tbody>
   <?php
+  $sql = "";
+     if(htmlentities($_GET['q']) != ""){
+        $sql .= "and (shelf_code LIKE '%".htmlentities($_GET['q'])."%' or shelf_detail LIKE '%".htmlentities($_GET['q'])."%' or shelf_class LIKE '%".htmlentities($_GET['q'])."%' )";
+
+     }
+
   $x=0;
   $getcat = $getdata->my_sql_select("s.shelf_code,s.*
   ,(select sum(d.amt_rimit) FROM shelf_detail d where d.shelf_code = s.shelf_code) as useAmt "
   ,"shelf s"
-  ,"s.shelf_status in ('1','0') ORDER BY s.shelf_code, s.shelf_detail, s.shelf_class ");
+  ,"s.shelf_status in ('1','0') $sql ORDER BY s.shelf_code, s.shelf_detail, s.shelf_class ");
   while($showcat = mysql_fetch_object($getcat)){
 	  $x++;
   ?>

@@ -1,12 +1,12 @@
 <div class="row">
      <div class="col-lg-12">
-             <h1 class="page-header"><i class="fa fa-pie-chart fa-fw"></i> รายงานการขาย</h1>
+             <h1 class="page-header"><i class="fa fa-pie-chart fa-fw"></i> รายงานยอดขาย</h1>
      </div>
 </div>
 <ol class="breadcrumb">
 <li><a href="index.php"><?php echo @LA_MN_HOME;?></a></li>
 <li><a href="?p=report">รายงาน</a></li>
- <li class="active">รายงานการขาย</li>
+ <li class="active">รายงานยอดขาย</li>
 </ol>
 
    <?php
@@ -19,7 +19,7 @@
         if(addslashes($_POST['salepopType']) == 'd'){
             $strsaerchpop = "&fromd=".addslashes($_POST['datepopPrfrom']);
         }else if(addslashes($_POST['salepopType']) == 'm'){
-            $strsaerchpop = "&typeM=".addslashes($_POST['monthpop']);
+            $strsaerchpop = "&typeM=".addslashes($_POST['monthpop'])."&y=".addslashes($_POST['monthyear']);
         }else if(addslashes($_POST['salepopType']) == 'y'){
             $strsaerchpop = "&typeY=".addslashes($_POST['yearpop']);
         }
@@ -80,6 +80,10 @@
 
               </select>
             </div>
+            <div class="col-md-4">
+                <label ><b>ปี :  (ตัวอย่าง 1992)    </b></label>
+                <input type="number" id="monthyear" name="monthyear" class="form-control" autocomplete="off">
+            </div>
 
         </div>
       </div>
@@ -121,19 +125,27 @@
 
 $(document).ready(function(){
 
+  var d = new Date();
+  var n = d.getFullYear();
+
+  $("#monthyear").val(n);
+
 $('input[name=salepopType]').change(function(){
 var value = $( 'input[name=salepopType]:checked' ).val();
     if(value == 'd'){
       $("#dallday").show();
       $("#dallmonth").hide();
+        $("#monthyear").hide();
       $("#dallyear").hide();
     }else if(value == 'm'){
       $("#dallday").hide();
       $("#dallmonth").show();
+      $("#monthyear").show();
       $("#dallyear").hide();
     }else if(value == 'y'){
       $("#dallday").hide();
       $("#dallmonth").hide();
+        $("#monthyear").hide();
       $("#dallyear").show();
     }
 });
@@ -158,6 +170,11 @@ var value = $( 'input[name=salepopType]:checked' ).val();
               return false;
             }
 
+          }else if(getradio == 'm'){
+            if($("#monthyear").val() == ""){
+              alert("กรุณาระบุปี");
+              return false;
+            }
           }
       }else{
         if($("#datePrfrom").val() == ""){

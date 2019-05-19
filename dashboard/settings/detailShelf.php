@@ -37,11 +37,11 @@ $getctype_detail =$getdata->my_sql_select("s.ProductID as proId, s.amt_rimit as 
 	end code "
 ,"shelf_detail s
 left join product_n p on p.ProductID = (select pp.ProductID
-										from product_n pp 
-										left join productDetailWheel ww on pp.ProductID = ww.ProductID 
-										left join productDetailRubber rr on pp.ProductID = rr.ProductID 
-										where (rr.code = s.ProductID or ww.code = s.ProductID) )  
-left join productDetailWheel w on p.ProductID = w.ProductID 
+										from product_n pp
+										left join productDetailWheel ww on pp.ProductID = ww.ProductID
+										left join productDetailRubber rr on pp.ProductID = rr.ProductID
+										where (rr.code = s.ProductID or ww.code = s.ProductID) )
+left join productDetailWheel w on p.ProductID = w.ProductID
 left join productDetailRubber r on p.ProductID = r.ProductID "
 ,"s.shelf_code='".addslashes($_GET['key'])."' ");
 ?>
@@ -50,7 +50,7 @@ left join productDetailRubber r on p.ProductID = r.ProductID "
  <div class="form-group row">
 		 <div class="col-md-12">
 		 <?
-	
+
 
 		 $getcattt = $getdata->my_sql_query("s.* "
 		 ,"shelf s"
@@ -72,7 +72,6 @@ left join productDetailRubber r on p.ProductID = r.ProductID "
   <tbody>
   <?php
   while($showproduct = mysql_fetch_object($getctype_detail)){
-	  $x++;
 	  
 	  if($showproduct->TypeID == '1'){
 		$gettype = "ล้อแม๊ก ".$showproduct->BrandName." รุ่น:".$showproduct->gen." ขนาด:".$showproduct->diameterWheel." ขอบ:".$showproduct->whediameter." รู:".$showproduct->holeSize." ประเภท:".$showproduct->typeFormat." <br>ยี่ห้อ:".$showproduct->BrandName." offset:".$showproduct->offset." สี: ".$showproduct->color." รุ่น: ".$showproduct->gen ;

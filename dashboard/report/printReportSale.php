@@ -81,9 +81,11 @@ if(htmlentities($_GET['pop']) != ""){
 		}else if(htmlentities($_GET['typeM']) == '12'){
 				$strmont = "ธันวาคม";
 		}
+
+		//if
 		$head .= '<h2 style="text-align:center">รายงานสินค้าขายดีประจำเดือน</h2>
-							<p style="text-align:center"><b>ประจำเดือน '.$strmont.'</b></p>';
-							$str_sql  .= "DATE_FORMAT(create_date,'%c') = '".htmlentities($_GET['typeM'])."'";
+							<p style="text-align:center"><b>ประจำเดือน '.$strmont.' ปี '.htmlentities($_GET['y']).'</b></p>';
+							$str_sql  .= "DATE_FORMAT(create_date,'%c') = '".htmlentities($_GET['typeM'])."' and DATE_FORMAT(create_date,'%Y') = '".htmlentities($_GET['y'])."'";
 	}if(htmlentities($_GET['pop']) == "y"){
 		$head .= '<h2 style="text-align:center">รายงานสินค้าขายดีประจำปี</h2>
 							<p style="text-align:center"><b>ประจำปี '.htmlentities($_GET['typeY']).'</b></p>';

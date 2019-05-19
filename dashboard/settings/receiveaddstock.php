@@ -67,7 +67,7 @@ if(mysql_num_rows($checkproduct) < 1){
   ," po,ProductID,total,price,dealer_code "
   ," '".addslashes($_POST['po'])."'
   , '".addslashes($_POST['ProductID'])."'
-  , '".addslashes($_POST['total'])."' 
+  , '".addslashes($_POST['total'])."'
   , ".$_POST['price']."
   , '".addslashes($_POST['dealer_code'])."'");
 
@@ -77,7 +77,7 @@ if(mysql_num_rows($checkproduct) < 1){
 
 //ทำการupdate ราคาต้นทุนล่าสุด
 
-//get ต้นทุนล่าสุดที่รับมา 
+//get ต้นทุนล่าสุดที่รับมา
 $newCost = $_POST['total'] * $_POST['price'];
 
 //get ราคาต้นทุนก่อนหน้า
@@ -90,16 +90,12 @@ $sumAmtAll = $_POST['total'] + $getProduct->Quantity;
 //sum ต้นทุนทั้งหมด เพื่อ หา ต้นทุนใหม่
 $priceCost = ($newCost + $currentCost) / $sumAmtAll;
 
-?>
-<script>console.log(<?= $_POST['price']?>)</script>
-<script>console.log(<?= $getProduct->PriceSale;?>)</script>
-<script>console.log(<?= $priceCost?>)</script>
-<?
+
 //update จำนวน และ ราคาต้นทุนให้กับ table สินค้า
 
 
   //upproduct
-$getdata->my_sql_update("product_N"," Quantity =  Quantity + '".addslashes($_POST['total'])."', PriceBuy = ".number_format($priceCost, 2, '.', '').", PriceBuyOld = ".$getProduct->PriceBuy."  ","ProductID='".addslashes($_POST['ProductID'])."' ");
+$getdata->my_sql_update("product_N"," PriceBuy = ".number_format($priceCost, 2, '.', '').", PriceBuyOld = ".$getProduct->PriceBuy."  ","ProductID='".addslashes($_POST['ProductID'])."' ");
 
    $_SESSION['lang'] = addslashes($_REQUEST['mlanguage']);
 	 $alert = '<div class="alert alert-block alert-success fade in"><button data-dismiss="alert" class="close" type="button">×</button>เพิ่มรายการสำเร็จ</div>';
@@ -233,14 +229,14 @@ $getpo = $getdata->my_sql_query(NULL,"stock_tb_receive_master","po='".$_GET['d']
                           <div class="form-group row">
                               <div class="col-xs-2">
                                 <label for="mname">จำนวน (ชิ้น)</label>
-                               <input type="number" name="total" id="total" onblur="setchekc_total(this.value)" class="form-control number" size="4" required>
+                               <input type="number" name="total" id="total" onblur="setchekc_total(this.value)" value="<?= $_GET['getAmt']?>" class="form-control number" size="4" required>
                                <input type="number" name="chekc_total" id="chekc_total" style="display:none;">
                               </div>
-                              <div class="col-xs-2">
+                              <div class="col-xs-2 icontrue" style="display:none;">
                                 <label for="mname">ราคาต้นทุน</label>
                                <input type="number" name="price" id="price" class="form-control number" size="4" required>
                               </div>
-                              <div class="col-xs-3">
+                              <div class="col-xs-3 icontrue" style="display:none;">
                                 <label for="mname">ผู้จำหน่าย</label>
                                 <select name="dealer_code" id="dealer_code" class="form-control" required>
                                                 <option value="" selected="selected">--เลือกผู้จำหน่าย--</option>
@@ -252,7 +248,7 @@ $getpo = $getdata->my_sql_query(NULL,"stock_tb_receive_master","po='".$_GET['d']
                                                 }
                                               ?>
                                 </select>
-                                
+
                               </div>
                             </div>
 
@@ -265,7 +261,7 @@ $getpo = $getdata->my_sql_query(NULL,"stock_tb_receive_master","po='".$_GET['d']
                           <div class="form-group row">
                               <div class="col-xs-3">
                                 <br>
-                              <button type="submit" name="info_save" id="info_save" class="btn btn-primary" ><i class="fa fa-plus-square"></i> เพิ่มรายการ</button>
+                              <button type="submit" name="info_save" id="info_save" class="btn btn-primary" style="display:none;"><i class="fa fa-plus-square"></i> เพิ่มรายการ</button>
                               </div>
                           </div>
                         </form>
@@ -350,14 +346,14 @@ $getpo = $getdata->my_sql_query(NULL,"stock_tb_receive_master","po='".$_GET['d']
                             </div>
 <script type="text/javascript">
 $( document ).ready(function() {
-  
+
  if('<?= addslashes($_GET['Mshelf'])?>'){
       $('#chekc_total').val(0);
       $('#shelfDiv').removeClass('cssfalse').addClass('csstrue');
       $('.icontrue').show();
       $('#Manshelf').hide();
       $('#info_save').show();
-      
+
     }
 
 $(".number").bind('keyup mouseup', function () {
@@ -404,11 +400,11 @@ function setchekc_total(Isvalue){
 
 function manshelf(code){
   if($('#total').val() > 0){
-    window.location='../dashboard/index.php?p=addShelf&ProductID='+code+'&PO='+'<?php echo @$getpo->po;?>'+'&Amt='+ $('#total').val()
+    window.location='../dashboard/index.php?p=addShelf&ProductID='+code+'&PO='+'<?php echo @$getpo->po;?>'+'&Amt='+ $('#total').val()+'&getAmt='+ $('#total').val()
   }else{
     alert("กรุณากรอกจำนวน !");
   }
- 
+
 }
 
 </script>

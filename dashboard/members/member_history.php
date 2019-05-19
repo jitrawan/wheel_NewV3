@@ -59,29 +59,45 @@ $getmember_detail = $getdata->my_sql_query(NULL,"dealer","dealer_id='".addslashe
   <tbody>
   <?php
   $i=0;
-  $getneed_checkin_today=$getdata->my_sql_selectJoin(" p.*, r.*, w.* ,w.diameter as diameterWheel,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
-  ,case
-  when p.TypeID = '2'
-  then (select b.Description from brandRubble b where r.brand = b.id)
-  when p.TypeID = '1'
-  then (select b.Description from BrandWhee b where b.id = w.brand)
-  end BrandName"
-  ,"product_N "
-  ,"productDetailWheel w on p.ProductID = w.ProductID
-  left join productdetailrubber r on p.ProductID = r.ProductID "
-  ,"Where p.dealer_code='".@$getmember_detail->dealer_code."' ");
-  while($showneed_checkin_today = mysql_fetch_object($getneed_checkin_today)){
+$getdelor = $getdata->my_sql_select(" ProductID,dealer_code "
+," stock_tb_receive_master_sub "
+," dealer_code ='".@$getmember_detail->dealer_code."'
+GROUP by ProductID,dealer_code");
+
+
+  while($showneed_checkin_today = mysql_fetch_object($getdelor)){
+
+  $getneed = $getdata->my_sql_query("p.*, r.*, w.* ,p.ProductID as ProductID, p.Quantity as Quantity,r.diameter as rubdiameter ,w.diameter as whediameter,w.gen as genWheel
+    ,case
+      when p.TypeID = '2'
+      then (select b.Description from brandRubble b where r.brand = b.id)
+      when p.TypeID = '1'
+      then (select b.Description from BrandWhee b where b.id = w.brand)
+      end BrandName
+      , case
+      when p.TypeID = '2'
+      then (select r.code from productdetailrubber r where r.ProductID = p.ProductID)
+      when p.TypeID = '1'
+      then (select w.code from productdetailwheel w where w.ProductID = p.ProductID)
+      end code
+      "," product_N p
+      left join productdetailrubber r on p.ProductID = r.ProductID
+      left join productdetailwheel w on p.ProductID = w.ProductID
+      "," p.ProductID='".@$showneed_checkin_today->ProductID."' ");
+
+
     $i++;
-    if($showneed_checkin_today->TypeID == '1'){
-      $gettype = "ล้อแม๊ก ".$showneed_checkin_today->BrandName." ขนาด:".$showneed_checkin_today->diameterWheel." ขอบ:".$showneed_checkin_today->whediameter." รู:".$showneed_checkin_today->holeSize." ประเภท:".$showneed_checkin_today->typeFormat;
-    }else if($showneed_checkin_today->TypeID == '2'){
-      $gettype = "ยาง ".$showneed_checkin_today->BrandName." ขนาด:".$showneed_checkin_today->diameterRubber." ซี่รี่:".$showneed_checkin_today->series." ความกว้าง:".$showneed_checkin_today->width;
+    if($getneed->TypeID == '1'){
+      $gettype = "ล้อแม๊ก ".$getneed->BrandName." รุ่น:".$getneed->gen." ขนาด:".$getneed->diameterWheel." ขอบ:".$getneed->whediameter." รู:".$getneed->holeSize." ประเภท:".$getneed->typeFormat." ยี่ห้อ:".$getneed->BrandName." offset:".$getneed->offset." สี: ".$getneed->color." รุ่น: ".$getneed->gen ;
+    }else if($getneed->TypeID == '2'){
+      $gettype = "ยาง ".$getneed->BrandName." ขนาด:".$getneed->diameterRubber." ขอบ:".$getneed->rubdiameter." ซี่รี่:".$getneed->series." ความกว้าง:".$getneed->width." ยี่ห้อ:".$getneed->BrandName." กลุ่มยาง: ".$getneed->groudRubber
+      ." สัปดาห์: ".$getneed->productionWeek." ปี: ".$getneed->productionYear." รุ่น: ".$getneed->genRubber." ดัชนีความเร็ว: ".$getneed->speedIndex." ดัชนีน้ำหนัก: ".$getneed->weightIndex;
     }else{
       $gettype = "";
     }
   ?>
   <tr>
-    <td align="center"><?php echo @$i;?></td>
+    <td align="center"><?php echo $getneed->code ?></td>
     <td align=""><strong><?php echo @$gettype;?></strong></td>
     </tr>
 

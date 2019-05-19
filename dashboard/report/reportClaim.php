@@ -11,7 +11,7 @@
 
 <?php
   if(isset($_POST['search_product'])){
-      echo "<script>window.open(\"../dashboard/report/printReportClaim.php?Group=".addslashes($_POST['G_type'])."&datefrom=".addslashes($_POST['datePrfrom'])."&dateto=".addslashes($_POST['datePrto'])."\",'_blank')</script>";
+      echo "<script>window.open(\"../dashboard/report/printReportClaim.php?Group=".addslashes($_POST['G_type'])."&status=".addslashes($_POST['card_status'])."&datefrom=".addslashes($_POST['datePrfrom'])."&dateto=".addslashes($_POST['datePrto'])."\",'_blank')</script>";
   }
 ?>
 
@@ -27,6 +27,23 @@
                 <label for="wheel">สถานะ</label>
               </div>
 
+
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-2">
+              <label ><b>สถานะ :    </b></label>
+              <select name="card_status" id="card_status" class="form-control">
+              <?php
+                $getcard_type = $getdata->my_sql_select(NULL,"card_type","ctype_status='1' ORDER BY ctype_insert");
+                echo '<option value="" select>ทุกสถานะ</option>';
+                while($showcard_type = mysql_fetch_object($getcard_type)){
+                echo '<option value="'.$showcard_type->ctype_key.'">'.$showcard_type->ctype_name.'</option>';
+                }
+                ?>
+              </select>
+            </div>
+
           </div>
 
         <div class="form-group row">
@@ -41,6 +58,7 @@
 
 
         </div>
+
     </div>
      <div style="text-align: center;margin-bottom: 10px;">
           <button type="submit" name="search_product" id="search_product" class="btn btn-default"><i class="fa fa-print"></i> Print Previwe</button>

@@ -57,7 +57,7 @@
 </ol>
 
  <?php
- 
+
  echo @$alert;
  ?>
  <style>
@@ -65,19 +65,69 @@
 		<?php echo @$userdata->font_size_text;?>
 	}
 	</style>
+  <?
+  $getproduct = $getdata->my_sql_query("p.*, r.*, w.* ,p.ProductID as ProductID, p.Quantity as Quantity,r.diameter as rubdiameter ,w.diameter as whediameter,w.gen as genWheel
+  ,case
+    when p.TypeID = '2'
+    then (select b.Description from brandRubble b where r.brand = b.id)
+    when p.TypeID = '1'
+    then (select b.Description from BrandWhee b where b.id = w.brand)
+    end BrandName
+    , case
+    when p.TypeID = '2'
+    then (select r.code from productdetailrubber r where r.ProductID = p.ProductID)
+    when p.TypeID = '1'
+    then (select w.code from productdetailwheel w where w.ProductID = p.ProductID)
+    end code
+    "," product_N p
+    left join productdetailrubber r on p.ProductID = r.ProductID
+    left join productdetailwheel w on p.ProductID = w.ProductID
+    "," (r.code = '".addslashes($_GET['ProductID'])."' or w.code = '".addslashes($_GET['ProductID'])."') ");
+
+    if($getproduct->TypeID == '1'){
+      $gettype = "ล้อแม๊ก ".$getproduct->BrandName." รุ่น:".$getproduct->genWheel." ขนาด:".$getproduct->diameterWheel." ขอบ:".$getproduct->whediameter." รู:".$getproduct->holeSize." ประเภท:".$getproduct->typeFormat;
+    }else if($getproduct->TypeID == '2'){
+      $gettype = "ยาง ".$getproduct->BrandName." ขนาด:".$getproduct->diameterRubber." ซี่รี่:".$getproduct->series." ความกว้าง:".$getproduct->width;
+    }else{
+      $gettype = "";
+    }
+  ?>
 
 <?php
  if(isset($_POST['info_save'])){
     $getpo = $getdata->my_sql_query(NULL,"shelf","shelf_code='".addslashes($_POST['shelf_id'])."' ");
    if( $_POST['total'] > $getpo->amt){
-    $alert = '<div class="alert alert-danger alert-dismissable"><button data-dismiss="alert" class="close" type="button">×</button>จำนวนชั้นวางไม่เพียงพอ !!</div>';
-   }else{
-   $getdata->my_sql_update("shelf_detail"," amt_rimit =  amt_rimit + '".$_POST['total']."' ","shelf_code='".addslashes($_POST['shelf_id'])."' ");
+     if($_POST['total'] > $_GET['Amt'] ){
+       $alert = '<div class="alert alert-danger alert-dismissable"><button data-dismiss="alert" class="close" type="button">×</button>กรอกเกินจำนวนที่รับมา !!</div>';
+     }else{
+       $alert = '<div class="alert alert-danger alert-dismissable"><button data-dismiss="alert" class="close" type="button">×</button>จำนวนชั้นวางไม่เพียงพอ !!</div>';
+     }
+  }else{
+   $checkproinshelf = $getdata->my_sql_select(NULL,"shelf_detail","ProductID = '".addslashes($_GET['ProductID'])."' and  shelf_code='".addslashes($_POST['shelf_id'])."' ");
 
-   
+if(mysql_num_rows($checkproinshelf) < 1){
+   $getdata->my_sql_insert_New("shelf_detail","amt_rimit
+    , shelf_code, ProductID "
+    ," '".addslashes($_POST['total'])."'
+    ,'".addslashes($_POST['shelf_id'])."'
+    ,'".addslashes($_GET['ProductID'])."' ");
+$baland = $_POST['gettotal'] - $_POST['total'];
 
-   $getdata->my_sql_update("product_N"," Quantity =  Quantity + '".addslashes($_POST['total'])."'  ","ProductID='".addslashes($_POST['ProductID'])."' ");
+}else{
+  $getdata->my_sql_update("shelf_detail"," amt_rimit =  amt_rimit + '".$_POST['total']."' ","shelf_code='".addslashes($_POST['shelf_id'])."' and ProductID='".addslashes($_GET['ProductID'])."' ");
+  $baland = $_POST['gettotal'] - $_POST['total'];
+}
+
+  $getdata->my_sql_update("product_N"," Quantity =  Quantity + '".addslashes($_POST['total'])."'  ","ProductID='".addslashes($_POST['ProductID'])."' ");
+
+if($baland < 1){
+  echo "<script>window.location=\"../dashboard/index.php?p=receiveaddstock&q=".@$getproduct->code."&d=".addslashes($_GET['PO'])."&Mshelf=true&getAmt=".$_GET['getAmt']."\"</script>";
+}else{
+  echo "<script>window.location=\"../dashboard/index.php?p=addShelf&ProductID=".@$getproduct->code."&PO=".addslashes($_GET['PO'])."&Amt=".$baland."\"</script>";
+
    $alert = '<div class="alert alert-block alert-success fade in"><button data-dismiss="alert" class="close" type="button">×</button>เพิ่มรายการสำเร็จ</div>';
+}
+
    }
  }
  echo @$alert;
@@ -96,33 +146,7 @@
 
 <form method="post" enctype="multipart/form-data" name="form1" id="form1">
                             <div class="form-group row">
-                            <?
-                            $getproduct = $getdata->my_sql_query("p.*, r.*, w.* ,p.ProductID as ProductID, p.Quantity as Quantity,r.diameter as rubdiameter ,w.diameter as whediameter,w.gen as genWheel
-                            ,case
-                              when p.TypeID = '2'
-                              then (select b.Description from brandRubble b where r.brand = b.id)
-                              when p.TypeID = '1'
-                              then (select b.Description from BrandWhee b where b.id = w.brand)
-                              end BrandName
-                              , case
-                              when p.TypeID = '2'
-                              then (select r.code from productdetailrubber r where r.ProductID = p.ProductID)
-                              when p.TypeID = '1'
-                              then (select w.code from productdetailwheel w where w.ProductID = p.ProductID)
-                              end code
-                              "," product_N p
-                              left join productdetailrubber r on p.ProductID = r.ProductID
-                              left join productdetailwheel w on p.ProductID = w.ProductID 
-                              "," (r.code = '".addslashes($_GET['ProductID'])."' or w.code = '".addslashes($_GET['ProductID'])."') ");
 
-                              if($getproduct->TypeID == '1'){
-                                $gettype = "ล้อแม๊ก ".$getproduct->BrandName." รุ่น:".$getproduct->genWheel." ขนาด:".$getproduct->diameterWheel." ขอบ:".$getproduct->whediameter." รู:".$getproduct->holeSize." ประเภท:".$getproduct->typeFormat;
-                              }else if($getproduct->TypeID == '2'){
-                                $gettype = "ยาง ".$getproduct->BrandName." ขนาด:".$getproduct->diameterRubber." ซี่รี่:".$getproduct->series." ความกว้าง:".$getproduct->width;
-                              }else{
-                                $gettype = "";
-                              }
-                            ?>
                               <div class="col-xs-2">
                                 <input type="hidden" name="po" id="po" value="<?php echo @$getpo->po;?>" >
                                 <input type="hidden" name="ProductID" id="ProductID" value="<?php echo @$getproduct->ProductID;?>" >
@@ -153,7 +177,7 @@
                                                         }
                                                       ?>
                                                 </select>
-                                
+
                               </div>
                               <div class="col-xs-2">
                                 <label for="mname">จำนวน (ชิ้น)</label>
@@ -164,10 +188,10 @@
                               <label for="mname">จำนวน ที่รับ (ชิ้น)</label>
                                <input type="number" name="gettotal" id="gettotal" class="form-control number" size="4" readonly>
                               </div>
-                              
+
                             </div>
 
-                          
+
                           <div class="form-group row">
                               <div class="col-xs-3">
                                 <br>
@@ -198,10 +222,12 @@
                             </div>
                       </div>
                     </div>
-                  </div>                                       
+                  </div>
 <script type="text/javascript">
 $( document ).ready(function() {
-    
+  var gettotal = 0;
+  gettotal = '<?= addslashes($_GET['Amt'])?>'
+    $('#gettotal').val(gettotal);
 });
 
 function setchekc_total(isvalue){

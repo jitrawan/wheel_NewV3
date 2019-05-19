@@ -1,7 +1,8 @@
 <?php session_start();
 error_reporting(0);?>
 <?php
-require("../../../vendor/autoload.php");
+include("mpdf/mpdf.php");
+//require("../../../vendor/autoload.php");
 require("../../core/config.core.php");
 require("../../core/connect.core.php");
 require("../../core/functions.core.php");
@@ -67,8 +68,14 @@ $head .= '<h2 style="text-align:center">รายงานการเคลม<
 <p style="text-align:center"><b>รายงาน ณ วันที่ '.date("d/m/Y").' </b></p>
 <p style="text-align:center"><b>จัดกลุ่มตาม '.$getGroup.' </b></p>';
 
-if(isset($_GET['datefrom'])){
-	$head .= '<p style="text-align:center"><b>วันที่เคลม ระหว่าง '.$_GET['datefrom'].'  ถึง '.$_GET['dateto'].' </b></p>';
+if($_GET['datefrom'] != "" && $_GET['dateto'] != ""){
+	$head .= '<p style="text-align:center"><b>วันที่เคลม ระหว่าง '.date("d/m/Y",strtotime($_GET['datefrom'])).'  ถึง '.date("d/m/Y",strtotime($_GET['dateto'])).' </b></p>';
+}
+
+if($_GET['status'] != ""){
+   $getcard = $getdata->my_sql_query("ctype_name","card_type","ctype_key = 'c382e352e2e620a3c60a2cc7c6a7fa35' ");
+
+		$head .= '<p style="text-align:center"><b>สถานะ : '.$getcard->ctype_name.' </b></p>';
 }
 
 $head .= '<table>';
@@ -86,11 +93,16 @@ $head .= '<tr style="font-weight:bold; color:#FFF; background:#777777;">
             </tr>
 </thead>';
 
-$
 $content = "";
-if(isset($_GET['datefrom'])){
-$getGroup = $getdata->my_sql_select("card_code, card_key ","card_info"," card_status != '' and card_insert BETWEEN '".htmlentities($_GET['datefrom'])."' and '".htmlentities($_GET['dateto'])."'  Group by card_code ,card_key");
+$strsql = "";
+if($_GET['status'] != ""){
+$strsql .= "and card_insert BETWEEN '".htmlentities($_GET['datefrom'])."' and '".htmlentities($_GET['dateto'])."'";
 }
+if($_GET['status'] != ""){
+	$strsql .= "and card_status = '".$_GET['status']."' ";
+}
+
+$getGroup = $getdata->my_sql_select("card_code, card_key ","card_info"," card_status != '' $strsql  Group by card_code ,card_key");
 while($row = mysql_fetch_object($getGroup)){
 $content .= '<tr style="font-weight:bold; color:#FFF; background:#A9A9A9;">
 <td colspan="5">&nbsp;&nbsp;<b>เลขที่ใบเคลม : '.$row->card_code.' </b></td>

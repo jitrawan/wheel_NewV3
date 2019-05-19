@@ -11,7 +11,7 @@
 
    <?php
      if(isset($_POST['search_product'])){
-        echo "<script>window.open(\"../dashboard/report/printReportProduct.php?key=".addslashes($_POST['search_type'])."\",'_blank')</script>";
+        echo "<script>window.open(\"../dashboard/report/printReportProduct.php?key=".addslashes($_POST['search_type'])."&hand=".addslashes($_POST['search_hand'])."\",'_blank')</script>";
      }
    ?>
 <nav class="navbar navbar-default" role="navigation">
@@ -41,6 +41,19 @@
               <input type="radio" id="search_rubber" name="search_type" value="2">
               <label for="rubber">ยาง</label>
             </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+              <label ><b>สินค้า มือ :    </b></label>
+              <select name="search_hand" id="search_hand" class="form-control">
+                <option value="0" selected="selected">--ทั้งหมด--</option>
+                <option value="1">สินค้ามือ 1</option>
+                  <option value="2">สินค้ามือ 2</option>
+
+              </select>
+            </div>
+
         </div>
     </div>
      <div style="text-align: center;margin-bottom: 10px;">

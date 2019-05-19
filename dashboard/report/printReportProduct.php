@@ -96,6 +96,9 @@ th {
 <p style="text-align:center"><b>จัดกลุ่มตาม ประเภท , มือ </b></p>';
 
 $str_sql = "";
+$str_show = "";
+
+
 
 if(isset($_GET['key'])){
 
@@ -113,9 +116,14 @@ if(isset($_GET['key'])){
 
   }
 
-
-
 }
+
+if(addslashes($_GET['hand']) != 0){
+		$str_sql  .= " And hand = '".$_GET['hand']."' ";
+		$head .= '<p style="text-align:center"><b>สินค้ามือ : '.$_GET['hand'].' </b></p>';
+}
+
+
 
 $head .= '<table>
 
@@ -185,7 +193,7 @@ if (mysql_num_rows($GroupType) > 0) {
 
 									$sumPriceBuy = $sumPriceBuy + $showDetailProduct->PriceBuy;
                   $sumPriceSale = $sumPriceSale + $showDetailProduct->PriceSale;
-                  
+
                   if($showDetailProduct->TypeID == '1'){
                     $gettype = $showDetailProduct->BrandName." รุ่น:".$showDetailProduct->genWheel." ขนาด:".$showDetailProduct->diameterWheel." ขอบ:".$showDetailProduct->whediameter." รู:".$showDetailProduct->holeSize." ประเภท:".$showDetailProduct->typeFormat;
                   }else if($showDetailProduct->TypeID == '2'){
@@ -193,7 +201,7 @@ if (mysql_num_rows($GroupType) > 0) {
                   }else{
                     $gettype = "";
                   }
-                  
+
 
                 $content .='<tr>
 

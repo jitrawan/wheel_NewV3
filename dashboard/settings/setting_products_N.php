@@ -338,7 +338,7 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                             <div class="form-group row">
                                               <div class="col-md-2 pr-2">
                                                 <label for="genWheel">รุ่น</label>
-                                                <select name="genWheel" id="genWheel" class="form-control" required>
+                                                <select name="genWheel" id="genWheel" class="form-control cw" required>
                                                   <option value="" selected="selected">--เลือก--</option>
                                                   <? $getgen = $getdata->my_sql_select(NULL,"genwhee","Description IS NOT NULL order by Description ");
                                                      while($showgen = mysql_fetch_object($getgen)){?>
@@ -500,7 +500,7 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                                  <label for="hand">เปอร์เซ็นยาง (%)</label>
                                                       <input type="number" name="persentrubber" id="persentrubber" class="form-control" value="">
                                                </div>
-                                               
+
                                              </div>
                                              <div class="col-md-4">
                                               <label for="PriceSale">ราคาขาย (บาท)</label>
@@ -532,7 +532,7 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                           </div>
 
                                         <div class="form-group row">
-                                            
+
                                              <!--div class="col-md-4">
                                              <label for="PriceBuy">ราคาซื้อ (บาท)</label>
                                             <input type="number" name="PriceBuy" id="PriceBuy" class="form-control number" value="0" onblur="chkprice(this.value)" required style="text-align: right;">

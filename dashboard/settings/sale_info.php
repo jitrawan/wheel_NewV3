@@ -102,8 +102,25 @@ if(isset($_POST['tSave'])){
   ,address='".$_POST['address']."' ","
    reserve_key='".$_POST['savereserve_key']."' ");
 
-  $productInfo = $getdata->my_sql_select("  sum(item_amt) sumatm ,ProductID ","reserve_item "," reserve_key='".$_POST['savereserve_key']."' GROUP BY ProductID ");
+  $productInfo = $getdata->my_sql_select("  sum(item_amt) sumatm ,ProductID,shelf_code ","reserve_item "," reserve_key='".$_POST['savereserve_key']."' GROUP BY ProductID , shelf_code ");
   while($objpro = mysql_fetch_object($productInfo)){
+    //หักในshelf
+
+    $getproduct = $getdata->my_sql_query("
+     case
+      when p.TypeID = '2'
+      then (select r.code from productdetailrubber r where r.ProductID = p.ProductID)
+      when p.TypeID = '1'
+      then (select w.code from productdetailwheel w where w.ProductID = p.ProductID)
+      end code
+      "," product_N p
+      left join productdetailrubber r on p.ProductID = r.ProductID
+      left join productdetailwheel w on p.ProductID = w.ProductID
+      "," p.ProductID = '".$objpro->ProductID."' ");
+
+  $getdata->my_sql_update(" shelf_detail "," amt_rimit=amt_rimit - '".$objpro->sumatm."' "," ProductID='".$getproduct->code."' and shelf_code ='".$objpro->shelf_code."' ");
+
+    //หักstock
       $getdata->my_sql_update(" product_n "," Quantity=Quantity - '".$objpro->sumatm."' "," ProductID='".$objpro->ProductID."' ");
 
   }
@@ -111,6 +128,7 @@ if(isset($_POST['tSave'])){
   echo "<script>window.location=\"../dashboard/?p=saleProduct\"</script>";
 
 }else if(isset($_POST['save_item'])){
+
 
   $getProductID = $getdata->my_sql_query("p.ProductID","product_N p
  left join productDetailWheel w on p.ProductID = w.ProductID
@@ -127,7 +145,7 @@ if(isset($_POST['tSave'])){
 
 $getAmt = $getdata->my_sql_query(NULL,"reserve_item","item_key='".$_POST['itemId']."' ");
 
-    $getdicountTotal = ($getproduct_info->PriceSale * $_POST['setdiscount']) / 100;
+    $getdicountTotal = $_POST['setdiscount'];
     $getprice = $getproduct_info->PriceSale - $getdicountTotal;
     $gettotal = $getprice * $getAmt->item_amt;
 
@@ -143,6 +161,7 @@ $getAmt = $getdata->my_sql_query(NULL,"reserve_item","item_key='".$_POST['itemId
 
   }else{
 /*ขั้นตอนการ save product info*/
+
   $reserve_key=md5($_POST['reserve_key'].$getProductID->ProductID.'/'.@RandomString(4,'C',7));
 
   $getdata->my_sql_update("reserve_info"," reserve_status='P' "," reserve_key='".$_POST['reserve_key']."' ");
@@ -162,6 +181,7 @@ $getAmt = $getdata->my_sql_query(NULL,"reserve_item","item_key='".$_POST['itemId
     ,item_price='".$getproduct_info->PriceSale."'
     ,item_total='".$gettotal."'
     ,cost_price=".$getproduct_info->PriceBuy."
+    ,shelf_code='".$_POST['setshelf']."'
     ,create_Date=NOW() ");
 
     $getreserve_info = $getdata->my_sql_query(NULL,"reserve_info"," reserve_key='".$_POST['reserve_key']."' ");
@@ -222,7 +242,6 @@ if($num == $numAmt){
 }else{
   $alert = '<div class="alert alert-danger alert-dismissable" id="alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>จำนวนสินค้าไม่พอจำหน่าย กรุณาระบุใหม่อีกครั้ง !</div>';
 }
-
 }else{
 
   $getdata->my_sql_delete("reserve_info","reserve_status = 'N'");
@@ -278,6 +297,24 @@ while($objShow = mysql_fetch_object($getproduct_info)){
   ?>
 
   <!-- Modal Edit -->
+  <div class="modal fade" id="selectshelf" tabindex="-1" role="dialog" aria-labelledby="memberModalLabel" aria-hidden="true">
+      <form method="post" enctype="multipart/form-data" name="form2" id="form2">
+
+       <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php echo @LA_BTN_CLOSE;?></span></button>
+                      <h4 class="modal-title" id="memberModalLabel">เลือกshelf</h4>
+                  </div>
+                  <div class="ct">
+
+                  </div>
+              </div>
+          </div>
+    </form>
+  </div>
+
+  <!-- Modal Edit -->
   <div class="modal fade" id="show_event" tabindex="-1" role="dialog" aria-labelledby="memberModalLabel" aria-hidden="true">
       <form method="post" enctype="multipart/form-data" name="form2" id="form2">
 
@@ -300,7 +337,7 @@ while($objShow = mysql_fetch_object($getproduct_info)){
 <div class="panel panel-primary">
 <div class="panel-heading"><i class="fa fa-shopping-cart fa-fw"></i> การขายสินค้า</div>
 <div class="panel-body">
-  <form method="post" enctype="multipart/form-data" name="form2" id="additem">
+  <form method="post" enctype="multipart/form-data" name="additem" id="additem">
 <div class="form-group row">
   <div class="col-xs-6">
     <?
@@ -366,8 +403,10 @@ while($objShow = mysql_fetch_object($getproduct_info)){
   <span class="input-group-addon"><i class="glyphicon glyphicon-shopping-cart"></i></span>
   <input class="form-control" placeholder="กรอกรหัสสินค้า เพื่อค้นหา" type="text" name="ProductID" id="ProductID" autocomplete="off">
   <input class="form-control" type="hidden" name="setProductID" id="setProductID">
+  <input class="form-control" type="hidden" name="setshelf" id="setshelf">
   <input class="form-control" type="hidden" name="setdiscount" id="setdiscount">
   <input class="form-control" type="hidden" name="itemId" id="itemId">
+  <a id="btnselectshelf" name="btnselectshelf" data-toggle="modal" data-target="#selectshelf"  ></a>
   <div class="autocomplete" style="width:50%;"></div>
 </div>
 <button type="submit" name="save_item" id="save_item" style="display:none;"></button>
@@ -420,10 +459,10 @@ while($objShow = mysql_fetch_object($getproduct_info)){
 
       ?>
       <tr id="<?php echo @$objShow->item_key;?>">
-        <td class="right"><label class="g-input"><div><input type="text" class="form-control right" readonly="true" size="5" value="<?= @$objShow->item_amt?>  <?php echo @$objShow->ProductID;?>" class="price"></div></label></td>
+        <td class="right"><label class="g-input"><div><input type="text" class="form-control right" readonly="true" size="5" value="<?= @$objShow->item_amt?> " class="price"></div></label></td>
         <td class=""><label class="g-input"><div><input type="text" class="form-control" size="5" readonly="true" value="<?= $gettype?>" class="price"></div></label></td>
         <td class="right"><label class="g-input"><div><input type="text" class="form-control right" readonly="true" size="5" value="<?= convertPoint2($objShow->item_price,2)?>" class="price"></div></label></td>
-        <td class="right"><label class="g-input"><span class="g-input"><div class="input-group"><input type="number" class="form-control right" size="5" value="<?php echo @$objShow->item_discountPercent;?>" onblur="discount('<?php echo @$objShow->item_key;?>',this.value,'<?php echo @$objShow->ProductID;?>') " class="price" ><span class="input-group-addon">%</span></div></span></label></td>
+        <td class="right"><label class="g-input"><span class="g-input"><div class="input-group"><input type="number" class="form-control right" size="5" value="<?php echo @$objShow->item_discountPercent;?>" onblur="discount('<?php echo @$objShow->item_key;?>',this.value,'<?php echo @$objShow->ProductID;?>') " class="price" ><span class="input-group-addon">B</span></div></span></label></td>
         <td class="right"><label class="g-input"><div></div></label></td>
         <td class="right"><label class="g-input"><div><input type="text" class="form-control right" size="5" value="<?= convertPoint2($objShow->item_total,2)?>" class="price"></div></label></td>
         <td style="text-align: center;"><a onClick="javascript:deleteItem('<?php echo @$objShow->item_key;?>');" class="btn btn-xs btn-danger" style="color:#FFF;" title="ลบ"><i class="fa fa-times"></i> <?php echo @LA_BTN_DELETE;?></a></td>
@@ -444,7 +483,7 @@ while($objShow = mysql_fetch_object($getproduct_info)){
 <table id="">
   <tfoot>
     <tr>
-      <td colspan="6">
+      <td colspan="7">
         <nav class="navbar navbar-default" role="navigation">
   <div class="row">
       <div class="col-xs-2" style="padding-top: 15px; padding-left: 20px;">
@@ -544,6 +583,9 @@ while($objShow = mysql_fetch_object($getproduct_info)){
 <script language="javascript">
 
 $(document).ready(function(){
+
+
+
   $("#adddatacustomer").click(function(){
     $("#datacustomer").toggle();
   });
@@ -571,7 +613,8 @@ $(document).ready(function(){
              select: function (event, ui) {
                var str = ui.item.value;
                $('#setProductID').val(str);
-               $('#save_item').click();
+                selectshelf(str);
+               //$('#save_item').click();
                }
     });
 
@@ -592,6 +635,7 @@ $(document).ready(function(){
 
 
 });
+
 function issaleset(isval){
   if(isval.value != ""){
     var totalnum = isval.value * 4;
@@ -655,5 +699,37 @@ function discount(id,price,ProductId){
   $('#itemId').val(id);
   $('#save_item').click();
 }
+var getkey = "";
+var amt = 0;
+function selectshelf(isvalue){
+  getkey = isvalue;
+  amt = $('#product_quantity').val();
+  $('#btnselectshelf').click();
+  //return false;
+
+}
+
+$('#selectshelf').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+    //  var recipient = button.data('whatever') // Extract info from data-* attributes
+    var modal = $(this);
+      var dataString = 'key='+getkey+'&amt='+amt;
+
+        $.ajax({
+            type: "GET",
+            url: "settings/selectShelf.php",
+            data: dataString,
+            cache: false,
+            success: function (data) {
+               // console.log(data);
+                modal.find('.ct').html(data);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+});
+
+
 
 </script>
