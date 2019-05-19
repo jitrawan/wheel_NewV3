@@ -123,14 +123,8 @@ $getitem = mysql_fetch_object($getedit);
 																							 <div class="form-group row">
 																								 <div class="col-md-2 pr-2">
 																									 <label for="edit_genWheel">รุ่น</label>
-																									 <select name="edit_genWheel" id="edit_genWheel" class="form-control">
-																										 <option value="" selected="selected">--เลือก--</option>
-																										 <? $getgen = $getdata->my_sql_select(NULL,"genwhee","Description IS NOT NULL order by Description ");
-																												while($showgen = mysql_fetch_object($getgen)){?>
-																											<option value="<?= $showgen->Description?>" ><?= $showgen->Description?></option>
-																											<?}?>
-																									 </select>
-																								 </div>
+																									 <input type="text" name="edit_genWheel" id="edit_genWheel" class="form-control">
+																									 </div>
 	                                                   <div class="col-md-2 pr-2">
 	                                                     <label for="edit_offset">offset(mm)</label>
 	                                                       <!--input type="text" name="edit_offset" id="edit_offset" class="form-control" value="<?php echo @$getitem->offset;?>" -->
@@ -290,7 +284,7 @@ $getitem = mysql_fetch_object($getedit);
   	                                                     <input type="number" name="edit_persentrubber" id="edit_persentrubber" class="form-control" value="">
   	                                              </div>
   	                                            </div>
-																										 
+
 																								<div class="col-md-4">
 	                                               <label for="edit_PriceSale">ราคาขาย (บาท)</label>
 	                                               <input type="number" name="edit_PriceSale" id="edit_PriceSale" class="form-control number" value="<?php echo @$getitem->PriceSale;?>" onblur="chkprice_edit(this.value)" style="text-align: right;">
@@ -320,7 +314,7 @@ $getitem = mysql_fetch_object($getedit);
 	                                           </div>
 
 	                                         <div class="form-group row">
-	                                           
+
 	                                              <!--div class="col-md-4">
 	                                              <label for="edit_PriceBuy">ราคาซื้อ (บาท)</label>
 	                                             <input type="number" name="edit_PriceBuy" id="edit_PriceBuy" class="form-control number" value="<?php echo @$getitem->PriceBuy;?>" onblur="chkprice_edit(this.value)" style="text-align: right;">

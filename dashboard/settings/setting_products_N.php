@@ -338,14 +338,8 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                             <div class="form-group row">
                                               <div class="col-md-2 pr-2">
                                                 <label for="genWheel">รุ่น</label>
-                                                <select name="genWheel" id="genWheel" class="form-control cw" required>
-                                                  <option value="" selected="selected">--เลือก--</option>
-                                                  <? $getgen = $getdata->my_sql_select(NULL,"genwhee","Description IS NOT NULL order by Description ");
-                                                     while($showgen = mysql_fetch_object($getgen)){?>
-                                                   <option value="<?= $showgen->Description?>" ><?= $showgen->Description?></option>
-                                                   <?}?>
-                                                </select>
-                                              </div>
+                                                <input type="text" name="genWheel" id="genWheel" class="form-control cw" value="" required>
+                                                </div>
                                                   <div class="col-md-2 pr-2">
                                                     <label for="brandWheel">offset(mm)</label>
                                                     <select name="offset" id="offset" class="form-control cw" required>
@@ -654,14 +648,8 @@ console.log('<?= $_POST['edit_genWheel']?>');
           <div class="form-group row">
             <div class="col-md-2">
             <label for="search_rim">รุ่น</label>
-            <select name="search_gen_Wheel" id="search_gen_Wheel" class="form-control">
-              <option value="" selected="selected">--เลือก--</option>
-              <? $getgenWhee = $getdata->my_sql_select(NULL,"genwhee","status = '1' ORDER BY id ");
-                while($showgenWhee = mysql_fetch_object($getgenWhee)){?>
-              <option value="<?= $showgenWhee->Description?>" ><?= $showgenWhee->Description?></option>
-              <?}?>
-            </select>
-            </div>
+            <input type="text" name="search_gen_Wheel" id="search_gen_Wheel" class="form-control" value="" >
+          </div>
           </div>
     </div>
            <!--ยาง-->
