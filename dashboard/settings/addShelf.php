@@ -120,10 +120,16 @@ $baland = $_POST['gettotal'] - $_POST['total'];
 
   $getdata->my_sql_update("product_N"," Quantity =  Quantity + '".addslashes($_POST['total'])."'  ","ProductID='".addslashes($_POST['ProductID'])."' ");
 
+  if(isset($_GET['getAmt'])){
+      $gettest = $_GET['getAmt'];
+  }else{
+      $gettest = $gettest;
+  }
+
 if($baland < 1){
-  echo "<script>window.location=\"../dashboard/index.php?p=receiveaddstock&q=".@$getproduct->code."&d=".addslashes($_GET['PO'])."&Mshelf=true&getAmt=".$_GET['getAmt']."\"</script>";
+  echo "<script>window.location=\"../dashboard/index.php?p=receiveaddstock&q=".@$getproduct->code."&d=".addslashes($_GET['PO'])."&Mshelf=true&getAmt=".$gettest."\"</script>";
 }else{
-  echo "<script>window.location=\"../dashboard/index.php?p=addShelf&ProductID=".@$getproduct->code."&PO=".addslashes($_GET['PO'])."&Amt=".$baland."\"</script>";
+  echo "<script>window.location=\"../dashboard/index.php?p=addShelf&ProductID=".@$getproduct->code."&PO=".addslashes($_GET['PO'])."&Amt=".$baland."&getAmt=".$gettest."\"</script>";
 
    $alert = '<div class="alert alert-block alert-success fade in"><button data-dismiss="alert" class="close" type="button">×</button>เพิ่มรายการสำเร็จ</div>';
 }

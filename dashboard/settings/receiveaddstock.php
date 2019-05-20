@@ -82,14 +82,21 @@ $newCost = $_POST['total'] * $_POST['price'];
 
 //get ราคาต้นทุนก่อนหน้า
 $getProduct = $getdata->my_sql_query(null,"product_n","ProductID = '".addslashes($_POST['ProductID'])."' ");
-$currentCost = $getProduct->Quantity * $getProduct->PriceBuy;
+
+if($getProduct->Quantity < 1){
+  $currentCost = $getProduct->Quantity * $getProduct->PriceBuy;
+}else{
+  $currentCost = ($getProduct->Quantity - $_POST['total']) * $getProduct->PriceBuy;
+}
+
 
 //sum จำนวนสินค้าที่เหลือ
-$sumAmtAll = $_POST['total'] + $getProduct->Quantity;
+$sumAmtAll = $getProduct->Quantity;
+
+
 
 //sum ต้นทุนทั้งหมด เพื่อ หา ต้นทุนใหม่
 $priceCost = ($newCost + $currentCost) / $sumAmtAll;
-
 
 //update จำนวน และ ราคาต้นทุนให้กับ table สินค้า
 

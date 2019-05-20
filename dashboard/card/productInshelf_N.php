@@ -198,7 +198,7 @@ if(isset($_POST['save_new_status'])){
          <div class="col-md-2">
            <label for="search_offset">รุ่น</label>
            <input type="text" name="search_gen_Wheel" id="search_gen_Wheel" class="form-control" value="" >
-          
+
          </div>
          </div>
 </div>
@@ -320,7 +320,16 @@ if(isset($_POST['save_new_status'])){
   <?php
 
    if(htmlentities($_GET['q']) != ""){
-     $getproduct = $getdata->my_sql_selectJoin(" p.*, r.*, w.*, s.*,p.ProductID as productMain, d.dealer_name as dealer_name, d.mobile as mobile
+     $getproduct = $getdata->my_sql_select(" s.shelf_code , s.ProductID "
+     ,"shelf_detail s
+     left join product_N p on p.ProductID = (select pp.ProductID from product_N pp
+                                        left join productDetailWheel ww on pp.ProductID = ww.ProductID
+                      left join productDetailRubber rr on pp.ProductID = rr.ProductID
+                                        where (rr.code = s.ProductID or ww.code = s.ProductID ) )
+     left join productDetailWheel w on p.ProductID = w.ProductID
+     left join productDetailRubber r on p.ProductID = r.ProductID"
+     ,"(r.code LIKE '%".htmlentities($_GET['q'])."%' or w.code LIKE '%".htmlentities($_GET['q'])."%') GROUP by s.shelf_code, s.ProductID ORDER BY p.ProductID");
+     /*$getproduct = $getdata->my_sql_selectJoin(" p.*, r.*, w.*, s.*,p.ProductID as productMain, d.dealer_name as dealer_name, d.mobile as mobile
      ,case
        when p.TypeID = '2'
        then (select r.code from productdetailrubber r where r.ProductID = p.ProductID)
@@ -332,7 +341,7 @@ if(isset($_POST['save_new_status'])){
      left join productDetailRubber r on p.ProductID = r.ProductID
      left join shelf s ON p.shelf_id = s.shelf_id
      left join dealer d ON p.dealer_code = d.dealer_code "
-     ,"Where (r.code LIKE '%".htmlentities($_GET['q'])."%' or w.code LIKE '%".htmlentities($_GET['q'])."%') ");
+     ,"Where (r.code LIKE '%".htmlentities($_GET['q'])."%' or w.code LIKE '%".htmlentities($_GET['q'])."%') ");*/
 
   }else{
     $str_sql = "";
@@ -373,8 +382,17 @@ if(isset($_POST['save_new_status'])){
          $str_sql  .= " And w.color in (".$strcol.") ";
         }
 
-
-       $getproduct = $getdata->my_sql_selectJoin("p.*, r.*, w.*, s.*,p.ProductID as productMain, d.dealer_name as dealer_name, d.mobile as mobile
+        $getproduct = $getdata->my_sql_select(" s.shelf_code , s.ProductID "
+        ,"shelf_detail s
+        left join product_N p on p.ProductID = (select pp.ProductID from product_N pp
+                                           left join productDetailWheel ww on pp.ProductID = ww.ProductID
+                         left join productDetailRubber rr on pp.ProductID = rr.ProductID
+                                           where (rr.code = s.ProductID or ww.code = s.ProductID ) )
+        left join productDetailWheel w on p.ProductID = w.ProductID
+        left join productDetailRubber r on p.ProductID = r.ProductID
+        "
+        ,"p.TypeID = '1' ".$str_sql." GROUP by s.shelf_code, s.ProductID ORDER BY p.ProductID");
+      /* $getproduct = $getdata->my_sql_selectJoin("p.*, r.*, w.*, s.*,p.ProductID as productMain, d.dealer_name as dealer_name, d.mobile as mobile
        ,case
          when p.TypeID = '2'
          then (select b.Description from brandRubble b where r.brand = b.id)
@@ -387,7 +405,11 @@ if(isset($_POST['save_new_status'])){
            when p.TypeID = '1'
            then (select w.code from productdetailwheel w where w.ProductID = p.ProductID)
            end code
-       ","product_N","productDetailWheel w on p.ProductID = w.ProductID left join productDetailRubber r on p.ProductID = r.ProductID left join shelf s ON p.shelf_id = s.shelf_id left join dealer d ON p.dealer_code = d.dealer_code "," Where p.TypeID = '1' ".$str_sql);
+       ","product_N","productDetailWheel w on p.ProductID = w.ProductID
+       left join productDetailRubber r on p.ProductID = r.ProductID
+       left join shelf s ON p.shelf_id = s.shelf_id
+       left join dealer d ON p.dealer_code = d.dealer_code "
+       ," Where p.TypeID = '1' ".$str_sql);*/
 
      }else{
        if($_POST['search_diameterRubber'] != ""){
@@ -402,6 +424,18 @@ if(isset($_POST['save_new_status'])){
          if(addslashes($_POST['search_brand']) != ""){
            $str_sql  .= " And r.brand = '".addslashes($_POST['search_brand'])."' ";
          }
+
+         $getproduct = $getdata->my_sql_select(" s.shelf_code , s.ProductID "
+         ,"shelf_detail s
+         left join product_N p on p.ProductID = (select pp.ProductID from product_N pp
+                                            left join productDetailWheel ww on pp.ProductID = ww.ProductID
+         									left join productDetailRubber rr on pp.ProductID = rr.ProductID
+                                            where (rr.code = s.ProductID or ww.code = s.ProductID ) )
+         left join productDetailWheel w on p.ProductID = w.ProductID
+         left join productDetailRubber r on p.ProductID = r.ProductID
+         "
+         ,"p.TypeID = '2' ".$str_sql." GROUP by s.shelf_code, s.ProductID ORDER BY p.ProductID");
+         /*
        $getproduct = $getdata->my_sql_selectJoin("p.*, r.*, w.*, s.*,p.ProductID as productMain, d.dealer_name as dealer_name, d.mobile as mobile ,w.diameter as diameterWheel,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
        ,case
          when p.TypeID = '2'
@@ -415,28 +449,28 @@ if(isset($_POST['save_new_status'])){
            when p.TypeID = '1'
            then (select w.code from productdetailwheel w where w.ProductID = p.ProductID)
            end code
-       ","product_N","productDetailWheel w on p.ProductID = w.ProductID left join productDetailRubber r on p.ProductID = r.ProductID left join shelf s ON p.shelf_id = s.shelf_id left join dealer d ON p.dealer_code = d.dealer_code ","Where p.TypeID = '2' ".$str_sql." ORDER BY p.ProductID ");
+       ","product_N","productDetailWheel w on p.ProductID = w.ProductID
+       left join productDetailRubber r on p.ProductID = r.ProductID
+        left join shelf s ON p.shelf_id = s.shelf_id
+        left join dealer d ON p.dealer_code = d.dealer_code "
+        ,"Where p.TypeID = '2' ".$str_sql." ORDER BY p.ProductID ");
+        */
      }
    }else{
-    $getproduct = $getdata->my_sql_selectJoin("p.*, r.*, w.*, s.*,p.ProductID as productMain, d.dealer_name as dealer_name, d.mobile as mobile ,w.diameter as diameterWheel,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter
-    ,case
-      when p.TypeID = '2'
-      then (select b.Description from brandRubble b where r.brand = b.id)
-      when p.TypeID = '1'
-      then (select b.Description from BrandWhee b where b.id = w.brand)
-      end BrandName
-      ,case
-        when p.TypeID = '2'
-        then (select r.code from productdetailrubber r where r.ProductID = p.ProductID)
-        when p.TypeID = '1'
-        then (select w.code from productdetailwheel w where w.ProductID = p.ProductID)
-        end code
-    ","product_N","productDetailWheel w on p.ProductID = w.ProductID left join productDetailRubber r on p.ProductID = r.ProductID left join shelf s ON p.shelf_id = s.shelf_id left join dealer d ON p.dealer_code = d.dealer_code ","Where ProductStatus in ('1',2)  ORDER BY p.ProductID ");
-    ?>
-    <script>
-    console.log('<?= mysql_num_rows($getproduct)?>');
-    </script>
-    <?
+     $getproduct = $getdata->my_sql_select(" s.shelf_code , s.ProductID "
+     ,"shelf_detail s
+     left join product_N p on p.ProductID = (select pp.ProductID from product_N pp
+                                        left join productDetailWheel ww on pp.ProductID = ww.ProductID
+     									left join productDetailRubber rr on pp.ProductID = rr.ProductID
+                                        where (rr.code = s.ProductID or ww.code = s.ProductID ) )
+     left join productDetailWheel w on p.ProductID = w.ProductID
+     left join productDetailRubber r on p.ProductID = r.ProductID
+     GROUP by s.shelf_code, s.ProductID ORDER BY p.ProductID
+     ",Null);
+
+?>
+<script>console.log('<?= mysql_num_rows($getproduct)?>')</script>
+<?
    }
  }
 
@@ -457,7 +491,28 @@ if(isset($_POST['save_new_status'])){
      </thead>
        <tbody>
        <?
-       while($showproduct = mysql_fetch_object($getproduct)){
+       while($showtt = mysql_fetch_object($getproduct)){
+
+$showshelf = $getdata->my_sql_query("shelf_detail,shelf_class","shelf","shelf_code = '".$showtt->shelf_code."' ");
+
+$showproduct = $getdata->my_sql_query("p.*, r.*, w.* ,p.ProductID as ProductID, p.Quantity as Quantity,r.diameter as rubdiameter ,w.diameter as whediameter,w.gen as genWheel
+,case
+  when p.TypeID = '2'
+  then (select b.Description from brandRubble b where r.brand = b.id)
+  when p.TypeID = '1'
+  then (select b.Description from BrandWhee b where b.id = w.brand)
+  end BrandName
+  , case
+  when p.TypeID = '2'
+  then (select r.code from productdetailrubber r where r.ProductID = p.ProductID)
+  when p.TypeID = '1'
+  then (select w.code from productdetailwheel w where w.ProductID = p.ProductID)
+  end code
+  "," product_N p
+  left join productdetailrubber r on p.ProductID = r.ProductID
+  left join productdetailwheel w on p.ProductID = w.ProductID
+  "," (r.code = '".$showtt->ProductID."' or w.code = '".$showtt->ProductID."' ) ");
+
          $x++;
 
          if($showproduct->TypeID == '1'){
@@ -468,18 +523,20 @@ if(isset($_POST['save_new_status'])){
          }else{
            $gettype = "";
          }
-
+if($gettype != ""){
        ?>
        <tr>
-         <td >&nbsp;<?php echo @$showproduct->shelf_detail;?>&nbsp; ชั้น &nbsp;<?php echo @$showproduct->shelf_class;?></td>
-         <td align="center"><?php echo @$showproduct->code;?></td>
+         <td >&nbsp;<?php echo @$showshelf->shelf_detail;?>&nbsp; ชั้น &nbsp;<?php echo @$showshelf->shelf_class;?></td>
+         <td align="center">  <?php echo @$showproduct->code;?></td>
          <!--td valign="middle"><strong><?php echo @$showproduct->dealer_code;?> | <?php echo @$showproduct->dealer_name;?> | <?php echo @$showproduct->mobile;?></strong></td-->
          <td valign="middle"><? echo $gettype?></td>
          <td align="right" valign="middle"><strong><?php echo @convertPoint2(@$showproduct->Quantity,'0');?></strong>&nbsp;</td>
          <td align="right" valign="middle"><strong><?php echo @convertPoint2(@$showproduct->PriceBuy,'2');?></strong>&nbsp;</td>
          <td align="right" valign="middle"><strong><?php echo @convertPoint2(@$showproduct->PriceSale,'2');?></strong>&nbsp;</td>
       </tr>
-    <? } ?>
+    <?
+  }
+ } ?>
      </tbody>
    </table>
        <?php
