@@ -353,7 +353,7 @@ console.log('<?= $_POST['edit_genWheel']?>');
                                                   </div>
                                                   <div class="col-md-3 pr-2 pl-2">
                                                     <label for="color">color</label>
-                                                    <select name="color" id="color" class="form-control cw" required>
+                                                    <select name="color" id="color" class="form-control cw" >
                                                         <option value="" selected="selected">--สีอื่น--</option>
                                                         <option value="black">black</option> <option value="bronze">bronze</option> <option value="chrome">chrome</option> <option value="silver">silver</option>
                                                         <option value="gray">gray</option> <option value="white">white</option> <option value="copper">copper</option> <option value="gold">gold</option>
