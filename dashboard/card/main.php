@@ -10,7 +10,7 @@
 <?php
 $getparamKey = "";
 if(isset($_GET['paramKey'])){
-$getparamKey = '&reserve_key='.$_GET['reserveKey'].'&paramKey='.$_GET['paramKey'];
+$getparamKey = '&reserve_key='.$_GET['reserveKey'].'&item_key='.$_GET['item_key'].'&paramKey='.$_GET['paramKey'];
 }
 if(isset($_POST['save_card'])){
 

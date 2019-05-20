@@ -209,7 +209,7 @@ if($dteDiff >= 0){
             <td style="text-align: center;"><?= @$objShow->item_amt?></td>
             <td class=""><?= @$objShow->code?> <?= $gettype?></td>
             <td style="text-align: center;">
-            <a onClick="javascript:sentclaim('<?php echo @$showcard->reserve_key;?>','<?php echo @$objShow->ProductID;?>');" class="btn btn-xs btn-success" style="color:#FFF;" title="ส่งเคลม"><i class="fa fa-edit"></i> ส่งเคลม</a>
+            <a onClick="javascript:sentclaim('<?php echo @$showcard->reserve_key;?>','<?php echo @$showcard->item_key;?>','<?php echo @$objShow->ProductID;?>');" class="btn btn-xs btn-success" style="color:#FFF;" title="ส่งเคลม"><i class="fa fa-edit"></i> ส่งเคลม</a>
             <button type="button" data-toggle="modal" data-target="#edit_item" data-whatever="<?php echo @$objShow->ProductID;?>" class="btn btn-xs btn-warning" style="color:#FFF;" title="เปลี่ยนสินค้า" <?= @$checkchange?>><i class="fa fa-refresh"></i> เปลี่ยนสินค้า</button></td>
           </tr>
         <?}?>
@@ -403,8 +403,8 @@ function hideCard(cardkey){
 	}
 
 }
-function sentclaim(reserveKey,paramKey){
-  window.location="../dashboard/?p=card_create&reserveKey="+reserveKey+"&paramKey="+paramKey;
+function sentclaim(reserveKey,itemKey,paramKey){
+  window.location="../dashboard/?p=card_create&reserveKey="+reserveKey+"&item_key="+itemKey+"&paramKey="+paramKey;
 }
 
 $('#edit_item').on('show.bs.modal', function (event) {

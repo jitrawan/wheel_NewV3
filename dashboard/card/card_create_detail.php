@@ -169,7 +169,7 @@ if($getreserve_key != ""){
 ?>
 <div class="panel panel-yellow" style="width: 70%;">
                         <div class="panel-heading">
-                            รายการสินค้าของเลขที่ใบเสร็จ [<?= $getreseveNo->reserve_code?>]
+                            รายการสินค้าของเลขที่ใบเสร็จ [<?= $getreseveNo->reserve_no?>]
   </div>
 		<form id="form1" name="form1" method="post">
 		<div class="table-responsive">
@@ -212,7 +212,7 @@ if($getreserve_key != ""){
 
 		      ?>
 
-		      <tr onClick="window.location='../dashboard/?p=card_create_detail&key=<?php echo addslashes($_GET['key']);?>&reserve_key=<?php echo @$objShow->reserve_key;?>&paramKey=<?php echo @$objShow->ProductID;?>'" id="<?php echo @$objShow->item_key;?>">
+		      <tr onClick="window.location='../dashboard/?p=card_create_detail&key=<?php echo addslashes($_GET['key']);?>&reserve_key=<?php echo @$objShow->reserve_key;?>&item_key=<?php echo @$objShow->item_key;?>&paramKey=<?php echo @$objShow->ProductID;?>'" id="<?php echo @$objShow->item_key;?>">
 						<td class=""><?= @$objShow->code?> <?= $gettypeshow?></td>
 		        <td style="text-align: center;"><?= @$objShow->item_amt?></td>
 		       </tr>
@@ -235,7 +235,7 @@ if($getreserve_key != ""){
   <tr>
 		<?
 if(isset($_GET['paramKey'])){
-  	$product_detail = $getdata->my_sql_query("p.*, r.*, w.* ,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter,w.gen as genWheel
+	$product_detail = $getdata->my_sql_query("p.*, r.*, w.* ,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter,w.gen as genWheel
     ,case
       when p.TypeID = '2'
       then (select b.Description from brandRubble b where r.brand = b.id)
@@ -248,7 +248,7 @@ if(isset($_GET['paramKey'])){
         when p.TypeID = '1'
         then (select w.code from productdetailwheel w where w.ProductID = p.ProductID)
         end code
-  ,(select t.item_amt from reserve_item t where t.ProductID = p.ProductID and t.reserve_key = '".addslashes($_GET['reserve_key'])."') as item_amt
+  ,(select t.item_amt from reserve_item t where t.ProductID = p.ProductID and t.reserve_key = '".addslashes($_GET['reserve_key'])."' and item_key = '".addslashes($_GET['item_key'])."') as item_amt
 	 "
 	," product_n p
 	 left join productdetailrubber r on p.ProductID = r.ProductID
@@ -316,6 +316,7 @@ $( document ).ready(function() {
 var getreserve_key = '<?= addslashes($_GET['reserve_key'])?>';
     if(getreserve_key != ""){
     	var amt = $("#get_item_am").val();
+      console.log(amt)
 			if($(this).attr('name') == 'item_amt'){
 				if($(this).val() < 0){
 					alert("กรุณากรอกตัวเลขให้ถูกต้อง ! ");
