@@ -23,6 +23,10 @@ if(isset($_POST['save_edit_item'])){
       ,createBy='".$_SESSION['uname']."'
       ,createDate=NOW() ");
 
+      //หัก shelf
+      $getdata->my_sql_update(" shelf_detail "," amt_rimit=amt_rimit - '".$_POST['edit_change_Amt']."' "," ProductID='".$_POST['edit_ProductCode']."' and shelf_code ='".$_POST['shelf_id']."' ");
+
+      //หัก stock
       $getdata->my_sql_update(" product_n "," Quantity=Quantity - '".$_POST['edit_change_Amt']."' "," ProductID='".addslashes($_POST['edit_ProductID'])."' ");
 
       echo "<script>window.location=\"../dashboard/?p=claim_info&q=\"+'".@htmlentities($_GET['q'])."'</script>";

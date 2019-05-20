@@ -29,6 +29,12 @@ $getitem_detail = $getdata->my_sql_query(" ri.*,p.*, d.*, w.*, s.*,ri.ProductID 
 	when p.TypeID = '2'
 	then (select b.BrandName from brand b where d.brand = b.BrandID)
 	end BrandName
+	, case
+  when p.TypeID = '2'
+  then (select r.code from productdetailrubber r where r.ProductID = p.ProductID)
+  when p.TypeID = '1'
+  then (select w.code from productdetailwheel w where w.ProductID = p.ProductID)
+  end code
 	"
 																			 ," reserve_item ri
 																			 left join product_N p on ri.ProductID = p.ProductID
@@ -38,18 +44,20 @@ $getitem_detail = $getdata->my_sql_query(" ri.*,p.*, d.*, w.*, s.*,ri.ProductID 
 																			 ," ri.reserve_key = '".htmlentities($_GET['reserveKey'])."' and ri.ProductID = '".htmlentities($_GET['key'])."' ");
 
  if($getitem_detail->TypeID == '1'){
- 	$gettype = "ล้อแม๊ก"." มือ".$getitem_detail->hand." ขอบ".$getitem_detail->whediameter;
+	 $gettype = "ล้อแม๊ก ".$getitem_detail->BrandName." รุ่น:".$getitem_detail->gen." ขนาด:".$getitem_detail->diameterWheel." ขอบ:".$getitem_detail->whediameter." รู:".$getitem_detail->holeSize." ประเภท:".$getitem_detail->typeFormat." <br>ยี่ห้อ:".$getitem_detail->BrandName." offset:".$getitem_detail->offset." สี: ".$getitem_detail->color." รุ่น: ".$getitem_detail->gen ;
  }else if($getitem_detail->TypeID == '2'){
- 	$gettype = "ยาง ".$getitem_detail->BrandName." มือ".$getitem_detail->hand." ขอบ".$getitem_detail->rubdiameter;
+	 $gettype = "ยาง ".$getitem_detail->BrandName." ขนาด:".$getitem_detail->diameterRubber." ขอบ:".$getitem_detail->rubdiameter." ซี่รี่:".$getitem_detail->series." ความกว้าง:".$getitem_detail->width." ยี่ห้อ:".$getitem_detail->BrandName." กลุ่มยาง: ".$getitem_detail->groudRubber
+	 ." <br>สัปดาห์: ".$getitem_detail->productionWeek." ปี: ".$getitem_detail->productionYear." รุ่น: ".$getitem_detail->genRubber." ดัชนีความเร็ว: ".$getitem_detail->speedIndex." ดัชนีน้ำหนัก: ".$getitem_detail->weightIndex;
  }else{
- 	$gettype = "";
+	 $gettype = "";
  }
 ?>
 
 <div class="modal-body">
  <div class="form-group">
     <label for="edit_ProductID">หมายเลขสินค้า</label>
-    <input type="text" name="edit_ProductID" id="edit_ProductID" readonly class="form-control" value="<?php echo @$getitem_detail->ProductID;?>">
+    <input type="text" name="edit_ProductID" id="edit_ProductID" style="display:none;" class="form-control" value="<?php echo @$getitem_detail->ProductID;?>">
+		<input type="text" name="edit_ProductCode" id="edit_ProductCode" readonly class="form-control" value="<?php echo @$getitem_detail->code;?>">
  </div>
  <div class="form-group">
     <label>ชื่อรายการ</label>
@@ -59,14 +67,32 @@ $getitem_detail = $getdata->my_sql_query(" ri.*,p.*, d.*, w.*, s.*,ri.ProductID 
     <label for="edit_remark">สาเหตุที่เปลี่ยน</label>
     <textarea name="edit_remark" id="edit_remark" class="form-control" autofocus required></textarea>
  </div>
- <div class="form-group">
-    <label for="edit_change_Amt">จำนวน</label>
-		<div class="input-group col-xs-5">
-		<span class="input-group-addon">123</span>
-		 <input class="form-control right number" type="number"  name="edit_change_Amt" id="edit_change_Amt" style="text-align: right;" value="<?php echo @$getitem_detail->item_amt;?>">
-<input type="hidden" name="get_item_am" id="get_item_am" class="form-control number" value="<? echo @$getitem_detail->item_amt ?>">
+
+<div class="form-group row" >
+	<div class="col-md-6">
+			    <label for="edit_change_Amt">จำนวน</label>
+					<div class="input-group">
+					<span class="input-group-addon">123</span>
+					 <input class="form-control right number" type="number"  name="edit_change_Amt" id="edit_change_Amt" style="text-align: right;" value="<?php echo @$getitem_detail->item_amt;?>">
+			<input type="hidden" name="get_item_am" id="get_item_am" class="form-control number" value="<? echo @$getitem_detail->item_amt ?>">
+					</div>
+	</div>
+ <div class="col-md-6">
+			<label for="edit_ProductID">shelf </label>
+		<select name="shelf_id" id="shelf_id" class="form-control"  required>
+				<option value="" selected="selected">--เลือกชั้นวางสินค้า--</option>
+				<?
+				$getitem = $getdata->my_sql_select(NULL,"shelf_detail","ProductID='".@$getitem_detail->code."' and amt_rimit >=  '".@$getitem_detail->item_amt."' ");
+			while($showshelf = mysql_fetch_object($getitem)){
+				$getshelf = $getdata->my_sql_query("s.*,s.shelf_code,(select sum(ss.amt_rimit) from shelf_detail ss where ss.shelf_code = s.shelf_code) as rimit ","shelf s","s.shelf_code ='".@$showshelf->shelf_code."' ");
+				?>
+			<option value="<?php echo @$showshelf->shelf_code;?>"><?php echo @$getshelf->shelf_detail;?> ชั้น <?php echo @$getshelf->shelf_class;?> มี <?php echo $showshelf->amt_rimit ?> ชิ้น</option>
+			<?
+			 }
+		 ?>
+			</select>
 		</div>
- </div>
+			</div>
 
  <div class="form-group">
   <input type="hidden" name="edit_reserve_key" id="edit_reserve_key" value="<?php echo @$getitem_detail->reserve_key;?>">
@@ -100,4 +126,6 @@ $(".number").bind('keyup mouseup', function () {
 
 						});
 							});
+
+
 </script>
