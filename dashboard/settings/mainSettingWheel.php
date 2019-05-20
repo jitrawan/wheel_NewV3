@@ -23,7 +23,7 @@
 <a href="?p=settingHoleSizeWheelList" class="btn btn-primary btn-sm"><i class="fa fa fa-gear fa-fw"></i>&nbsp;&nbsp;รูปแบบรูน๊อต Bolt pattern</a></br></br>
 <a href="?p=settingTypeFormatWheelList" class="btn btn-primary btn-sm"><i class="fa fa fa-gear fa-fw"></i>&nbsp;&nbsp;ประเภท</a></br></br>
 <a href="?p=settingBrandWheelList" class="btn btn-primary btn-sm"><i class="fa fa fa-gear fa-fw"></i>&nbsp;&nbsp;ยี่ห้อ</a></br></br>
-<a href="?p=settingGenWheelList" class="btn btn-primary btn-sm"><i class="fa fa fa-gear fa-fw"></i>&nbsp;&nbsp;รุ่น</a></br></br>
+<!--a href="?p=settingGenWheelList" class="btn btn-primary btn-sm"><i class="fa fa fa-gear fa-fw"></i>&nbsp;&nbsp;รุ่น</a></br></br-->
 <a href="?p=settingOffsetList" class="btn btn-primary btn-sm"><i class="fa fa fa-gear fa-fw"></i>&nbsp;&nbsp;OffSet (mm)</a></br>
 
 <script language="javascript">

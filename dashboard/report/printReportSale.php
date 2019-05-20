@@ -1,8 +1,8 @@
 <?php session_start();
 error_reporting(0);?>
 <?php
-//include("mpdf/mpdf.php");
-require("../../../vendor/autoload.php");
+include("mpdf/mpdf.php");
+//require("../../../vendor/autoload.php");
 require("../../core/config.core.php");
 require("../../core/connect.core.php");
 require("../../core/functions.core.php");

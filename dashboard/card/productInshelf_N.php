@@ -197,13 +197,8 @@ if(isset($_POST['save_new_status'])){
       <div class="form-group row">
          <div class="col-md-2">
            <label for="search_offset">รุ่น</label>
-           <select name="search_gen_Wheel" id="search_gen_Wheel" class="form-control">
-                <option value="" selected="selected">--เลือก--</option>
-                <? $getgenWhee = $getdata->my_sql_select(NULL,"genwhee","status = '1' ORDER BY id ");
-                  while($showgenWhee = mysql_fetch_object($getgenWhee)){?>
-                <option value="<?= $showgenWhee->Description?>" ><?= $showgenWhee->Description?></option>
-                <?}?>
-              </select>
+           <input type="text" name="search_gen_Wheel" id="search_gen_Wheel" class="form-control" value="" >
+          
          </div>
          </div>
 </div>
