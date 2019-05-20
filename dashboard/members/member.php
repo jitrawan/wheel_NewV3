@@ -238,20 +238,26 @@ function changeMemberStatus(memberkey){
 	xmlhttp.send();
 }
 	function deleteMember(memberkey){
-	if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
-	 	xmlhttp=new XMLHttpRequest();
-	}else{// code for IE6, IE5
-  		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.onreadystatechange=function(){
-  		if (xmlhttp.readyState==4 && xmlhttp.status==200){
-			document.getElementById(memberkey).innerHTML = '';
+    var txt;
+  var r = confirm("คุณต้องการลบข้อมูล !");
+  if (r == true) {
+      	if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+      	 	xmlhttp=new XMLHttpRequest();
+      	}else{// code for IE6, IE5
+        		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+      	}
+      	xmlhttp.onreadystatechange=function(){
+        		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+      			document.getElementById(memberkey).innerHTML = '';
 
-  		}
-	}
-	xmlhttp.open("GET","function.php?type=delete_dealer&key="+memberkey,true);
-	xmlhttp.send();
-    alert_Success("Success","<?=@LA_ALERT_DELETE;?>");
+        		}
+      	}
+      	xmlhttp.open("GET","function.php?type=delete_dealer&key="+memberkey,true);
+      	xmlhttp.send();
+          alert_Success("Success","<?=@LA_ALERT_DELETE;?>");
+        } else {
+          return false;
+        }
 }
 function alert_Success(id,value){
     $( "#Success" ).show();

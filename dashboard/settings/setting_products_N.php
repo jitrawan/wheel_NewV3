@@ -840,7 +840,7 @@ console.log('<?= $_POST['edit_genWheel']?>');
      ," product_N "
      ," productDetailWheel w on p.ProductID = w.ProductID
         left join productDetailRubber r on p.ProductID = r.ProductID "
-    ," where p.ProductStatus in ('1','2')  ORDER BY  p.ProductID ");
+    ," where p.ProductStatus in ('1','2','0')  ORDER BY  p.ProductID ");
   }
 
 
