@@ -23,9 +23,13 @@ if(@$_SESSION['lang']!=NULL){
 }
 
 $id = $_POST['id'];
-$getShelf = $getdata->my_sql_select(NULL,"product_n","shelf_id ='".$id."' ");
-if(mysql_num_rows($getShelf) < 1){
+$getS = $getdata->my_sql_query(NULL,"shelf","shelf_id ='".$id."' ");
+$getShelfDetail = $getdata->my_sql_query("sum(amt_rimit) as sumamt","shelf_detail","shelf_code ='".$getS->shelf_code."' ");
+
+//$getShelf = $getdata->my_sql_select(NULL,"product_n","shelf_id ='".$id."' ");
+if($getShelfDetail->sumamt < 1){
    $getdata->my_sql_delete("shelf","shelf_id='".$id."'");
+    $getdata->my_sql_delete("shelf_detail","shelf_code='".$getS->shelf_code."' ");
   $results = 1;
  }else{
    $results = 0;
