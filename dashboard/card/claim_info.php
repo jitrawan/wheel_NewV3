@@ -121,7 +121,7 @@ echo @$alert;
 <div class="form-group row">
 
    <div class="col-xs-6">
-     <label>วันที่ใบเสร็จ : </label> <label> &nbsp;<?php echo @$showcard->create_date;?> </label>
+     <label>วันที่ใบเสร็จ : </label> <label> &nbsp;<?php echo date("d-m-Y h:i:s", strtotime(@$showcard->create_date));?></label>
    </div>
      <div class="col-xs-6">
 
@@ -160,7 +160,7 @@ if($dteDiff >= 0){
 }
 
     ?>
-  <label class="<? echo @$showcard->csswarantry?>">สิ้นสุดการรับประกันสินค้า :</label> <label class="<? echo @$csswarantry?>"> &nbsp;<?php echo Date("Y-m-d", strtotime($showcard->create_date." +15 Day"));?> <?= $textwarantry?></label>
+  <label class="<? echo @$showcard->csswarantry?>">สิ้นสุดการรับประกันสินค้า :</label> <label class="<? echo @$csswarantry?>"> &nbsp;<?php echo Date("d-m-Y", strtotime($showcard->create_date." +15 Day"));?> <?= $textwarantry?></label>
 
  </div>
 </div>

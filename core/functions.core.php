@@ -51,6 +51,12 @@ function memberNumber(){
 	$getlynda = $getdata->my_sql_query(NULL,"autonumber",NULL);
 	return ($getlynda->year+543).$getlynda->member_number;
 }
+function genreserv(tb,val,filed){
+  $getdata = new clear_db();
+	$getdata->my_sql_connect(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_NAME);
+	$getdata->my_sql_set_utf8();
+	$getlynda = $getdata->my_sql_query(tb,"max(SUBSTR(".filed."),9,5) as max",NULL);
+}
 function updateMember(){
 	$getdata = new clear_db();
 	$getdata->my_sql_connect(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_NAME);
@@ -142,6 +148,8 @@ function convertPoint2($value,$point){
 		return number_format(0,$point, '.', ',');
 	}
 }
+
+
 function resizeProductThumb($imgext,$imgname){
 	switch($imgext){
 		case "jpg" :

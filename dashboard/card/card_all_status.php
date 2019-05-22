@@ -36,7 +36,7 @@ if(addslashes($_GET['key']) == NULL){
                             <div class="col-md-3"><strong>รหัสการส่งซ่อม/เคลม</strong></div>
                             <div class="col-md-3"><?php echo @$card_detail->card_code;?></div>
                             <div class="col-md-3"><strong>วันที่</strong></div>
-                            <div class="col-md-3"><?php echo $card_detail->card_insert;?></div>
+                            <div class="col-md-3"><?php echo date("d-m-Y", strtotime($card_detail->card_insert));?></div>
                             </div>
                             <div class="row form-group">
                             <div class="col-md-3"><strong>ชื่อผู้ส่งซ่อม</strong></div>
@@ -78,7 +78,7 @@ if(addslashes($_GET['key']) == NULL){
 	while($showitem = mysql_fetch_object($getitem)){
 	?>
   <tr id="<?php echo @$showitem->item_key;?>">
-    <td align="center" bgcolor="#EFEFEF"><?php echo @$showitem->item_number;?></td>
+    <td align="center" bgcolor="#EFEFEF"><?php echo @$showitem->reseve_item_key;?></td>
     <td><?php echo @$showitem->item_name;?></td>
     <td style="color:#970002;"><?php echo @$showitem->item_note;?></td>
     <td align="right"><?php echo @($showitem->item_price_aprox == 0)?'ไม่ระบุ':convertPoint2($showitem->item_price_aprox,2);?></td>

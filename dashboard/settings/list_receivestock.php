@@ -18,7 +18,7 @@ if($_POST['datedo_from'] != "" && $_POST['datedo_to'] != ""){
   ," stock_tb_receive_master r "
   ,"  r.datedo BETWEEN '".htmlentities($_POST['datedo_from'])."' and '".htmlentities($_POST['datedo_to'])."'
   order by r.po DESC");
-  
+
 }else{
   $getcat = $getdata->my_sql_select(" r.*, ( select COUNT(d.no) FROM stock_tb_receive_master_sub d WHERE r.po = d.po )as sum , r.po as No_po "," stock_tb_receive_master r order by r.po DESC ",NULL);
 }
@@ -107,7 +107,7 @@ if(mysql_num_rows($getcat) > 0){
   <tr id="<?php echo @$showcat->rid;?>">
     <td align="center"><?php echo @$x;?></td>
     <td>&nbsp;<?php echo @$showcat->No_po;?></td>
-      <td>&nbsp;<?php echo @$showcat->datedo;?></td>
+      <td>&nbsp;<?php echo date("d-m-Y", strtotime(@$showcat->datedo));?></td>
     <td>&nbsp;<?php echo @$showcat->iduser;?></td>
     <td align="right" valign="middle"><strong><?php echo @$showcat->sum;?></strong>&nbsp;</td></td>
     <td align="center" valign="middle">

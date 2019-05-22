@@ -37,7 +37,7 @@ if(isset($_POST['save_item'])){
 		}
 		$getdata->my_sql_insert("card_item","reserve_key='".addslashes(addslashes($_POST['reserveKey']))."' , reseve_item_key='".addslashes(addslashes($_POST['product_Id']))."' ,item_key='".$item_key."',item_amt='".addslashes(addslashes($_POST['item_amt']))."',card_key='".$card_detail->card_key."',item_number='".INumber()."',item_name='".addslashes(addslashes($_POST['item_name']))."',item_note='".addslashes(addslashes($_POST['item_note']))."',item_insert=NOW(),item_price_aprox='".@$price_aprox."'");
 		updateItem();
-    echo "<script>window.location=\"../dashboard/?p=card_create_detail&key=\"+'".addslashes($_GET['key'])."'+\"&reserve_key=\"+'".addslashes($_GET['reserveKey'])."'</script>";
+    echo "<script>window.location=\"../dashboard/?p=card_create_detail&key=\"+'".addslashes($_GET['key'])."'+\"&reserve_key=\"+'".addslashes($_GET['reserve_key'])."'+\"&item_key=\"+'".addslashes($_GET['item_key'])."'+\"&paramKey=\"+'".addslashes($_GET['paramKey'])."'</script>";
 		$alert = '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>บันทึกข้อมูล สำเร็จ !</div>';
 }else{
 		$alert = '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>ข้อมูลไม่ถูกต้อง กรุณาระบุอีกครั้ง !</div>';
@@ -137,7 +137,7 @@ if(isset($_POST['save_confirm_card'])){
                             <div class="col-md-3"><strong>รหัสการส่งซ่อม/เคลม</strong></div>
                             <div class="col-md-3"><?php echo @$card_detail->card_code;?></div>
                             <div class="col-md-3"><strong>วันที่</strong></div>
-                            <div class="col-md-3"><?php echo $card_detail->card_insert;?></div>
+                            <div class="col-md-3"><?php echo date("d-m-Y", strtotime($card_detail->card_insert));?></div>
                             </div>
                             <div class="row form-group">
                             <div class="col-md-3"><strong>ชื่อผู้ส่งซ่อม</strong></div>
@@ -210,13 +210,21 @@ if($getreserve_key != ""){
               $gettypeshow = "";
             }
 
-		      ?>
+            $getsumamt = $getdata->my_sql_query("sum(item_amt) as amt ","card_item","reserve_key='".@$objShow->reserve_key."' and reseve_item_key = '".@$objShow->code."'  ");
 
+            if($getsumamt->amt > 0){
+              $getamt = $getsumamt->amt;
+            }else{
+              $getamt = $objShow->item_amt;
+            }
+
+              if($getsumamt->amt < $objShow->item_amt){
+		      ?>
 		      <tr onClick="window.location='../dashboard/?p=card_create_detail&key=<?php echo addslashes($_GET['key']);?>&reserve_key=<?php echo @$objShow->reserve_key;?>&item_key=<?php echo @$objShow->item_key;?>&paramKey=<?php echo @$objShow->ProductID;?>'" id="<?php echo @$objShow->item_key;?>">
 						<td class=""><?= @$objShow->code?> <?= $gettypeshow?></td>
-		        <td style="text-align: center;"><?= @$objShow->item_amt?></td>
+		        <td style="text-align: center;"><?= $getamt?> </td>
 		       </tr>
-		    <?}?>
+		    <?}}?>
 
 		    </tbody>
 		</table>
@@ -262,6 +270,15 @@ if(isset($_GET['paramKey'])){
   }else{
     $gettype = "";
   }
+
+    $getbaAmt = $getdata->my_sql_query("sum(item_amt) as amt ","card_item","reserve_key='".addslashes($_GET['reserve_key'])."' and reseve_item_key = '".@$product_detail->code."'  ");
+$chkgetbaAmt  = $product_detail->item_amt;
+  if (isset($getbaAmt->amt)){
+    if($getbaAmt->amt > 0){
+
+      $chkgetbaAmt = $product_detail->item_amt - $getbaAmt->amt;
+    }
+  }
 }
 		?>
 		<td ><label for="product_Id">รหัสสินค้า</label>
@@ -273,8 +290,8 @@ if(isset($_GET['paramKey'])){
     <td width="30%"><label for="item_note">สาเหตุที่ส่งซ่อม/เคลม</label>
       <input type="text" name="item_note" id="item_note" class="form-control" autofocus></td>
       <td width="10%"><label for="item_amt">จำนวนเคลม</label>
-        <input type="number" name="item_amt" id="item_amt" class="form-control number" value="<? echo $product_detail->item_amt ?>">
-				<input type="hidden" name="get_item_am" id="get_item_am" class="form-control number" value="<? echo $product_detail->item_amt ?>">
+        <input type="number" name="item_amt" id="item_amt" class="form-control number" value="<?= $chkgetbaAmt?>">
+				<input type="hidden" name="get_item_am" id="get_item_am" class="form-control number" value="<?= $chkgetbaAmt?>">
 				</td>
     <td width="10%"><label for="item_price_aprox">ราคาโดยประมาณ</label>
       <input type="number" name="item_price_aprox" id="item_price_aprox" class="form-control number"></td>
@@ -316,13 +333,12 @@ $( document ).ready(function() {
 var getreserve_key = '<?= addslashes($_GET['reserve_key'])?>';
     if(getreserve_key != ""){
     	var amt = $("#get_item_am").val();
-      console.log(amt)
-			if($(this).attr('name') == 'item_amt'){
+      if($(this).attr('name') == 'item_amt'){
 				if($(this).val() < 0){
 					alert("กรุณากรอกตัวเลขให้ถูกต้อง ! ");
 					$(this).val(0);
 				}else if($(this).val() > amt){
-					alert("จำนวนสินค้าที่กรอกเกินจำนวนสินค้าที่ซื้อ ! ");
+					alert("จำนวนสินค้าที่กรอกเกิน ! ");
 					$(this).val(amt);
 				}
 		}else{

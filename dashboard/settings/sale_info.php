@@ -293,7 +293,7 @@ while($objShow = mysql_fetch_object($getproduct_info)){
   $getreserve_info = $getdata->my_sql_query(NULL,"reserve_info"," reserve_code='".$getreserveCode."' ");
   $showcard = mysql_fetch_object($getcard);
 
-  $getreservNo = date("Ymd").'00'.$getreserve_info->reserve_code;
+  $getreservNo = date("dmY").'00'.$getreserve_info->reserve_code;
   ?>
 
   <!-- Modal Edit -->
@@ -366,7 +366,7 @@ while($objShow = mysql_fetch_object($getproduct_info)){
     <label>วันที่ใบเสร็จ : </label>
     <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-      <input class="form-control form_datetime" type="text" name="reserve_date" id="reserve_date" title="วันที่ใบเสร็จ" value="<?= date("Y-m-d")?>">
+      <input class="form-control form_datetime" type="text" name="reserve_date" id="reserve_date" title="วันที่ใบเสร็จ" value="<?= date("d-m-Y")?>">
     </div>
 
   </div>

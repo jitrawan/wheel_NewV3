@@ -57,7 +57,7 @@ body{
                         <table width="100%" border="0" class="table">
   <tr>
     <td width="23%"><strong>วันที่</strong></td>
-    <td width="27%"><?php echo $card_detail->card_insert;?></td>
+    <td width="27%"><?php echo date("d-m-Y", strtotime($card_detail->card_insert));?></td>
     <td colspan="2" rowspan="4" style="text-align:center"> </td>
     </tr>
   <tr>

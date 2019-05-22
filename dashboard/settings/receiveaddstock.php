@@ -146,7 +146,7 @@ $getpo = $getdata->my_sql_query(NULL,"stock_tb_receive_master","po='".$_GET['d']
                       <div class="panel panel-primary">
 
                         <div class="panel-heading">
-                            วันที่ทำรายการ : <?= @$getpo->datedo?>
+                            วันที่ทำรายการ : <?= date("d-m-Y", strtotime(@$getpo->datedo));?>
                         </div>
                         <div class="panel-body">
 

@@ -126,7 +126,7 @@ body{
 			<td colspan="2" align="center">โทร 080-986-8795</td>
 		</tr>
     <tr>
-			<td>วันที่ใบเสร็จ <?php echo $card_detail->create_date?></td>
+			<td>วันที่ใบเสร็จ <?= date("d-m-Y h:i:s", strtotime(@$card_detail->create_date));?></td>
 			<td align="right"></td>
 		</tr>
     <tr>
@@ -163,15 +163,15 @@ body{
 	</table>
   <table width="100%">
   <tr>
+		<td width="3%" align="center"># </td>
 			<td width="30%" align="center">รายการ </td>
-      <td width="15%" align="center">จำนวน </td>
-      <td width="15%" align="center">ราคา </td>
-      <td width="15%" align="center">discount </td>
-			<td width="15%" align="center">รวม</td>
+      <td width="10%" align="center">จำนวน </td>
+      <td width="10%" align="right">ราคา </td>
+      <td width="10%" align="right">discount </td>
+			<td width="10%" align="right">รวม</td>
 		</tr>
-  <tr>
-    <td colspan="5">==================================================================================================================================</td></tr>
-  </tr>
+  <tr><td colspan="6">==================================================================================================================================</td></tr>
+
   <?
 	$productInfo = $getdata->my_sql_select("i.*,p.*, r.*, w.* ,w.diameter as diameterWheel,r.diameter as diameterRubber,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter,w.gen as genWheel
 	,case
@@ -192,7 +192,8 @@ body{
 		 left join productDetailRubber r on p.ProductID = r.ProductID "
 	," i.reserve_key='".addslashes($_GET['key'])."' ");
   //$productInfo = $getdata->my_sql_select("i.* , p.* ","reserve_item i left join product_n p on i.ProductID = p.ProductID "," i.reserve_key='".addslashes($_GET['key'])."' ");
-  while($objpro = mysql_fetch_object($productInfo)){
+$x = 1;
+	while($objpro = mysql_fetch_object($productInfo)){
 		if($objpro->TypeID == '1'){
 			$gettype = "ล้อแม๊ก ".$objpro->BrandName." รุ่น:".$objpro->genWheel." ขนาด:".$objpro->diameterWheel." ขอบ:".$objpro->whediameter." รู:".$objpro->holeSize." ประเภท:".$objpro->typeFormat;
 		}else if($objpro->TypeID == '2'){
@@ -202,24 +203,25 @@ body{
 		}
 ?>
 		<tr>
+			<td align="center"> <?echo $x ?></td>
 			<td><?php echo $objpro->code?> <?   echo $gettype ?></td>
       <td align="center"><?php echo $objpro->item_amt?></td>
       <td align="right"><?php echo convertPoint2($objpro->item_price,2)?> </td>
       <td align="right"><?php echo convertPoint2($objpro->item_discount,2)?></td>
 			<td align="right"><?php echo convertPoint2($objpro->item_total,2)?></td>
 		</tr>
-    <? } ?>
-  </tr><td colspan="5">-----------------------------------------------------------------------------------------------------------------------------------------------------------------</td></tr>
-		<tr>
+    <? $x ++; } ?>
+  </tr><td colspan="6">-----------------------------------------------------------------------------------------------------------------------------------------------------------------</td></tr>
+		<!--tr>
 			<td colspan="4" align="right">จำนวนเงิน</td>
 			<td align="right"><?php echo convertPoint2($card_detail->reserve_total,2)?></td>
-		</tr>
+		</tr-->
 		<tr>
-			<td colspan="4" align="right">รวมราคาทั้งสิน</td>
+			<td colspan="5" align="right">รวมราคาทั้งสิน</td>
 			<td align="right"><?php echo convertPoint2($card_detail->reserve_total,2)?></td>
 		</tr>
-  </tr><td colspan="5">==================================================================================================================================</td></tr>
-    <tr>
+  </tr><td colspan="6">==================================================================================================================================</td></tr>
+    <!--tr>
 			<td colspan="4" align="right">VATAble</td>
       <td align="right"><?php echo convertPoint2($card_detail->reserve_total,2)?></td>
 		</tr>
@@ -229,18 +231,18 @@ body{
       ?>
 			<td colspan="4" align="right">VAT 7.00%</td>
       <td align="right"><?php echo convertPoint2($gettax,2)?></td>
-		</tr>
-  </tr><td colspan="5">-----------------------------------------------------------------------------------------------------------------------------------------------------------------</td></tr>
+		</tr-->
+  <!--/tr><td colspan="5">-----------------------------------------------------------------------------------------------------------------------------------------------------------------</td></tr-->
 	</table>
   <h4 align="left">*รับประกันสินค้า 15 วัน หลังการซื้อ</h4>
   <table width="100%">
 
     <tr>
-			<td>เริ่มประกัน : <?php echo $card_detail->create_date?></td>
+			<td>เริ่มประกัน : <?= date("d-m-Y h:i:s", strtotime(@$card_detail->create_date));?></td>
 			<td></td>
 		</tr>
     <tr>
-			<td>สิ้นสุดประกัน : <?php echo Date("Y-m-d", strtotime($card_detail->create_date." +15 Day"));?></td>
+			<td>สิ้นสุดประกัน : <?php echo Date("d-m-Y", strtotime($card_detail->create_date." +15 Day"));?></td>
 			<td></td>
 		</tr>
 

@@ -60,7 +60,7 @@
                       <div class="panel panel-primary">
 
                         <div class="panel-heading">
-                            วันที่ทำรายการ : <?= @$getpo->datedo?>
+                            วันที่ทำรายการ : <?= date("d-m-Y", strtotime(@$getpo->datedo));?>
                         </div>
                         <div class="panel-body">
 
@@ -70,7 +70,7 @@
                                <label>เลขที่อ้างอิง : </label> <label> &nbsp;<?php echo @$getpo->po;?> </label>
                           </div>
                           <div class="col-xs-4">
-                           <label>วันที่รับวัสดุ : </label> <label> &nbsp;<?php echo @$getpo->datereceive;?> </label>
+                           <label>วันที่รับวัสดุ : </label> <label> &nbsp;<?php echo date("d-m-Y", strtotime(@$getpo->datereceive));?></label>
                          </div>
                           <div class="col-xs-4">
                            <label>ผู้รับวัสดุ : </label> <label> &nbsp;<?php echo @$getpo->iduser;?> </label>
@@ -84,25 +84,46 @@
                           <thead>
                         <tr style="font-weight:bold; color:#FFF; text-align:center; background:#ff7709;">
                           <td width="12%">รหัสสินค้า</td>
-                          <td width="12%">สินค้า</td>
+                          <td width="50%">สินค้า</td>
                           <td width="15%">จำนวน</td>
-                          <td width="30%">ผู้จำหน่าย</td>
-                          <td width="10%">ปรับปรุง</td>
                         </tr>
                         </thead>
                           <tbody>
                           <?
-                        //  $getproduct = $getdata->my_sql_selectJoin(" p.*, r.*, w.*, s.*,p.ProductID as productMain, d.dealer_name as dealer_name, d.mobile as mobile ","product_N"," productDetailWheel w on p.ProductID = w.ProductID left join productDetailRubber r on p.ProductID = r.ProductID left join shelf s ON p.shelf_id = s.shelf_id left join dealer d ON p.dealer_code = d.dealer_code ","Where po='".$_GET['d']."' ");
-                           $getproduct = $getdata->my_sql_select(" s.*,p.*,d.* "," stock_tb_receive_master_sub s left join product_N p on s.ProductID = p.ProductID left join dealer d ON p.dealer_code = d.dealer_code "," po='".$_GET['d']."' ");
+                         $getproduct = $getdata->my_sql_select(" s.*, p.*, r.*, w.* ,w.diameter as diameterWheel,r.diameter as diameterRubber
+                         ,p.ProductID as ProductID,r.diameter as rubdiameter ,w.diameter as whediameter,w.gen as genWheel
+                         ,case
+                           when p.TypeID = '2'
+                           then (select b.Description from brandRubble b where r.brand = b.id)
+                           when p.TypeID = '1'
+                           then (select b.Description from BrandWhee b where b.id = w.brand)
+                           end BrandName
+                           ,case
+                             when p.TypeID = '2'
+                             then (select r.code from productdetailrubber r where r.ProductID = p.ProductID)
+                             when p.TypeID = '1'
+                             then (select w.code from productdetailwheel w where w.ProductID = p.ProductID)
+                             end code"
+                         ," stock_tb_receive_master_sub s
+                         left join product_N p on s.ProductID = p.ProductID
+                         left join productDetailWheel w on p.ProductID = w.ProductID
+                         left join productDetailRubber r on p.ProductID = r.ProductID
+                         "," s.po='".$_GET['d']."' ");
+
                            if(mysql_num_rows($getproduct) > 0){
                           while($showproduct = mysql_fetch_object($getproduct)){
+                                if($showproduct->TypeID == '1'){
+                                  $gettypeshow = "ล้อแม๊ก ".$showproduct->BrandName." รุ่น:".$showproduct->genWheel." ขนาด:".$showproduct->diameterWheel." ขอบ:".$showproduct->whediameter." รู:".$showproduct->holeSize." ประเภท:".$showproduct->typeFormat;
+                                }else if($showproduct->TypeID == '2'){
+                                  $gettypeshow = "ยาง ".$showproduct->BrandName." ขนาด:".$showproduct->diameterRubber." ซี่รี่:".$showproduct->series." ความกว้าง:".$showproduct->width;
+                                }else{
+                                  $gettypeshow = "";
+                                }
                             ?>
                           <tr id="<?php echo @$showproduct->no;?>">
-                            <td align="center"><?php echo @$showproduct->ProductID;?></td>
-                            <td align="center"><?if(@$showproduct->TypeID == '1'){ echo 'ล้อแม็ก';}else{echo 'ยาง';}?></td>
+                            <td align="center"><?php echo @$showproduct->code;?></td>
+                            <td align="left"><?= $gettypeshow?></td>
                             <td align="right" valign="middle"><strong><?php echo @$showproduct->total;?></strong>&nbsp;&nbsp;</td>
-                             <td valign="middle">&nbsp;&nbsp;<strong><?php echo @$showproduct->dealer_code;?> | <?php echo @$showproduct->dealer_name;?> | <?php echo @$showproduct->mobile;?></strong>&nbsp;</td>
-                            <td align="center"><!--button type="submit" name="btn_delete" onClick="javascript:deleteProduct('<?php echo @$showproduct->no;?>','<?php echo @$showproduct->ProductID;?>');" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> <?php echo @LA_BTN_DELETE;?></button--></td>
 
                          </tr>
                        <? }
