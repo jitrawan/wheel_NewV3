@@ -202,7 +202,7 @@ if(isset($_POST['save_edit_card'])){
 	  $x++;
   ?>
   <tr id="<?php echo @$showcat->shelf_id;?>">
-    <td align="center"><?php echo @$x;?></td>
+    <td align="center"><?php echo @$x;?>  <?php echo @$showcat->shelf_id;?></td>
     <td>&nbsp;<?php echo @$showcat->shelf_code;?> </td>
     <td>&nbsp;<?php echo @$showcat->shelf_detail;?> &nbsp; ชั้น &nbsp;<?php echo @$showcat->shelf_class;?></td>
     <td align="right"><a data-toggle="modal" data-target="#detailShelf" data-whatever="<?php echo @$showcat->shelf_code;?>"><?php if(@$showcat->useAmt > 0){echo @$showcat->useAmt;}else{echo 0;}  ;?>/<?php echo @$showcat->amt;?> &nbsp; ชิ้น</a></td>
@@ -213,7 +213,9 @@ if(isset($_POST['save_edit_card'])){
 	  }else{
 		  echo '<button type="button" class="btn btn-danger btn-xs" id="btn-'.@$showcat->shelf_id.'" onClick="javascript:changecatStatus(\''.@$showcat->shelf_id.'\',\''.$_SESSION['lang'].'\');"><i class="fa fa-lock" id="icon-'.@$showcat->shelf_id.'"></i> <span id="text-'.@$showcat->shelf_id.'">'.@LA_BTN_OFF.'</span></button>';
 	  }
-	  ?><a data-toggle="modal" data-target="#edit_card_type" data-whatever="<?php echo @$showcat->shelf_id;?>" class="btn btn-xs btn-info" style="color:#FFF;"><i class="fa fa-edit fa-fw"></i> <?php echo @LA_BTN_EDIT;?></a><button type="button" class="btn btn-danger btn-xs delete" id="del_<?php echo @$showcat->shelf_id;?>"><i class="glyphicon glyphicon-remove"></i> <?php echo @LA_BTN_DELETE;?></button></td>
+	  ?><a data-toggle="modal" data-target="#edit_card_type" data-whatever="<?php echo @$showcat->shelf_id;?>" class="btn btn-xs btn-info" style="color:#FFF;"><i class="fa fa-edit fa-fw"></i> <?php echo @LA_BTN_EDIT;?></a>
+    <button type="button" class="btn btn-danger btn-xs delete" id="del_<?php echo @$showcat->shelf_id;?>"><i class="glyphicon glyphicon-remove"></i> <?php echo @LA_BTN_DELETE;?></button>
+    </td>
   </tr>
   <?php
   }
@@ -261,6 +263,7 @@ $(document).ready(function(){
 
   });
   	});
+
 function changecatStatus(catkey,lang){
 	if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
 	 	xmlhttp=new XMLHttpRequest();
